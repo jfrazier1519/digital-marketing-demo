@@ -30,15 +30,15 @@ class BottomNavBar extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_bag),
             label: 'Products',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place),
+            icon: Icon(Icons.storefront),
             label: 'Venues',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.sell),
             label: 'Brands',
           ),
         ],

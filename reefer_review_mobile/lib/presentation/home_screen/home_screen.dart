@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return Center(child: Text('Following Content'));
       case 1:
-        return Center(child: Text('Feed Content'));
+        return Center(child: Text('Suggested Content'));
       default:
         return Center(child: Text('Following Content'));
     }
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         },
                         child: Text(
-                          'Feed',
+                          'Suggested',
                           style: TextStyle(
                             color: _selectedTabIndex == 1
                                 ? Colors.green
