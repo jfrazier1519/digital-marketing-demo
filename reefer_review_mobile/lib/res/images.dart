@@ -1,1 +1,1 @@
-const reeferImage = "assets/Reefer_Black_Colourful_ellipse.png";
+const reeferImage = "assets/images/Reefer_Black_Colourful_ellipse.png";

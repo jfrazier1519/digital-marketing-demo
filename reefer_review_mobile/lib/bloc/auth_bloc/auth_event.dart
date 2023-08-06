@@ -9,3 +9,5 @@ class LoginUserUsecase extends AuthEvent {
 
   LoginUserUsecase(this.email, this.password);
 }
+
+class LogoutUserUsecase extends AuthEvent {}

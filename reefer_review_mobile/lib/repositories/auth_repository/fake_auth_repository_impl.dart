@@ -10,5 +10,10 @@ class FakeAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<void> logout() async {
+    _user = null;
+  }
+
+  @override
   User? get user => _user;
 }

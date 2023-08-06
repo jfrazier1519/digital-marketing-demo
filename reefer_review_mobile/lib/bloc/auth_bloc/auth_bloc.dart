@@ -15,5 +15,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await repository.login(event.email, event.password);
       emit(AuthUserLoggedIn(repository.user!));
     });
+    on<LogoutUserUsecase>((event, emit) async {
+      emit(AuthLoading());
+      await repository.logout();
+      emit(AuthInitial());
+    });
   }
 }
