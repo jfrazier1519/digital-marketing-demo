@@ -12,7 +12,7 @@ class NavigationMenu extends StatelessWidget {
 
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is! AuthUserLoggedIn) {
+          if (state is AuthInitial) {
             Navigator.of(context).pushReplacementNamed('/login');
           }
         },
