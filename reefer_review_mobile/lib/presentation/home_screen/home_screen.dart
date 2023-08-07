@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/bottom_nav_bar.dart';
+import './following_feed.dart';
+import './suggested_feed.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
   _switchContent() {
     switch (_selectedTabIndex) {
       case 0:
-        return Center(child: Text('Following Content'));
+        return const FollowingFeedScreen();
       case 1:
-        return Center(child: Text('Suggested Content'));
+        return const SuggestedFeedScreen();
       default:
-        return Center(child: Text('Following Content'));
+        return const FollowingFeedScreen();
     }
   }
 

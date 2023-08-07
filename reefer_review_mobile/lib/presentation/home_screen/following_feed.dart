@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/post/post.dart';
 import '../../repositories/post_repository.dart/fake_post_repository_impl.dart';
 import '../../repositories/post_repository.dart/post_repository.dart';
+import '../../data/post/post_feed_type.dart';
 
 class FollowingFeedScreen extends StatefulWidget {
   const FollowingFeedScreen({super.key});
@@ -21,7 +22,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
   }
 
   _fetchPosts() async {
-    posts = await postRepository.getPosts();
+    posts = await postRepository.getPosts(feedType: PostFeedType.Following);
     setState(() {});
   }
 
@@ -31,7 +32,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
       body: ListView.builder(
         itemCount: posts.length,
         itemBuilder: (context, index) {
-          return posts[index].displayContent();
+          return posts[index].displayContent(context);
         },
       ),
     );

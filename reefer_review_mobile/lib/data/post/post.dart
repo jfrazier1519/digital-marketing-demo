@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import '../user.dart';
 
 abstract class Post {
   final int postId;
-  final String author;
+  final User author;
   final DateTime date;
   final String content;
-  final String image; //url path to image
+  final String image;
 
-  Post(this.image,
-      {required this.postId,
-      required this.author,
-      required this.date,
-      required this.content});
+  Post({
+    required this.postId,
+    required this.author,
+    required this.date,
+    required this.content,
+    required this.image,
+  });
 
-  Widget displayContent();
+  Widget displayContent(BuildContext context);
 }

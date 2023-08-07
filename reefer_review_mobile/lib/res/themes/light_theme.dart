@@ -5,12 +5,11 @@ import '../colors.dart';
 var lightTheme = ThemeData(
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: secondaryGreen,
-    selectedItemColor: secondaryOrange, // A contrast to the background
-    unselectedItemColor: primaryBackground, // Adjust this if needed
-    elevation: 8.0, // Optional: For a little shadow
+    selectedItemColor: secondaryOrange,
+    unselectedItemColor: primaryBackground,
+    elevation: 8.0,
     type: BottomNavigationBarType.fixed,
-    showUnselectedLabels:
-        true, // If you want to show labels for unselected items
+    showUnselectedLabels: true,
     selectedLabelStyle: TextStyle(
       fontWeight: FontWeight.bold,
     ),
@@ -18,7 +17,8 @@ var lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
       background: primaryBackground,
       secondary: secondaryGreen,
-      primary: secondaryGreen),
+      primary: secondaryGreen,
+      tertiary: secondaryBackground),
   scaffoldBackgroundColor: primaryBackground,
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: secondaryGreen),

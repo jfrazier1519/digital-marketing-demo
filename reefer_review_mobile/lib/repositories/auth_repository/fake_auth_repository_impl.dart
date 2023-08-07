@@ -6,7 +6,7 @@ class FakeAuthRepository implements AuthRepository {
 
   @override
   Future<void> login(String email, String passsword) async {
-    _user = User("test@mail.com");
+    _user = User("test@mail.com", "", "", "");
   }
 
   @override
