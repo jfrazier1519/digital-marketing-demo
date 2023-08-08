@@ -14,10 +14,10 @@ class FakePostRepository implements PostRepository {
 
   FakePostRepository() {
     User dummyUser = User(
-      'john.doe@example.com',
-      'userID1',
-      'John Doe',
-      dummyProfileImage,
+      userId: 'userID1',
+      email: 'john.doe@example.com',
+      name: 'John Doe',
+      profileImageUrl: dummyProfileImage,
     );
 
     _allPosts = [
