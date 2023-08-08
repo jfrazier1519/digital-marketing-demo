@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/res/routes.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/bottom_nav_bar.dart';
 import './following_feed.dart';
@@ -88,7 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                          addPostViewRoute); // Use pushNamed instead of pushReplacementNamed
+                    },
                     child: const Text('Add Post'),
                   ),
                   Row(
