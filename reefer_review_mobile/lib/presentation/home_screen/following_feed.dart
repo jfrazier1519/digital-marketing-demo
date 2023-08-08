@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/post/post_feed_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
+import '../shared/loading_modal.dart';
 
 class FollowingFeedScreen extends StatefulWidget {
   const FollowingFeedScreen({super.key});
@@ -23,7 +24,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
       body: BlocBuilder<FeedBloc, FeedState>(
         builder: (context, state) {
           if (state is FeedLoading) {
-            return CircularProgressIndicator();
+            return LoadingModal(); // Return the custom loading modal
           } else if (state is FeedLoaded) {
             return ListView.builder(
               itemCount: state.posts.length,
