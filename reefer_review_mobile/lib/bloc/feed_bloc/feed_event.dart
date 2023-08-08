@@ -8,3 +8,13 @@ class FetchPostsUsecase extends FeedEvent {
 
   FetchPostsUsecase(this.feedType);
 }
+
+class ExpandPost extends FeedEvent {
+  final int postId;
+  ExpandPost(this.postId);
+}
+
+class CollapsePost extends FeedEvent {
+  final int postId;
+  CollapsePost(this.postId);
+}

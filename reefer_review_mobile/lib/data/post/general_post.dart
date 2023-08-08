@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
+import 'package:expandable_text/expandable_text.dart'; // Import the expandable_text package
 import '../../presentation/shared/rounded_container.dart';
 import '../user.dart';
 
@@ -20,6 +21,9 @@ class GeneralPost extends Post {
 
   @override
   Widget displayContent(BuildContext context) {
+    var colorScheme =
+        Theme.of(context).colorScheme; // Get the current color scheme
+
     return RoundedContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,12 +31,14 @@ class GeneralPost extends Post {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start, // Aligns the avatar to the top
               children: [
                 CircleAvatar(
                   backgroundImage: AssetImage(author.profileImageUrl),
-                  radius: 25, // Updated radius
+                  radius: 25,
                 ),
-                const SizedBox(width: 20), // Updated space
+                const SizedBox(width: 20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +48,13 @@ class GeneralPost extends Post {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
-                      Text(content),
+                      ExpandableText(
+                        content,
+                        expandText: 'See More',
+                        collapseText: 'See Less',
+                        maxLines: 2,
+                        linkColor: colorScheme.primary,
+                      ),
                     ],
                   ),
                 ),
@@ -51,11 +63,11 @@ class GeneralPost extends Post {
           ),
           image.isNotEmpty
               ? Container(
-                  height: 200, // Set the height
-                  width: double.infinity, // Stretch across the width
+                  height: 200,
+                  width: double.infinity,
                   child: Image.asset(
                     image,
-                    fit: BoxFit.cover, // Fit the image
+                    fit: BoxFit.cover,
                   ),
                 )
               : Container(),

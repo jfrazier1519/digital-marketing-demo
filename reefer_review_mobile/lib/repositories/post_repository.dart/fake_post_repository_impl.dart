@@ -32,7 +32,8 @@ class FakePostRepository implements PostRepository {
         postId: 2,
         author: dummyUser,
         date: DateTime.now(),
-        content: 'This is an event post.',
+        content:
+            'This is an event post. Im going to keep adding words here until I run out of things to say. Ill just keep going and going and going and going. alright. done now. hopefully. maybe? please be done',
         image: dummyEventPostImage,
         eventUrl: 'event_screen_route',
       ),
