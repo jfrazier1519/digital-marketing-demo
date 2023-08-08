@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedTabIndex = 0;
   bool _isSearching = false;
 
-  //replace with the following and feed widgets when applicable
   _switchContent() {
     switch (_selectedTabIndex) {
       case 0:
@@ -30,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -51,11 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     hintText: 'Search...',
                   ),
                 )
-              : Text('Home'),
+              : const Text('Home'),
           actions: [
             _isSearching
                 ? IconButton(
-                    icon: Icon(Icons.close, color: Colors.white),
+                    icon: const Icon(Icons.close, color: Colors.white),
                     onPressed: () {
                       setState(() {
                         _isSearching = false;
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   )
                 : IconButton(
-                    icon: Icon(Icons.search, color: Colors.white),
+                    icon: const Icon(Icons.search, color: Colors.white),
                     onPressed: () {
                       setState(() {
                         _isSearching = true;
@@ -83,11 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                     ),
                     onPressed: () {},
-                    child: Text('Add Post'),
+                    child: const Text('Add Post'),
                   ),
                   Row(
                     children: [
@@ -109,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      Text('|'),
+                      const Text('|'),
                       TextButton(
                         onPressed: () {
                           setState(() {
@@ -130,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 50),
+                  const SizedBox(width: 50),
                 ],
               ),
             ),

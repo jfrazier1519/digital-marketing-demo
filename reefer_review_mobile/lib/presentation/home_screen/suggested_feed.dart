@@ -23,7 +23,7 @@ class _SuggestedFeedScreenState extends State<SuggestedFeedScreen> {
       body: BlocBuilder<FeedBloc, FeedState>(
         builder: (context, state) {
           if (state is FeedLoading) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (state is FeedLoaded) {
             return ListView.builder(
               itemCount: state.posts.length,
@@ -32,7 +32,7 @@ class _SuggestedFeedScreenState extends State<SuggestedFeedScreen> {
               },
             );
           } else {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
         },
       ),

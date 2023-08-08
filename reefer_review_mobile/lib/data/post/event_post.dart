@@ -76,7 +76,7 @@ class EventPost extends Post {
             ),
           ),
           image.isNotEmpty
-              ? Container(
+              ? SizedBox(
                   height: 200,
                   width: double.infinity,
                   child: Image.asset(

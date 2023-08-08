@@ -27,7 +27,7 @@ class NavigationMenu extends StatelessWidget {
                 children: <Widget>[
                   UserAccountsDrawerHeader(
                     accountName: Text(name),
-                    accountEmail: Text(''),
+                    accountEmail: const Text(''),
                     currentAccountPicture: CircleAvatar(
                       backgroundColor: Colors.white,
                       child: Icon(Icons.person,

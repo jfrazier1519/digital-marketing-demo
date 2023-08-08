@@ -24,7 +24,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
       body: BlocBuilder<FeedBloc, FeedState>(
         builder: (context, state) {
           if (state is FeedLoading) {
-            return LoadingModal(); // Return the custom loading modal
+            return const LoadingModal(); // Return the custom loading modal
           } else if (state is FeedLoaded) {
             return ListView.builder(
               itemCount: state.posts.length,
@@ -33,7 +33,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
               },
             );
           } else {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
         },
       ),

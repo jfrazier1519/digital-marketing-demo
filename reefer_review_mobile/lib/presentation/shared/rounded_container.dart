@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/res/colors.dart';
 
 class RoundedContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
 
-  RoundedContainer(
-      {required this.child, this.padding = const EdgeInsets.all(0)});
+  const RoundedContainer(
+      {super.key, required this.child, this.padding = const EdgeInsets.all(0)});
 
   @override
   Widget build(BuildContext context) {

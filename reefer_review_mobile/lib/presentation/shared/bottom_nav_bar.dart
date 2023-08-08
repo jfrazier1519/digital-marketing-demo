@@ -10,7 +10,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60.0,
       child: BottomNavigationBar(
         currentIndex: currentIndex,
