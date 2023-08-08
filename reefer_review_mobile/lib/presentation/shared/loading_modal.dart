@@ -9,7 +9,7 @@ class LoadingModal extends StatelessWidget {
       onWillPop: () async => false, // Prevents back button
       child: Container(
         color: Colors.black.withOpacity(0.5), // Darken background
-        child: Center(
+        child: const Center(
           child: CircularProgressIndicator(),
         ),
       ),
