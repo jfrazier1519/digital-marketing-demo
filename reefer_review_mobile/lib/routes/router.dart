@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 
-import '../presentation/home/home_screen.dart';
+import '../presentation/home_screen/home_screen.dart';
 import '../presentation/shared/undefined_view.dart';
 import '../res/routes.dart';
 

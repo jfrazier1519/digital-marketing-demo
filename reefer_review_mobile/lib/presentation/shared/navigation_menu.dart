@@ -17,17 +17,16 @@ class NavigationMenu extends StatelessWidget {
           }
         },
         child: SizedBox(
-          width: MediaQuery.of(context).size.width *
-              0.6, // Adjust the width as needed
+          width: MediaQuery.of(context).size.width * 0.6,
           child: Drawer(
             child: Container(
-              color: colorScheme.background, // Set the background color here
+              color: colorScheme.background,
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   UserAccountsDrawerHeader(
                     accountName: Text(name),
-                    accountEmail: Text(''),
+                    accountEmail: const Text(''),
                     currentAccountPicture: CircleAvatar(
                       backgroundColor: Colors.white,
                       child: Icon(Icons.person,

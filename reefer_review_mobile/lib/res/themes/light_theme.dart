@@ -3,10 +3,22 @@ import 'package:flutter/material.dart';
 import '../colors.dart';
 
 var lightTheme = ThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: secondaryGreen,
+    selectedItemColor: secondaryOrange,
+    unselectedItemColor: primaryBackground,
+    elevation: 8.0,
+    type: BottomNavigationBarType.fixed,
+    showUnselectedLabels: true,
+    selectedLabelStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+    ),
+  ),
   colorScheme: const ColorScheme.light(
       background: primaryBackground,
       secondary: secondaryGreen,
-      primary: secondaryGreen),
+      primary: secondaryGreen,
+      tertiary: secondaryBackground),
   scaffoldBackgroundColor: primaryBackground,
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: secondaryGreen),
