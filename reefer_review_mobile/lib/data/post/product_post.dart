@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
-import 'package:expandable_text/expandable_text.dart'; // Import the expandable_text package
+import 'package:expandable_text/expandable_text.dart';
 import '../../presentation/shared/rounded_container.dart';
 import '../user.dart';
 
@@ -33,8 +33,7 @@ class ProductPost extends Post {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Aligns the avatar to the top
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
                   backgroundImage: AssetImage(author.profileImageUrl),

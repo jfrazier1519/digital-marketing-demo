@@ -64,7 +64,6 @@ class FakePostRepository implements PostRepository {
     ];
   }
 
-  // Here's a simple type-based categorization
   List<Post> get _followingPosts {
     return _allPosts
         .where((post) => post is! ProductPost && post is! EventPost)

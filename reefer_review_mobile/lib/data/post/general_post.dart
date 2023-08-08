@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
-import 'package:expandable_text/expandable_text.dart'; // Import the expandable_text package
+import 'package:expandable_text/expandable_text.dart';
 import '../../presentation/shared/rounded_container.dart';
 import '../user.dart';
 
@@ -21,8 +21,7 @@ class GeneralPost extends Post {
 
   @override
   Widget displayContent(BuildContext context) {
-    var colorScheme =
-        Theme.of(context).colorScheme; // Get the current color scheme
+    var colorScheme = Theme.of(context).colorScheme;
 
     return RoundedContainer(
       child: Column(
@@ -31,8 +30,7 @@ class GeneralPost extends Post {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Aligns the avatar to the top
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
                   backgroundImage: AssetImage(author.profileImageUrl),

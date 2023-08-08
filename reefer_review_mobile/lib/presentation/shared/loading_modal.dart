@@ -22,8 +22,7 @@ class LoadingModal extends StatelessWidget {
           width: 100,
           child: Center(
             child: CircularProgressIndicator(
-              color: colorScheme
-                  .primary, // Setting the color of the CircularProgressIndicator
+              color: colorScheme.primary,
             ),
           ),
         ),

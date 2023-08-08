@@ -8,6 +8,7 @@ class FollowingFeedScreen extends StatefulWidget {
   const FollowingFeedScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FollowingFeedScreenState createState() => _FollowingFeedScreenState();
 }
 
@@ -24,7 +25,7 @@ class _FollowingFeedScreenState extends State<FollowingFeedScreen> {
       body: BlocBuilder<FeedBloc, FeedState>(
         builder: (context, state) {
           if (state is FeedLoading) {
-            return const LoadingModal(); // Return the custom loading modal
+            return const LoadingModal();
           } else if (state is FeedLoaded) {
             return ListView.builder(
               itemCount: state.posts.length,

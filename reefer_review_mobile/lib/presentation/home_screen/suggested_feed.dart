@@ -4,9 +4,10 @@ import '../../data/post/post_feed_type.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class SuggestedFeedScreen extends StatefulWidget {
-  const SuggestedFeedScreen({Key? key}) : super(key: key); // Fix key parameter
+  const SuggestedFeedScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SuggestedFeedScreenState createState() => _SuggestedFeedScreenState();
 }
 
