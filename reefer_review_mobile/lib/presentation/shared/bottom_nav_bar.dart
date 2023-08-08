@@ -15,9 +15,6 @@ class BottomNavBar extends StatelessWidget {
       child: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
-          if (index == currentIndex) {
-            return;
-          }
           if (index == 0) {
             Navigator.of(context).pushReplacementNamed(homeScreenViewRoute);
           } else {

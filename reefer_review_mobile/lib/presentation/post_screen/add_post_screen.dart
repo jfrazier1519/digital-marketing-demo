@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../res/routes.dart';
-import '../../data/post/general_post.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import '../shared/bottom_nav_bar.dart';
+import '../shared/rounded_container.dart';
+import '../../res/images.dart';
 
 class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({
-    super.key,
-  });
+  const AddPostScreen({super.key});
 
   @override
   _AddPostScreenState createState() => _AddPostScreenState();
@@ -15,11 +15,20 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _contentController = TextEditingController();
   String? _selectedImagePath;
+  final String profileImageUrl = dummyProfileImage;
+  final String userName = 'John Doe';
 
   _selectImage() async {
-    // TODO: Implement logic to select an image
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery); // Open file explorer to select image
+
     setState(() {
-      _selectedImagePath = 'path/to/your/image.jpg';
+      if (pickedFile != null) {
+        _selectedImagePath = pickedFile.path;
+      } else {
+        print('No image selected.');
+      }
     });
   }
 
@@ -46,26 +55,47 @@ class _AddPostScreenState extends State<AddPostScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (_selectedImagePath != null) Image.network(_selectedImagePath!),
-            TextField(
-              controller: _contentController,
-              decoration: InputDecoration(
-                hintText: 'Write your post content...',
+            if (_selectedImagePath != null)
+              Image.file(File(_selectedImagePath!)),
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage(profileImageUrl),
+                  radius: 25,
+                ),
+                const SizedBox(width: 20),
+                Text(
+                  userName,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: _post,
+                  child: const Text('Post'),
+                ),
+              ],
+            ),
+            RoundedContainer(
+              child: TextField(
+                controller: _contentController,
+                decoration: InputDecoration(
+                  hintText: 'Write your post content...',
+                  border: InputBorder.none,
+                ),
+                maxLines: 5,
               ),
-              maxLines: 5,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _selectImage,
               child: const Text('Add Image'),
             ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _post,
-              child: const Text('Post'),
-            ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 0,
+        onTap: (index) {},
       ),
     );
   }
