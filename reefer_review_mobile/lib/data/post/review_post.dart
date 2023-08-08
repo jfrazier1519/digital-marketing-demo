@@ -23,6 +23,8 @@ class ReviewPost extends Post {
 
   @override
   Widget displayContent(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
     return RoundedContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,10 +50,15 @@ class ReviewPost extends Post {
                       Text(content),
                       const SizedBox(height: 10),
                       Row(
-                        children: List.generate(
-                          reviewStars.toInt(),
-                          (index) => Icon(Icons.star, color: Colors.green),
-                        ),
+                        children: [
+                          Icon(Icons.star_border, color: colorScheme.primary),
+                          Text(
+                            ' $reviewStars Stars', // Display the exact rating value
+                            style: TextStyle(
+                              color: colorScheme.primary,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -1,10 +1,14 @@
 part of 'feed_bloc.dart';
 
 @immutable
-sealed class FeedState {}
+abstract class FeedState {}
 
-final class FeedInitial extends FeedState {}
+class FeedInitial extends FeedState {}
 
-//LoadingState
+class FeedLoading extends FeedState {}
 
-//LoadedState => array of posts
+class FeedLoaded extends FeedState {
+  final List<Post> posts;
+
+  FeedLoaded(this.posts);
+}

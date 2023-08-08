@@ -23,6 +23,8 @@ class ProductPost extends Post {
 
   @override
   Widget displayContent(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
     return RoundedContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +53,10 @@ class ProductPost extends Post {
                         onTap: () {
                           Navigator.of(context).pushNamed(productUrl);
                         },
-                        child: const Text(
+                        child: Text(
                           'Go To Product Page',
                           style: TextStyle(
-                            color: Colors.green,
+                            color: colorScheme.primary,
                             decoration: TextDecoration.underline,
                           ),
                         ),

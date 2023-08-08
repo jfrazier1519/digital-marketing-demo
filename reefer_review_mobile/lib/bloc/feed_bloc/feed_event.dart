@@ -1,8 +1,10 @@
 part of 'feed_bloc.dart';
 
 @immutable
-sealed class FeedEvent {}
+abstract class FeedEvent {}
 
-//fetchFollowingUseCase
+class FetchPostsUsecase extends FeedEvent {
+  final PostFeedType feedType;
 
-//fetchSuggestedUseCase
+  FetchPostsUsecase(this.feedType);
+}
