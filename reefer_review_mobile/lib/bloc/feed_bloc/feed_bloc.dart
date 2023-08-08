@@ -12,8 +12,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedBloc(this.postRepository) : super(FeedInitial()) {
     on<FetchPostsUsecase>((event, emit) async {
       emit(FeedLoading());
-      // var posts = await postRepository.getPosts(feedType: event.feedType);
-      // emit(FeedLoaded(posts));
+      var posts = await postRepository.getPosts(feedType: event.feedType);
+      emit(FeedLoaded(posts));
     });
 
     on<ExpandPost>((event, emit) {
