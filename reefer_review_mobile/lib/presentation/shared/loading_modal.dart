@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LoadingModal extends StatelessWidget {
-  const LoadingModal({super.key});
+  const LoadingModal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
-
-    return Center(
-      child: Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        elevation: 5,
-        child: Container(
-          decoration: BoxDecoration(
-            color: colorScheme.tertiary,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          height: 100,
-          width: 100,
-          child: Center(
-            child: CircularProgressIndicator(
-              color: colorScheme.primary,
-            ),
-          ),
+    return WillPopScope(
+      onWillPop: () async => false, // Prevents back button
+      child: Container(
+        color: Colors.black.withOpacity(0.5), // Darken background
+        child: Center(
+          child: CircularProgressIndicator(),
         ),
       ),
     );

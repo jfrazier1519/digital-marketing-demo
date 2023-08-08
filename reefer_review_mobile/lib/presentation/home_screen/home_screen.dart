@@ -30,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -101,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Following',
                           style: TextStyle(
                             color: _selectedTabIndex == 0
-                                ? Colors.green
+                                ? colorScheme.primary
                                 : Colors.black,
                             decoration: _selectedTabIndex == 0
                                 ? TextDecoration.underline
@@ -120,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Suggested',
                           style: TextStyle(
                             color: _selectedTabIndex == 1
-                                ? Colors.green
+                                ? colorScheme.primary
                                 : Colors.black,
                             decoration: _selectedTabIndex == 1
                                 ? TextDecoration.underline
