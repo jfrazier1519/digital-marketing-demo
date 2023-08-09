@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/rounded_container.dart';
 import '../../res/images.dart';
+import '../../data/post/general_post.dart';
+import '../../data/user.dart';
+import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
@@ -33,11 +37,28 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   _post() {
-    // TODO: Implement logic to post the content
     String content = _contentController.text;
-    String? imagePath = _selectedImagePath;
 
-    // Post content using content and imagePath
+    // Create a Post object
+    GeneralPost post = GeneralPost(
+      postId: DateTime.now().millisecondsSinceEpoch, // Example ID
+      author: User(
+        userId: 'userID1',
+        email: 'john.doe@example.com',
+        name: 'John Doe',
+        profileImageUrl: dummyProfileImage,
+      ),
+      date: DateTime.now(),
+      content: content,
+      image: _selectedImagePath ??
+          '', // Assuming the imagePath is a local file path
+    );
+
+    // Dispatch the event to add the post
+    context.read<FeedBloc>().add(AddPost(post));
+
+    // Navigate back or refresh the posts in your feed
+    Navigator.pop(context);
   }
 
   @override
@@ -76,9 +97,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ],
             ),
             RoundedContainer(
+              margin: const EdgeInsets.symmetric(
+                  vertical: 8.0), // Override the horizontal margin here
               child: TextField(
                 controller: _contentController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Write your post content...',
                   border: InputBorder.none,
                 ),
