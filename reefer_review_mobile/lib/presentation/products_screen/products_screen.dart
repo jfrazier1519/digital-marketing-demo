@@ -19,6 +19,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   bool _isSortSelected = false; // Tracks whether the sort button is selected
 
   final GlobalKey _categoryButtonKey = GlobalKey();
+  final GlobalKey _sortButtonKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +89,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
+                      key: _sortButtonKey, // Add this line
                       onPressed: () {
                         if (_isSortSelected) {
                           Navigator.pop(context);
@@ -99,7 +101,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             _isCategorySelected = false;
                             _isSortSelected = true;
                           });
-                          showSortModal(context).then((_) {
+                          showSortModal(context, _sortButtonKey).then((_) {
                             setState(() {
                               _isSortSelected = false;
                             });

@@ -1,31 +1,120 @@
 import 'package:flutter/material.dart';
 
-Future<void> showSortModal(BuildContext context) {
-  return showDialog(
-      context: context,
-      barrierColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title:
-              const Text('Sort', style: TextStyle(fontWeight: FontWeight.bold)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              sortTile(context, 'Product'),
-              sortTile(context, 'Brand'),
-              sortTile(context, 'Rating'),
-              sortTile(context, 'Reviews'),
-            ],
-          ),
-        );
-      });
+Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey) {
+  final RenderBox renderBox =
+      sortButtonKey.currentContext!.findRenderObject() as RenderBox;
+  final position = renderBox.localToGlobal(Offset.zero);
+
+  var colorScheme = Theme.of(context).colorScheme;
+
+  return showGeneralDialog(
+    context: context,
+    barrierColor: Colors.transparent,
+    barrierDismissible: true,
+    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    transitionDuration: const Duration(milliseconds: 200),
+    pageBuilder: (BuildContext context, Animation animation,
+        Animation secondaryAnimation) {
+      return Stack(children: [
+        Positioned(
+          top: position.dy + renderBox.size.height,
+          right: MediaQuery.of(context).size.width -
+              position.dx -
+              renderBox.size.width,
+          child: SortOptions(colorScheme: colorScheme),
+        )
+      ]);
+    },
+  );
 }
 
-Widget sortTile(BuildContext context, String sortOption) {
-  return ListTile(
-      title: Text(sortOption),
+class SortOptions extends StatefulWidget {
+  final ColorScheme colorScheme;
+
+  SortOptions({required this.colorScheme});
+
+  @override
+  _SortOptionsState createState() => _SortOptionsState();
+}
+
+class _SortOptionsState extends State<SortOptions> {
+  String? selectedSortOption;
+  bool isAscending = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 4.0,
+      color: widget.colorScheme.background,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 10.0, left: 20.0),
+              child: Text('Sort',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10.0),
+              child: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    sortTile(context, 'Product', Icons.keyboard_arrow_up),
+                    sortTile(context, 'Brand', Icons.keyboard_arrow_up),
+                    sortTile(context, 'Rating', Icons.keyboard_arrow_up),
+                    sortTile(context, 'Reviews', Icons.keyboard_arrow_up),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget sortTile(BuildContext context, String sortOption, IconData icon) {
+    bool isSelected = sortOption == selectedSortOption;
+
+    return InkWell(
       onTap: () {
-        // Implement the sorting logic based on the sortOption here
-        print('Selected sort by $sortOption'); // For testing
-      });
+        setState(() {
+          if (selectedSortOption == sortOption) {
+            isAscending = !isAscending;
+          } else {
+            selectedSortOption = sortOption;
+            isAscending = true;
+          }
+        });
+        // Implement sorting logic here
+      },
+      child: Container(
+        color: isSelected ? Colors.green[100] : null,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              sortOption,
+              style: TextStyle(
+                color: isSelected ? Colors.green : Colors.black,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+            Icon(
+              isSelected
+                  ? (isAscending
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down)
+                  : Icons.keyboard_arrow_up,
+              color: isSelected ? Colors.green : Colors.grey,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

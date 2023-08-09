@@ -20,7 +20,7 @@ Future<void> showCategoriesModal(
       return Stack(children: [
         Positioned(
           top: position.dy + renderBox.size.height, // position below the button
-          left: position.dx, // position from the left side
+          left: MediaQuery.of(context).size.width * 0.25, // centering the modal
           child: Material(
             elevation: 4.0, // Adjust this value to change the shadow size
             color: colorScheme.background, // Set the background color here
@@ -28,7 +28,7 @@ Future<void> showCategoriesModal(
                 borderRadius: BorderRadius.circular(8.0)),
             child: SizedBox(
               width: MediaQuery.of(context).size.width *
-                  0.9, // 90% of screen width
+                  0.5, // 50% of screen width, same as the sort modal
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
