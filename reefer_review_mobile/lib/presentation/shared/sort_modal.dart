@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-void showSortModal(BuildContext context) {
-  showDialog(
+Future<void> showSortModal(BuildContext context) {
+  return showDialog(
       context: context,
+      barrierColor: Colors.transparent,
       builder: (BuildContext context) {
         return AlertDialog(
           title:

@@ -1,44 +1,66 @@
 import 'package:flutter/material.dart';
 
-void showCategoriesModal(BuildContext context) {
+Future<void> showCategoriesModal(
+    BuildContext context, GlobalKey categoryButtonKey) {
   var colorScheme = Theme.of(context).colorScheme;
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          insetPadding: const EdgeInsets.all(10.0),
-          backgroundColor: colorScheme.background,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          child: SizedBox(
-            height: 250,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0, left: 20.0),
-                  child: Text('Categories',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SingleChildScrollView(
-                    child: ListBody(
-                      children: [
-                        categoryTile(context, 'Category 1'),
-                        categoryTile(context, 'Category 2'),
-                        categoryTile(context, 'Category 3'),
-                        categoryTile(context, 'Category 4'),
-                        categoryTile(context, 'Category 5'),
-                      ],
+
+  final RenderBox renderBox =
+      categoryButtonKey.currentContext!.findRenderObject() as RenderBox;
+  final position = renderBox.localToGlobal(
+      Offset.zero); // this will give you the position of the context widget
+
+  return showGeneralDialog(
+    context: context,
+    barrierColor: Colors.transparent,
+    barrierDismissible: true,
+    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    transitionDuration: const Duration(milliseconds: 200),
+    pageBuilder: (BuildContext context, Animation animation,
+        Animation secondaryAnimation) {
+      return Stack(children: [
+        Positioned(
+          top: position.dy + renderBox.size.height, // position below the button
+          left: position.dx, // position from the left side
+          child: Material(
+            elevation: 4.0, // Adjust this value to change the shadow size
+            color: colorScheme.background, // Set the background color here
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width *
+                  0.9, // 90% of screen width
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0, left: 20.0),
+                    child: Text('Categories',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20)), // Increase the font size here
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10.0),
+                    child: SingleChildScrollView(
+                      child: ListBody(
+                        children: [
+                          categoryTile(context, 'Flower'),
+                          categoryTile(context, 'Accessories'),
+                          categoryTile(context, 'Concentrates'),
+                          categoryTile(context, 'Oils'),
+                          categoryTile(context, 'Merch'),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        );
-      });
+        )
+      ]);
+    },
+  );
 }
 
 Widget categoryTile(BuildContext context, String category) {
@@ -46,8 +68,10 @@ Widget categoryTile(BuildContext context, String category) {
     onTap: () {
       print('Selected $category'); // Handle the category selection here
     },
-    child: ListTile(
-      title: Text(category),
+    child: Container(
+      padding: EdgeInsets.symmetric(
+          vertical: 10, horizontal: 10), // Adjust padding here
+      child: Text(category),
     ),
   );
 }
