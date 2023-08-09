@@ -97,8 +97,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ],
             ),
             RoundedContainer(
-              margin: const EdgeInsets.symmetric(
-                  vertical: 8.0), // Override the horizontal margin here
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
               child: TextField(
                 controller: _contentController,
                 decoration: const InputDecoration(
