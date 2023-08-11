@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/product_bloc/product_bloc.dart';
+import '../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/category_modal.dart';
 import '../shared/sort_modal.dart';
 
-class ProductsScreen extends StatefulWidget {
+class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
 
   @override
-  _ProductsScreenState createState() => _ProductsScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          ProductBloc(FakeProductRepository())..add(FetchProducts()),
+      child: _ProductsScreenContent(),
+    );
+  }
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _ProductsScreenContent extends StatefulWidget {
+  @override
+  _ProductsScreenContentState createState() => _ProductsScreenContentState();
+}
+
+class _ProductsScreenContentState extends State<_ProductsScreenContent> {
   int _currentIndex = 1;
-  bool _filterActive = false; // Tracks whether the filter is active
-  bool _isCategorySelected =
-      false; // Tracks whether the category button is selected
-  bool _isSortSelected = false; // Tracks whether the sort button is selected
+  bool _filterActive = false;
+  bool _isCategorySelected = false;
+  bool _isSortSelected = false;
 
   final GlobalKey _categoryButtonKey = GlobalKey();
   final GlobalKey _sortButtonKey = GlobalKey();
@@ -83,13 +96,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         backgroundColor: MaterialStateProperty.resolveWith(
                             (states) => _isCategorySelected
                                 ? colorScheme.outlineVariant
-                                : null), // Change color when selected
+                                : null),
                       ),
                       child: const Text('Product Category'),
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
-                      key: _sortButtonKey, // Add this line
+                      key: _sortButtonKey,
                       onPressed: () {
                         if (_isSortSelected) {
                           Navigator.pop(context);
@@ -112,16 +125,29 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         backgroundColor: MaterialStateProperty.resolveWith(
                             (states) => _isSortSelected
                                 ? colorScheme.outlineVariant
-                                : null), // Change color when selected
+                                : null),
                       ),
                       child: const Text('Sort'),
                     ),
                   ],
                 ),
               ),
+            const SizedBox(height: 10),
             Expanded(
-              child: Center(
-                child: Text('This is the products screen yo'),
+              child: BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoading) {
+                    return CircularProgressIndicator();
+                  } else if (state is ProductsLoaded) {
+                    return ListView.builder(
+                      itemCount: state.products.length,
+                      itemBuilder: (context, index) =>
+                          state.products[index].displayContent(context),
+                    );
+                  } else {
+                    return Text('Something went wrong!');
+                  }
+                },
               ),
             ),
           ],
