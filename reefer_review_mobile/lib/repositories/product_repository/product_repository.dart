@@ -2,6 +2,8 @@ import '../../data/product.dart';
 
 abstract class ProductRepository {
   Future<List<Product>> getAllProducts();
+  Future<List<Product>> getProductsByCategory(String category);
+  Future<List<Product>> sortProducts(String sortOption, bool isAscending);
   Future<Product> getProductById(int id);
   Future<void> addProduct(Product product);
   Future<void> updateProduct(Product product);

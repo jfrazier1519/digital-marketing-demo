@@ -89,4 +89,40 @@ class FakeProductRepository implements ProductRepository {
       _allProducts[index] = updatedProduct;
     }
   }
+
+  @override
+  Future<List<Product>> getProductsByCategory(String category) async {
+    return _allProducts
+        .where((product) => product.category == category)
+        .toList();
+  }
+
+  @override
+  Future<List<Product>> sortProducts(
+      String sortOption, bool isAscending) async {
+    Comparator<Product> comparator;
+
+    switch (sortOption) {
+      case 'product':
+        comparator = (a, b) => a.name.compareTo(b.name);
+        break;
+      case 'brand':
+        comparator = (a, b) => a.brand.compareTo(b.brand);
+        break;
+      case 'rating':
+        comparator = (a, b) => a.rating.compareTo(b.rating);
+        break;
+      case 'reviews':
+        comparator = (a, b) => a.reviewCount.compareTo(b.reviewCount);
+        break;
+      default:
+        comparator = (a, b) => a.name.compareTo(b.name);
+        break;
+    }
+
+    _allProducts
+        .sort((a, b) => isAscending ? comparator(a, b) : -comparator(a, b));
+
+    return _allProducts;
+  }
 }

@@ -66,11 +66,10 @@ Future<void> showCategoriesModal(
 Widget categoryTile(BuildContext context, String category) {
   return InkWell(
     onTap: () {
-      print('Selected $category'); // Handle the category selection here
+      print('Selected $category');
     },
     child: Container(
-      padding: EdgeInsets.symmetric(
-          vertical: 10, horizontal: 10), // Adjust padding here
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Text(category),
     ),
   );

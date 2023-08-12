@@ -14,5 +14,19 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       var products = await productRepository.getAllProducts();
       emit(ProductsLoaded(products));
     });
+
+    on<FilterByCategory>((event, emit) async {
+      emit(ProductLoading());
+      var products =
+          await productRepository.getProductsByCategory(event.category);
+      emit(ProductsLoaded(products));
+    });
+
+    on<SortProducts>((event, emit) async {
+      emit(ProductLoading());
+      var products = await productRepository.sortProducts(
+          event.sortOption, event.isAscending);
+      emit(ProductsLoaded(products));
+    });
   }
 }
