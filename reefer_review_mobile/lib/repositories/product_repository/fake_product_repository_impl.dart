@@ -21,7 +21,7 @@ class FakeProductRepository implements ProductRepository {
       Product(
           productId: 2,
           name: "Sample Product 2",
-          category: "Edible",
+          category: "Edibles",
           strain: "Indica",
           brand: "Brand B",
           rating: 3.5,
@@ -31,7 +31,7 @@ class FakeProductRepository implements ProductRepository {
       Product(
           productId: 3,
           name: "Sample Product 3",
-          category: "Oil",
+          category: "Oils",
           strain: "Sativa",
           brand: "Brand C",
           rating: 4.0,
@@ -41,7 +41,7 @@ class FakeProductRepository implements ProductRepository {
       Product(
           productId: 4,
           name: "Sample Product 4",
-          category: "Concentrate",
+          category: "Concentrates",
           strain: "Hybrid",
           brand: "Brand D",
           rating: 5.0,
@@ -51,7 +51,7 @@ class FakeProductRepository implements ProductRepository {
       Product(
           productId: 5,
           name: "Sample Product 5",
-          category: "Vape",
+          category: "Oils",
           strain: "Sativa",
           brand: "Brand E",
           rating: 4.2,

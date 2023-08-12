@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey) {
+import '../../bloc/product_bloc/product_bloc.dart';
+
+Future<void> showSortModal(
+    BuildContext context, GlobalKey sortButtonKey, ProductBloc productBloc) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -21,7 +25,8 @@ Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey) {
           right: MediaQuery.of(context).size.width -
               position.dx -
               renderBox.size.width,
-          child: SortOptions(colorScheme: colorScheme),
+          child:
+              SortOptions(colorScheme: colorScheme, productBloc: productBloc),
         )
       ]);
     },
@@ -30,8 +35,9 @@ Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey) {
 
 class SortOptions extends StatefulWidget {
   final ColorScheme colorScheme;
+  final ProductBloc productBloc;
 
-  SortOptions({required this.colorScheme});
+  SortOptions({required this.colorScheme, required this.productBloc});
 
   @override
   _SortOptionsState createState() => _SortOptionsState();
@@ -89,7 +95,8 @@ class _SortOptionsState extends State<SortOptions> {
             isAscending = true;
           }
         });
-        // Implement sorting logic here
+        widget.productBloc.add(SortProducts(
+            sortOption: sortOption.toLowerCase(), isAscending: isAscending));
       },
       child: Container(
         color: isSelected ? Colors.green[100] : null,

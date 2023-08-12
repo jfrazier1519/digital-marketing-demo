@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-Future<void> showCategoriesModal(
-    BuildContext context, GlobalKey categoryButtonKey) {
+import '../../bloc/product_bloc/product_bloc.dart';
+
+Future<void> showCategoriesModal(BuildContext context,
+    GlobalKey categoryButtonKey, ProductBloc productBloc) {
   var colorScheme = Theme.of(context).colorScheme;
 
   final RenderBox renderBox =
@@ -44,11 +47,11 @@ Future<void> showCategoriesModal(
                     child: SingleChildScrollView(
                       child: ListBody(
                         children: [
-                          categoryTile(context, 'Flower'),
-                          categoryTile(context, 'Accessories'),
-                          categoryTile(context, 'Concentrates'),
-                          categoryTile(context, 'Oils'),
-                          categoryTile(context, 'Merch'),
+                          categoryTile(context, 'Flower', productBloc),
+                          categoryTile(context, 'Accessories', productBloc),
+                          categoryTile(context, 'Concentrates', productBloc),
+                          categoryTile(context, 'Oils', productBloc),
+                          categoryTile(context, 'Merch', productBloc),
                         ],
                       ),
                     ),
@@ -63,10 +66,12 @@ Future<void> showCategoriesModal(
   );
 }
 
-Widget categoryTile(BuildContext context, String category) {
+Widget categoryTile(
+    BuildContext context, String category, ProductBloc productBloc) {
   return InkWell(
     onTap: () {
-      print('Selected $category');
+      // Filtering by category
+      productBloc.add(FilterByCategory(category));
     },
     child: Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

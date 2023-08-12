@@ -84,7 +84,8 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = true;
                             _isSortSelected = false;
                           });
-                          showCategoriesModal(context, _categoryButtonKey)
+                          showCategoriesModal(context, _categoryButtonKey,
+                                  BlocProvider.of<ProductBloc>(context))
                               .then((_) {
                             setState(() {
                               _isCategorySelected = false;
@@ -114,7 +115,9 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = false;
                             _isSortSelected = true;
                           });
-                          showSortModal(context, _sortButtonKey).then((_) {
+                          showSortModal(context, _sortButtonKey,
+                                  BlocProvider.of<ProductBloc>(context))
+                              .then((_) {
                             setState(() {
                               _isSortSelected = false;
                             });
