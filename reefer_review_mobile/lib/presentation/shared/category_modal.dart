@@ -3,8 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
-Future<void> showCategoriesModal(BuildContext context,
-    GlobalKey categoryButtonKey, ProductBloc productBloc) {
+Future<void> showCategoriesModal(
+    BuildContext context,
+    GlobalKey categoryButtonKey,
+    ProductBloc productBloc,
+    String? selectedCategory,
+    Function(String?) onSelectCategory) {
+  // <-- Added selectedCategory and onSelectCategory
   var colorScheme = Theme.of(context).colorScheme;
 
   final RenderBox renderBox =
@@ -25,40 +30,15 @@ Future<void> showCategoriesModal(BuildContext context,
           top: position.dy + renderBox.size.height, // position below the button
           left: MediaQuery.of(context).size.width * 0.25, // centering the modal
           child: Material(
-            elevation: 4.0, // Adjust this value to change the shadow size
-            color: colorScheme.background, // Set the background color here
+            elevation: 4.0,
+            color: colorScheme.background,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width *
-                  0.5, // 50% of screen width, same as the sort modal
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.0, left: 20.0),
-                    child: Text('Categories',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20)), // Increase the font size here
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10.0),
-                    child: SingleChildScrollView(
-                      child: ListBody(
-                        children: [
-                          categoryTile(context, 'Flower', productBloc),
-                          categoryTile(context, 'Accessories', productBloc),
-                          categoryTile(context, 'Concentrates', productBloc),
-                          categoryTile(context, 'Oils', productBloc),
-                          categoryTile(context, 'Merch', productBloc),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: CategoriesContent(
+                productBloc: productBloc,
+                selectedCategory: selectedCategory,
+                onSelectCategory:
+                    onSelectCategory), // <-- Pass selectedCategory and onSelectCategory
           ),
         )
       ]);
@@ -66,16 +46,89 @@ Future<void> showCategoriesModal(BuildContext context,
   );
 }
 
-Widget categoryTile(
-    BuildContext context, String category, ProductBloc productBloc) {
-  return InkWell(
-    onTap: () {
-      // Filtering by category
-      productBloc.add(FilterByCategory(category));
-    },
-    child: Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child: Text(category),
-    ),
-  );
+class CategoriesContent extends StatefulWidget {
+  final ProductBloc productBloc;
+  final String? selectedCategory; // <-- Add this
+  final Function(String?) onSelectCategory; // <-- Add this callback
+
+  CategoriesContent(
+      {required this.productBloc,
+      this.selectedCategory,
+      required this.onSelectCategory}); // <-- Update constructor
+
+  @override
+  _CategoriesContentState createState() => _CategoriesContentState();
+}
+
+class _CategoriesContentState extends State<CategoriesContent> {
+  String? selectedCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCategory = widget
+        .selectedCategory; // <-- Initialize with the passed selectedCategory
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 10.0, left: 20.0),
+            child: Text('Categories',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10.0),
+            child: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  categoryTile(context, 'Flower'),
+                  categoryTile(context, 'Accessories'),
+                  categoryTile(context, 'Concentrates'),
+                  categoryTile(context, 'Oils'),
+                  categoryTile(context, 'Merch'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget categoryTile(BuildContext context, String category) {
+    bool isSelected = category == selectedCategory;
+
+    return InkWell(
+      onTap: () {
+        setState(() {
+          if (isSelected) {
+            // Deselect the category if it was previously selected
+            selectedCategory = null;
+            widget.productBloc.add(FetchProducts()); // Fetch all products
+          } else {
+            // Select the category
+            selectedCategory = category;
+            widget.productBloc.add(FilterByCategory(category));
+          }
+        });
+        widget.onSelectCategory(selectedCategory);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Text(
+          category,
+          style: TextStyle(
+            color: isSelected ? Colors.green : Colors.black,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ),
+    );
+  }
 }

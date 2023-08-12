@@ -30,6 +30,9 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
   bool _filterActive = false;
   bool _isCategorySelected = false;
   bool _isSortSelected = false;
+  String? selectedCategory;
+  String? _selectedSortOption;
+  bool _isAscending = true;
 
   final GlobalKey _categoryButtonKey = GlobalKey();
   final GlobalKey _sortButtonKey = GlobalKey();
@@ -84,9 +87,18 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = true;
                             _isSortSelected = false;
                           });
-                          showCategoriesModal(context, _categoryButtonKey,
-                                  BlocProvider.of<ProductBloc>(context))
-                              .then((_) {
+                          showCategoriesModal(
+                            context,
+                            _categoryButtonKey,
+                            BlocProvider.of<ProductBloc>(context),
+                            selectedCategory, // Pass the selected category
+                            (category) {
+                              // Callback when a category is selected
+                              setState(() {
+                                selectedCategory = category;
+                              });
+                            },
+                          ).then((_) {
                             setState(() {
                               _isCategorySelected = false;
                             });
@@ -95,9 +107,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => _isCategorySelected
+                            (states) => _isCategorySelected ||
+                                    selectedCategory != null
                                 ? colorScheme.outlineVariant
-                                : null),
+                                : null), // Highlight if a category is currently selected or _isCategorySelected is true
                       ),
                       child: const Text('Product Category'),
                     ),
@@ -115,9 +128,22 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = false;
                             _isSortSelected = true;
                           });
-                          showSortModal(context, _sortButtonKey,
-                                  BlocProvider.of<ProductBloc>(context))
-                              .then((_) {
+                          showSortModal(
+                            context,
+                            _sortButtonKey,
+                            BlocProvider.of<ProductBloc>(context),
+                            (sortOption, isAscendingDirection) {
+                              setState(() {
+                                _isSortSelected = sortOption != null;
+                                _selectedSortOption = sortOption;
+                                _isAscending = isAscendingDirection;
+                              });
+                            },
+                            initialSortOption: _selectedSortOption,
+                            initialIsAscending: _isAscending,
+                            selectedCategory:
+                                selectedCategory, // Pass the current selected category here
+                          ).then((_) {
                             setState(() {
                               _isSortSelected = false;
                             });
@@ -126,9 +152,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => _isSortSelected
-                                ? colorScheme.outlineVariant
-                                : null),
+                            (states) =>
+                                _isSortSelected || _selectedSortOption != null
+                                    ? colorScheme.outlineVariant
+                                    : null),
                       ),
                       child: const Text('Sort'),
                     ),

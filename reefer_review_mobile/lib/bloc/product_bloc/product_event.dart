@@ -11,8 +11,10 @@ class FilterByCategory extends ProductEvent {
 }
 
 class SortProducts extends ProductEvent {
+  final String? category;
   final String sortOption;
   final bool isAscending;
 
-  SortProducts({required this.sortOption, required this.isAscending});
+  SortProducts(
+      {this.category, required this.sortOption, required this.isAscending});
 }

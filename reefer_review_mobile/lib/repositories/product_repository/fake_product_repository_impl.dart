@@ -98,8 +98,10 @@ class FakeProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> sortProducts(
-      String sortOption, bool isAscending) async {
+  Future<List<Product>> sortProducts(String sortOption, bool isAscending,
+      [List<Product>? products]) async {
+    List<Product> productList = products ?? _allProducts;
+
     Comparator<Product> comparator;
 
     switch (sortOption) {
@@ -120,9 +122,9 @@ class FakeProductRepository implements ProductRepository {
         break;
     }
 
-    _allProducts
+    productList
         .sort((a, b) => isAscending ? comparator(a, b) : -comparator(a, b));
 
-    return _allProducts;
+    return productList;
   }
 }
