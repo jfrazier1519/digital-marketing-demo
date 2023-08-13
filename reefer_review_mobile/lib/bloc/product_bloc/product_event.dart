@@ -6,13 +6,13 @@ abstract class ProductEvent {}
 class FetchProducts extends ProductEvent {}
 
 class FilterByCategory extends ProductEvent {
-  final String category;
+  final CategoryOptionsEnum category;
   FilterByCategory(this.category);
 }
 
 class SortProducts extends ProductEvent {
-  final String? category;
-  final String sortOption;
+  final CategoryOptionsEnum? category;
+  final SortOptionsEnum sortOption;
   final bool isAscending;
 
   SortProducts(

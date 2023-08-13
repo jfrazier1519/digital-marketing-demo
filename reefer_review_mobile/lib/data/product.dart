@@ -28,10 +28,13 @@ class Product {
     var colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
       decoration: BoxDecoration(
-        color: colorScheme.tertiary, // Background color
-        borderRadius: BorderRadius.circular(8.0),
+        color: colorScheme.tertiary,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(8.0),
+          bottomLeft: Radius.circular(8.0),
+        ),
         boxShadow: [
           BoxShadow(
             color: colorScheme.onBackground.withOpacity(0.1),
@@ -42,17 +45,23 @@ class Product {
       ),
       child: Row(
         children: [
-          // Image on the far left
-          image.isNotEmpty
-              ? SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              : Container(),
+          Align(
+            alignment: Alignment.topLeft,
+            child: image.isNotEmpty
+                ? ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
+                    ),
+                    child: Image.asset(
+                      image,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Container(width: 100, height: 100),
+          ),
           const SizedBox(width: 20),
 
           // Details to the right of the image
@@ -60,6 +69,7 @@ class Product {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Top Section
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -81,18 +91,18 @@ class Product {
                         Icon(Icons.star_border,
                             color: colorScheme.primary, size: 30),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 Text(category, style: TextStyle(color: colorScheme.primary)),
                 const SizedBox(height: 5),
                 Text(brand, style: TextStyle(color: colorScheme.primary)),
-                const SizedBox(height: 5),
+                const SizedBox(height: 5), // Space before the expandable text
                 ExpandableText(
                   description,
                   expandText: 'See More',
                   collapseText: 'See Less',
-                  maxLines: 1, // Limit to 1 line before expansion
+                  maxLines: 1,
                   linkColor: colorScheme.primary,
                   style:
                       TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),

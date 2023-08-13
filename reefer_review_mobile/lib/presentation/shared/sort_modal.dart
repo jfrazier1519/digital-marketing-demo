@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../products_screen/sort_options_enum.dart';
+import '../products_screen/category_options_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
-Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey,
-    ProductBloc productBloc, void Function(String?, bool) onSortSelected,
-    {String? initialSortOption,
+Future<void> showSortModal(
+    BuildContext context,
+    GlobalKey sortButtonKey,
+    ProductBloc productBloc,
+    void Function(SortOptionsEnum?, bool) onSortSelected,
+    {SortOptionsEnum? initialSortOption,
     bool initialIsAscending = true,
-    String? selectedCategory}) {
+    CategoryOptionsEnum? selectedCategory}) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -45,10 +50,10 @@ Future<void> showSortModal(BuildContext context, GlobalKey sortButtonKey,
 class SortOptions extends StatefulWidget {
   final ColorScheme colorScheme;
   final ProductBloc productBloc;
-  final Function(String?, bool) onSortSelected;
-  final String? initialSortOption;
+  final Function(SortOptionsEnum?, bool) onSortSelected;
+  final SortOptionsEnum? initialSortOption;
   final bool initialIsAscending;
-  final String? selectedCategory;
+  final CategoryOptionsEnum? selectedCategory;
 
   SortOptions({
     required this.colorScheme,
@@ -57,23 +62,20 @@ class SortOptions extends StatefulWidget {
     required this.initialSortOption,
     required this.initialIsAscending,
     required this.selectedCategory,
-  }) {
-    print('Initial Sort Option: $initialSortOption');
-    print('Initial Is Ascending: $initialIsAscending');
-  }
+  });
 
   @override
   _SortOptionsState createState() => _SortOptionsState();
 }
 
 class _SortOptionsState extends State<SortOptions> {
-  String? selectedSortOption;
+  SortOptionsEnum? selectedSortOption;
   bool isAscending = true;
 
   @override
   void initState() {
     super.initState();
-    selectedSortOption = widget.initialSortOption;
+    selectedSortOption = widget.initialSortOption ?? SortOptionsEnum.Product;
     isAscending = widget.initialIsAscending;
   }
 
@@ -97,12 +99,9 @@ class _SortOptionsState extends State<SortOptions> {
               padding: const EdgeInsets.only(left: 10, right: 10.0),
               child: SingleChildScrollView(
                 child: ListBody(
-                  children: [
-                    sortTile(context, 'Product'),
-                    sortTile(context, 'Brand'),
-                    sortTile(context, 'Rating'),
-                    sortTile(context, 'Reviews'),
-                  ],
+                  children: SortOptionsEnum.values
+                      .map((e) => sortTile(context, e))
+                      .toList(),
                 ),
               ),
             ),
@@ -112,8 +111,11 @@ class _SortOptionsState extends State<SortOptions> {
     );
   }
 
-  Widget sortTile(BuildContext context, String sortOption) {
+  Widget sortTile(BuildContext context, SortOptionsEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
+    bool isDefault = sortOption == SortOptionsEnum.Product && isAscending;
+
+    String sortOptionString = sortOption.toString().split('.').last;
 
     return InkWell(
       onTap: () {
@@ -122,15 +124,16 @@ class _SortOptionsState extends State<SortOptions> {
             isAscending = !isAscending;
           } else {
             selectedSortOption = sortOption;
-            isAscending = true;
+            if (sortOption == SortOptionsEnum.Product) {
+              isAscending = true;
+            }
           }
         });
         widget.productBloc.add(SortProducts(
-            sortOption: sortOption.toLowerCase(),
+            sortOption: sortOption,
             isAscending: isAscending,
             category: widget.selectedCategory));
-        widget.onSortSelected(
-            selectedSortOption, isAscending); // Invoke callback here
+        widget.onSortSelected(selectedSortOption, isAscending);
       },
       child: Container(
         color: isSelected ? Colors.green[100] : null,
@@ -139,10 +142,12 @@ class _SortOptionsState extends State<SortOptions> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              sortOption,
+              sortOptionString,
               style: TextStyle(
-                color: isSelected ? Colors.green : Colors.black,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                color: isSelected || isDefault ? Colors.green : Colors.black,
+                fontWeight: isSelected || isDefault
+                    ? FontWeight.bold
+                    : FontWeight.normal,
               ),
             ),
             Icon(
@@ -151,7 +156,7 @@ class _SortOptionsState extends State<SortOptions> {
                       ? Icons.keyboard_arrow_up
                       : Icons.keyboard_arrow_down)
                   : Icons.keyboard_arrow_up,
-              color: isSelected ? Colors.green : Colors.grey,
+              color: isSelected || isDefault ? Colors.green : Colors.grey,
             ),
           ],
         ),

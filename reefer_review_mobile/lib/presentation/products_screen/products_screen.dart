@@ -6,6 +6,8 @@ import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/category_modal.dart';
 import '../shared/sort_modal.dart';
+import './category_options_enum.dart';
+import './sort_options_enum.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -30,8 +32,8 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
   bool _filterActive = false;
   bool _isCategorySelected = false;
   bool _isSortSelected = false;
-  String? selectedCategory;
-  String? _selectedSortOption;
+  CategoryOptionsEnum? selectedCategory;
+  SortOptionsEnum? _selectedSortOption;
   bool _isAscending = true;
 
   final GlobalKey _categoryButtonKey = GlobalKey();
@@ -68,11 +70,11 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
         drawer: const NavigationMenu(name: 'User name'),
         body: Column(
           children: [
-            if (_filterActive) // Show only if filter is active
+            if (_filterActive)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ElevatedButton(
                       key: _categoryButtonKey,
@@ -91,12 +93,17 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             context,
                             _categoryButtonKey,
                             BlocProvider.of<ProductBloc>(context),
-                            selectedCategory, // Pass the selected category
+                            selectedCategory,
                             (category) {
-                              // Callback when a category is selected
-                              setState(() {
-                                selectedCategory = category;
-                              });
+                              if (category == selectedCategory) {
+                                setState(() {
+                                  selectedCategory = null;
+                                });
+                              } else {
+                                setState(() {
+                                  selectedCategory = category;
+                                });
+                              }
                             },
                           ).then((_) {
                             setState(() {
@@ -134,15 +141,13 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             BlocProvider.of<ProductBloc>(context),
                             (sortOption, isAscendingDirection) {
                               setState(() {
-                                _isSortSelected = sortOption != null;
                                 _selectedSortOption = sortOption;
                                 _isAscending = isAscendingDirection;
                               });
                             },
                             initialSortOption: _selectedSortOption,
                             initialIsAscending: _isAscending,
-                            selectedCategory:
-                                selectedCategory, // Pass the current selected category here
+                            selectedCategory: selectedCategory,
                           ).then((_) {
                             setState(() {
                               _isSortSelected = false;
@@ -152,10 +157,14 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) =>
-                                _isSortSelected || _selectedSortOption != null
-                                    ? colorScheme.outlineVariant
-                                    : null),
+                          (states) => _isSortSelected ||
+                                  (_selectedSortOption != null &&
+                                      !(_selectedSortOption ==
+                                              SortOptionsEnum.Product &&
+                                          _isAscending))
+                              ? colorScheme.outlineVariant
+                              : null,
+                        ),
                       ),
                       child: const Text('Sort'),
                     ),
