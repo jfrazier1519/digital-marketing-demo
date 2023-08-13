@@ -20,6 +20,9 @@ class BottomNavBar extends StatelessWidget {
           }
           if (index == 0) {
             Navigator.of(context).pushReplacementNamed(homeScreenViewRoute);
+          }
+          if (index == 1) {
+            Navigator.of(context).pushReplacementNamed(productsScreenViewRoute);
           } else {
             onTap(index);
           }

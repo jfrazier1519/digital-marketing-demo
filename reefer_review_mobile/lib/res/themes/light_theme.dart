@@ -18,7 +18,8 @@ var lightTheme = ThemeData(
       background: primaryBackground,
       secondary: secondaryGreen,
       primary: secondaryGreen,
-      tertiary: secondaryBackground),
+      tertiary: secondaryBackground,
+      outlineVariant: secondaryOrange),
   scaffoldBackgroundColor: primaryBackground,
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: secondaryGreen),

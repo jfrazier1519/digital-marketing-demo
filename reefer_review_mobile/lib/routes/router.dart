@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/shared/undefined_view.dart';
@@ -14,6 +15,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     case homeScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
+    case productsScreenViewRoute:
+      return MaterialPageRoute(builder: (context) => const ProductsScreen());
 
     default:
       return MaterialPageRoute(
