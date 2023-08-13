@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/bloc/feed_bloc/feed_bloc.dart';
+import 'package:reefer_review_mobile/data/post/post_feed_type.dart';
+import 'package:reefer_review_mobile/repositories/post_repository.dart/fake_post_repository_impl.dart';
+import 'feed.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/bottom_nav_bar.dart';
-import './following_feed.dart';
-import './suggested_feed.dart';
 import '../../res/routes.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,14 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedTabIndex = 0;
   bool _isSearching = false;
 
-  _switchContent() {
+  Widget _switchContent() {
     switch (_selectedTabIndex) {
       case 0:
-        return const FollowingFeedScreen();
+        return FeedScreen(feedType: PostFeedType.Following);
       case 1:
-        return const SuggestedFeedScreen();
+        return FeedScreen(feedType: PostFeedType.Suggested);
       default:
-        return const FollowingFeedScreen();
+        return FeedScreen(feedType: PostFeedType.Following);
     }
   }
 
@@ -76,72 +79,75 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         drawer: const NavigationMenu(name: 'User name'),
-        body: Column(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+        body: BlocProvider(
+          create: (context) => FeedBloc(FakePostRepository()),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(addPostViewRoute,
+                            arguments: context.read<FeedBloc>());
+                      },
+                      child: const Text('Add Post'),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                          addPostViewRoute); // Use pushNamed instead of pushReplacementNamed
-                    },
-                    child: const Text('Add Post'),
-                  ),
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _selectedTabIndex = 0;
-                          });
-                        },
-                        child: Text(
-                          'Following',
-                          style: TextStyle(
-                            color: _selectedTabIndex == 0
-                                ? colorScheme.primary
-                                : Colors.black,
-                            decoration: _selectedTabIndex == 0
-                                ? TextDecoration.underline
-                                : null,
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedTabIndex = 0;
+                            });
+                          },
+                          child: Text(
+                            'Following',
+                            style: TextStyle(
+                              color: _selectedTabIndex == 0
+                                  ? colorScheme.primary
+                                  : Colors.black,
+                              decoration: _selectedTabIndex == 0
+                                  ? TextDecoration.underline
+                                  : null,
+                            ),
                           ),
                         ),
-                      ),
-                      const Text('|'),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _selectedTabIndex = 1;
-                          });
-                        },
-                        child: Text(
-                          'Suggested',
-                          style: TextStyle(
-                            color: _selectedTabIndex == 1
-                                ? colorScheme.primary
-                                : Colors.black,
-                            decoration: _selectedTabIndex == 1
-                                ? TextDecoration.underline
-                                : null,
+                        const Text('|'),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedTabIndex = 1;
+                            });
+                          },
+                          child: Text(
+                            'Suggested',
+                            style: TextStyle(
+                              color: _selectedTabIndex == 1
+                                  ? colorScheme.primary
+                                  : Colors.black,
+                              decoration: _selectedTabIndex == 1
+                                  ? TextDecoration.underline
+                                  : null,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 50),
-                ],
+                      ],
+                    ),
+                    const SizedBox(width: 50),
+                  ],
+                ),
               ),
-            ),
-            Expanded(child: _switchContent()),
-          ],
+              Expanded(child: _switchContent()),
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,

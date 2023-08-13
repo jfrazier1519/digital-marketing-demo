@@ -10,7 +10,9 @@ import '../../data/user.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({super.key});
+  final FeedBloc feedBloc;
+
+  const AddPostScreen({required this.feedBloc, Key? key}) : super(key: key);
 
   @override
   _AddPostScreenState createState() => _AddPostScreenState();
@@ -54,8 +56,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           '', // Assuming the imagePath is a local file path
     );
 
-    // Dispatch the event to add the post
-    context.read<FeedBloc>().add(AddPost(post));
+    widget.feedBloc.add(AddPost(post));
 
     // Navigate back or refresh the posts in your feed
     Navigator.pop(context);
