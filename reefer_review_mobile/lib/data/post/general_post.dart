@@ -3,6 +3,7 @@ import 'package:reefer_review_mobile/data/post/post.dart';
 import 'package:expandable_text/expandable_text.dart';
 import '../../presentation/shared/rounded_container.dart';
 import '../user.dart';
+import 'dart:io';
 
 class GeneralPost extends Post {
   GeneralPost({
@@ -63,14 +64,20 @@ class GeneralPost extends Post {
               ? SizedBox(
                   height: 200,
                   width: double.infinity,
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: _displayImage(image),
                 )
               : Container(),
         ],
       ),
     );
+  }
+}
+
+Widget _displayImage(String imagePath) {
+  // Check if the path is for bundled assets or file
+  if (imagePath.startsWith('assets/')) {
+    return Image.asset(imagePath, fit: BoxFit.cover);
+  } else {
+    return Image.file(File(imagePath), fit: BoxFit.cover);
   }
 }

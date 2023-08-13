@@ -15,8 +15,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     case homeScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
-    case addPostViewRoute:
-      return MaterialPageRoute(builder: (context) => const AddPostScreen());
 
     default:
       return MaterialPageRoute(

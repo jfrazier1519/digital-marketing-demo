@@ -10,9 +10,11 @@ import '../../data/user.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
+  final void Function() onClose;
   final FeedBloc feedBloc;
 
-  const AddPostScreen({required this.feedBloc, Key? key}) : super(key: key);
+  const AddPostScreen({required this.onClose, required this.feedBloc, Key? key})
+      : super(key: key);
 
   @override
   _AddPostScreenState createState() => _AddPostScreenState();
@@ -26,8 +28,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   _selectImage() async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(
-        source: ImageSource.gallery); // Open file explorer to select image
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
@@ -40,10 +41,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   _post() {
     String content = _contentController.text;
-
-    // Create a Post object
     GeneralPost post = GeneralPost(
-      postId: DateTime.now().millisecondsSinceEpoch, // Example ID
+      postId: DateTime.now().millisecondsSinceEpoch,
       author: User(
         userId: 'userID1',
         email: 'john.doe@example.com',
@@ -52,14 +51,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
       ),
       date: DateTime.now(),
       content: content,
-      image: _selectedImagePath ??
-          '', // Assuming the imagePath is a local file path
+      image: _selectedImagePath ?? '',
     );
 
     widget.feedBloc.add(AddPost(post));
-
-    // Navigate back or refresh the posts in your feed
-    Navigator.pop(context);
+    widget.onClose();
   }
 
   @override
@@ -67,8 +63,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.close),
+          onPressed: widget.onClose,
         ),
         title: const Text('Create Post'),
       ),
