@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -37,11 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _switchContent() {
     switch (_selectedTabIndex) {
       case 0:
-        return FeedScreen(feedType: PostFeedType.Following);
+        return const FeedScreen(feedType: PostFeedType.Following);
       case 1:
-        return FeedScreen(feedType: PostFeedType.Suggested);
+        return const FeedScreen(feedType: PostFeedType.Suggested);
       default:
-        return FeedScreen(feedType: PostFeedType.Following);
+        return const FeedScreen(feedType: PostFeedType.Following);
     }
   }
 

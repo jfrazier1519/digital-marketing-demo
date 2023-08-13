@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../shared/bottom_nav_bar.dart';
@@ -17,6 +17,7 @@ class AddPostScreen extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddPostScreenState createState() => _AddPostScreenState();
 }
 
@@ -34,13 +35,23 @@ class _AddPostScreenState extends State<AddPostScreen> {
       if (pickedFile != null) {
         _selectedImagePath = pickedFile.path;
       } else {
-        print('No image selected.');
+        if (kDebugMode) {
+          print("No image selected");
+        }
       }
     });
   }
 
   _post() {
-    String content = _contentController.text;
+    String content = _contentController.text.trim();
+
+    if (content.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter some text before posting.')),
+      );
+      return;
+    }
+
     GeneralPost post = GeneralPost(
       postId: DateTime.now().millisecondsSinceEpoch,
       author: User(
@@ -70,46 +81,54 @@ class _AddPostScreenState extends State<AddPostScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (_selectedImagePath != null)
-              Image.file(File(_selectedImagePath!)),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage(profileImageUrl),
-                  radius: 25,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_selectedImagePath != null)
+                SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child:
+                      Image.file(File(_selectedImagePath!), fit: BoxFit.cover),
                 ),
-                const SizedBox(width: 20),
-                Text(
-                  userName,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                ElevatedButton(
-                  onPressed: _post,
-                  child: const Text('Post'),
-                ),
-              ],
-            ),
-            RoundedContainer(
-              margin: const EdgeInsets.symmetric(vertical: 8.0),
-              child: TextField(
-                controller: _contentController,
-                decoration: const InputDecoration(
-                  hintText: 'Write your post content...',
-                  border: InputBorder.none,
-                ),
-                maxLines: 5,
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage(profileImageUrl),
+                    radius: 25,
+                  ),
+                  const SizedBox(width: 20),
+                  Text(
+                    userName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: _post,
+                    child: const Text('Post'),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _selectImage,
-              child: const Text('Add Image'),
-            ),
-          ],
+              RoundedContainer(
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _contentController,
+                  decoration: const InputDecoration(
+                    hintText: 'Write your post content...',
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 5,
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _selectImage,
+                child: const Text('Add Image'),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavBar(
