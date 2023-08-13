@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/bottom_nav_bar.dart';
 import './following_feed.dart';
 import './suggested_feed.dart';
+import '../../res/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
