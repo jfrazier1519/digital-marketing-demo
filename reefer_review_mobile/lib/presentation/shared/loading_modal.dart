@@ -9,12 +9,9 @@ class LoadingModal extends ModalRoute<Route> {
   }
 
   static dismiss(BuildContext context) {
-    Navigator.of(context)
-        .popUntil((route) => route.settings.name == loadingModalViewRoute);
-  }
-
-  static dismissLoading(BuildContext context) {
-    Navigator.of(context).popUntil((route) => route is! LoadingModal);
+    if (ModalRoute.of(context)?.settings.name == loadingModalViewRoute) {
+      Navigator.of(context).popUntil((route) => route is! LoadingModal);
+    }
   }
 
   @override

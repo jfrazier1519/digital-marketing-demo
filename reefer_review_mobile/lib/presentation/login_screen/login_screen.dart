@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
+import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
 import '../../bloc/auth_bloc/auth_bloc.dart';
@@ -37,6 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: BlocListener<AuthBloc, AuthState>(
               listener: (context, state) {
+                if (state is AuthLoading) {
+                  LoadingModal.display(context);
+                } else {
+                  LoadingModal.dismiss(context);
+                }
                 if (state is AuthUserLoggedIn) {
                   Navigator.of(context)
                       .pushReplacementNamed(homeScreenViewRoute);

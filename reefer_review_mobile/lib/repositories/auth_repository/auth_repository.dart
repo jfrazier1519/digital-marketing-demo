@@ -5,4 +5,6 @@ abstract class AuthRepository {
   User? get user;
 
   Future<void> login(LoginUserRequest request);
+
+  Future<void> logout();
 }
