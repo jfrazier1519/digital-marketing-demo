@@ -1,9 +1,8 @@
-import 'package:reefer_review_mobile/data/user.dart';
+import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
+import 'package:reefer_review_mobile/data/models/user.dart';
 
 abstract class AuthRepository {
   User? get user;
 
-  Future<void> login(String email, String passsword);
-
-  Future<void> logout();
+  Future<void> login(LoginUserRequest request);
 }

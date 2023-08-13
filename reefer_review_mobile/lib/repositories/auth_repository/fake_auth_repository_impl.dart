@@ -1,4 +1,4 @@
-import 'package:reefer_review_mobile/data/user.dart';
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/repositories/auth_repository/auth_repository.dart';
 import '../../res/images.dart';
 
