@@ -4,8 +4,8 @@ import '../../bloc/product_bloc/product_bloc.dart';
 import '../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
-import '../shared/category_modal.dart';
-import '../shared/sort_modal.dart';
+import 'category_modal.dart';
+import 'sort_modal.dart';
 import './category_options_enum.dart';
 import './sort_options_enum.dart';
 

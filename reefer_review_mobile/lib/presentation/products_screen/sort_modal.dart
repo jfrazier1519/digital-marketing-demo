@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../products_screen/sort_options_enum.dart';
-import '../products_screen/category_options_enum.dart';
+import 'sort_options_enum.dart';
+import 'category_options_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
@@ -113,12 +113,17 @@ class _SortOptionsState extends State<SortOptions> {
 
   Widget sortTile(BuildContext context, SortOptionsEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
-    bool isDefault = sortOption == SortOptionsEnum.Product && isAscending;
+
+    bool isDefault = sortOption == SortOptionsEnum.Product &&
+        selectedSortOption == SortOptionsEnum.Product &&
+        isAscending;
 
     String sortOptionString = sortOption.toString().split('.').last;
 
     return InkWell(
       onTap: () {
+        print(
+            "Selected Sort Option: $selectedSortOption, Ascending: $isAscending");
         setState(() {
           if (selectedSortOption == sortOption) {
             isAscending = !isAscending;

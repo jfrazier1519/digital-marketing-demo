@@ -12,7 +12,7 @@ class FakeProductRepository implements ProductRepository {
           name: "Sample Product 1",
           category: "Flower",
           strain: "Hybrid",
-          brand: "Brand A",
+          brand: "Brand C",
           rating: 4.5,
           reviewCount: 10,
           description:
@@ -23,7 +23,7 @@ class FakeProductRepository implements ProductRepository {
           name: "Sample Product 2",
           category: "Edibles",
           strain: "Indica",
-          brand: "Brand B",
+          brand: "Brand E",
           rating: 3.5,
           reviewCount: 5,
           description: "Tasty treat for relaxing.",
@@ -33,7 +33,7 @@ class FakeProductRepository implements ProductRepository {
           name: "Sample Product 3",
           category: "Oils",
           strain: "Sativa",
-          brand: "Brand C",
+          brand: "Brand A",
           rating: 4.0,
           reviewCount: 7,
           description: "Smooth oil for vaping.",
@@ -53,7 +53,7 @@ class FakeProductRepository implements ProductRepository {
           name: "Sample Product 5",
           category: "Oils",
           strain: "Sativa",
-          brand: "Brand E",
+          brand: "Brand B",
           rating: 4.2,
           reviewCount: 12,
           description: "Convenient and portable vaping solution.",
@@ -105,16 +105,16 @@ class FakeProductRepository implements ProductRepository {
     Comparator<Product> comparator;
 
     switch (sortOption) {
-      case 'product':
+      case 'Product':
         comparator = (a, b) => a.name.compareTo(b.name);
         break;
-      case 'brand':
+      case 'Brand':
         comparator = (a, b) => a.brand.compareTo(b.brand);
         break;
-      case 'rating':
+      case 'Rating':
         comparator = (a, b) => a.rating.compareTo(b.rating);
         break;
-      case 'reviews':
+      case 'Reviews':
         comparator = (a, b) => a.reviewCount.compareTo(b.reviewCount);
         break;
       default:
@@ -122,8 +122,13 @@ class FakeProductRepository implements ProductRepository {
         break;
     }
 
-    productList
-        .sort((a, b) => isAscending ? comparator(a, b) : -comparator(a, b));
+    productList.sort((a, b) {
+      if (isAscending) {
+        return comparator(a, b);
+      } else {
+        return comparator(b, a);
+      }
+    });
 
     return productList;
   }

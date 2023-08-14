@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../products_screen/category_options_enum.dart';
+import 'category_options_enum.dart';
 import '../../bloc/product_bloc/product_bloc.dart';
 
 Future<void> showCategoriesModal(
