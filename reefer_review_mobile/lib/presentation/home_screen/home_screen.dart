@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/repositories/auth_repository/fake_auth_repository_impl.dart';
+import 'package:reefer_review_mobile/res/routes.dart';
+import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 import 'package:reefer_review_mobile/data/post/post_feed_type.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/fake_post_repository_impl.dart';
+import '../../data/models/route_arguments/add_post_screen_arguments.dart';
 import 'feed.dart';
 import '../post_screen/add_post_screen.dart';
 import '../shared/navigation_menu.dart';
@@ -12,7 +16,6 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -20,20 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   int _selectedTabIndex = 0;
   bool _isSearching = false;
-
-  late FeedBloc feedBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    feedBloc = FeedBloc(FakePostRepository());
-  }
-
-  @override
-  void dispose() {
-    feedBloc.close();
-    super.dispose();
-  }
 
   Widget _switchContent() {
     switch (_selectedTabIndex) {
@@ -50,46 +39,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return BlocProvider.value(
-      value: feedBloc,
+    return BlocProvider(
+      create: (context) => FeedBloc(FakePostRepository()),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: _isSearching
-                ? TextField(
-                    onSubmitted: (value) {},
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 2.0),
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Search...',
-                    ),
-                  )
-                : const Text('Home'),
+            title: const Text('Home'),
             actions: [
-              _isSearching
-                  ? IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white),
-                      onPressed: () {
-                        setState(() {
-                          _isSearching = false;
-                        });
-                      },
-                    )
-                  : IconButton(
-                      icon: const Icon(Icons.search, color: Colors.white),
-                      onPressed: () {
-                        setState(() {
-                          _isSearching = true;
-                        });
-                      },
-                    ),
+              IconButton(
+                icon: const Icon(Icons.search, color: Colors.white),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'Search Screen');
+                },
+              ),
             ],
           ),
           drawer: const NavigationMenu(name: 'User name'),
@@ -103,22 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  BlocProvider.value(
-                                value: feedBloc,
-                                child: AddPostScreen(
-                                  feedBloc: feedBloc,
-                                  onClose: () {
-                                    Navigator.of(context).pop();
-                                  },
+                        Builder(
+                          builder: (builderContext) => ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                addPostViewRoute,
+                                arguments: AddPostScreenArguments(
+                                  feedBloc:
+                                      BlocProvider.of<FeedBloc>(builderContext),
+                                  authBloc: BlocProvider.of<AuthBloc>(context),
                                 ),
-                              ),
-                            ));
-                          },
-                          child: const Text('Add Post'),
+                              );
+                            },
+                            child: const Text('Add Post'),
+                          ),
                         ),
                         Row(
                           children: [

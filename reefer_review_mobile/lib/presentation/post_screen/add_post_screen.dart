@@ -2,30 +2,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/rounded_container.dart';
 import '../../res/images.dart';
 import '../../data/post/general_post.dart';
-import '../../data/user.dart';
+import '../../data/models/user.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
-  final void Function() onClose;
   final FeedBloc feedBloc;
+  final AuthBloc authBloc;
 
-  const AddPostScreen({required this.onClose, required this.feedBloc, Key? key})
+  const AddPostScreen(
+      {required this.authBloc, required this.feedBloc, Key? key})
       : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _AddPostScreenState createState() => _AddPostScreenState();
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _contentController = TextEditingController();
   String? _selectedImagePath;
-  final String profileImageUrl = dummyProfileImage;
-  final String userName = 'John Doe';
 
   _selectImage() async {
     final picker = ImagePicker();
@@ -52,21 +51,25 @@ class _AddPostScreenState extends State<AddPostScreen> {
       return;
     }
 
-    GeneralPost post = GeneralPost(
-      postId: DateTime.now().millisecondsSinceEpoch,
-      author: User(
-        userId: 'userID1',
-        email: 'john.doe@example.com',
-        name: 'John Doe',
-        profileImageUrl: dummyProfileImage,
-      ),
-      date: DateTime.now(),
-      content: content,
-      image: _selectedImagePath ?? '',
-    );
+    final currentState = widget.authBloc.state;
+    if (currentState is AuthUserLoggedIn) {
+      User user = currentState.user;
 
-    widget.feedBloc.add(AddPost(post));
-    widget.onClose();
+      GeneralPost post = GeneralPost(
+        postId: DateTime.now().millisecondsSinceEpoch,
+        author: user,
+        date: DateTime.now(),
+        content: content,
+        image: _selectedImagePath ?? '',
+      );
+
+      widget.feedBloc.add(AddPost(post));
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('User not logged in.')),
+      );
+    }
   }
 
   @override
@@ -77,11 +80,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentState = widget.authBloc.state;
+    String? userName;
+    String? userProfileImageUrl;
+
+    if (currentState is AuthUserLoggedIn) {
+      userName = currentState.user.name;
+      userProfileImageUrl = currentState.user.profileImageUrl;
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.close),
-          onPressed: widget.onClose,
+          onPressed: () => Navigator.pop(context),
         ),
         title: const Text('Create Post'),
       ),
@@ -102,12 +114,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(profileImageUrl),
+                    backgroundImage: AssetImage(userProfileImageUrl ?? ""),
                     radius: 25,
                   ),
                   const SizedBox(width: 20),
                   Text(
-                    userName,
+                    userName ?? "",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
