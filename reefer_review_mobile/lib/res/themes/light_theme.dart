@@ -21,8 +21,9 @@ var lightTheme = ThemeData(
       tertiary: secondaryBackground),
   scaffoldBackgroundColor: primaryBackground,
   inputDecorationTheme: const InputDecorationTheme(
+    errorMaxLines: 4,
     hintStyle: TextStyle(color: secondaryGreen),
-    labelStyle: TextStyle(color: secondaryGreen),
+    labelStyle: TextStyle(color: Colors.black),
     errorStyle: TextStyle(color: secondaryOrange, fontWeight: FontWeight.bold),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
@@ -56,6 +57,12 @@ var lightTheme = ThemeData(
         fontWeight: FontWeight.bold,
         fontSize: 15,
       ),
+    ),
+  ),
+  dropdownMenuTheme: const DropdownMenuThemeData(
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: secondaryBackground,
+      focusColor: secondaryBackground,
     ),
   ),
 );
