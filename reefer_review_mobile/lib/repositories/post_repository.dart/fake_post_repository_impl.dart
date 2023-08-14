@@ -1,11 +1,11 @@
 import 'package:reefer_review_mobile/repositories/post_repository.dart/post_repository.dart';
+import '../../data/models/user.dart';
 import '../../data/post/post.dart';
 import '../../data/post/event_post.dart';
 import '../../data/post/general_post.dart';
 import '../../data/post/loyalty_post.dart';
 import '../../data/post/product_post.dart';
 import '../../data/post/review_post.dart';
-import '../../data/user.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 import '../../data/post/post_feed_type.dart';
 

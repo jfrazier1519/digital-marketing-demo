@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
 import 'package:expandable_text/expandable_text.dart';
 import '../../presentation/shared/rounded_container.dart';
-import '../user.dart';
+import '../models/user.dart';
 
 class ReviewPost extends Post {
   final double reviewStars;
