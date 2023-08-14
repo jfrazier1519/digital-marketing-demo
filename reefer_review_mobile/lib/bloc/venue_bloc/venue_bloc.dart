@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import '../../data/venue.dart';
-import '../../presentation/venue_screen/sort_options_enum.dart';
+import '../../presentation/venue_screen/venues_sort_enum.dart';
 import '../../repositories/venue_repository/venue_repository.dart'; // Create a venue repository similar to the product_repository
 part 'venue_event.dart';
 part 'venue_state.dart';

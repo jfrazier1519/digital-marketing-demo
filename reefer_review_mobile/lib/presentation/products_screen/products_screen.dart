@@ -6,8 +6,8 @@ import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/category_modal.dart';
 import '../shared/sort_modal.dart';
-import './category_options_enum.dart';
-import './sort_options_enum.dart';
+import './products_category_enum.dart';
+import './products_sort_enum.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -32,8 +32,8 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
   bool _filterActive = false;
   bool _isCategorySelected = false;
   bool _isSortSelected = false;
-  CategoryOptionsEnum? selectedCategory;
-  SortOptionsEnum? _selectedSortOption;
+  ProductsCategoryEnum? selectedCategory;
+  ProductsSortEnum? _selectedSortOption;
   bool _isAscending = true;
 
   final GlobalKey _categoryButtonKey = GlobalKey();
@@ -160,7 +160,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                           (states) => _isSortSelected ||
                                   (_selectedSortOption != null &&
                                       !(_selectedSortOption ==
-                                              SortOptionsEnum.Product &&
+                                              ProductsSortEnum.Product &&
                                           _isAscending))
                               ? colorScheme.outlineVariant
                               : null,
