@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/presentation/venue_screen/venue_widget.dart';
 import 'package:reefer_review_mobile/presentation/venue_screen/venues_sort_modal.dart';
 import '../../bloc/venue_bloc/venue_bloc.dart';
 import '../../repositories/venue_repository/fake_venue_repository_impl.dart';
@@ -94,14 +95,14 @@ class _VenuesScreenContentState extends State<_VenuesScreenContent> {
                     return ListView.builder(
                       itemCount: state.venues.length,
                       itemBuilder: (context, index) =>
-                          state.venues[index].displayContent(context),
+                          VenueWidget(venue: state.venues[index]),
                     );
                   } else {
                     return Text('Something went wrong!');
                   }
                 },
               ),
-            ),
+            )
           ],
         ),
         bottomNavigationBar: BottomNavBar(
