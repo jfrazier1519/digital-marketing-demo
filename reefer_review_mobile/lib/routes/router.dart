@@ -10,6 +10,7 @@ import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
 import '../presentation/shared/undefined_view.dart';
+import '../presentation/venue_screen/venues_screen.dart';
 import '../res/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -22,7 +23,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const HomeScreen());
     case productsScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const ProductsScreen());
-
+    case venuesScreenViewRoute:
+      return MaterialPageRoute(builder: (context) => const VenuesScreen());
     case signupScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
     case termsAndConditionsViewRoute:

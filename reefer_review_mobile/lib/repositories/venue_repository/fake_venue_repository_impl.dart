@@ -1,6 +1,6 @@
 import 'package:reefer_review_mobile/data/venue.dart';
 import 'package:reefer_review_mobile/repositories/venue_repository/venue_repository.dart';
-import 'package:reefer_review_mobile/res/images.dart'; // Adjust this if your image paths differ
+import 'package:reefer_review_mobile/res/images.dart';
 
 class FakeVenueRepository implements VenueRepository {
   List<Venue> _allVenues = [];
@@ -24,7 +24,7 @@ class FakeVenueRepository implements VenueRepository {
           rating: 3.8,
           reviewCount: 25,
           description:
-              "This is a fantastic bar located in Location A. They sell weed in the back",
+              "This is a fantastic bar located in Location B. They sell weed in the back",
           image: venue2),
     ];
   }
@@ -71,16 +71,16 @@ class FakeVenueRepository implements VenueRepository {
     Comparator<Venue> comparator;
 
     switch (sortOption) {
-      case 'name':
+      case 'Venue':
         comparator = (a, b) => a.name.compareTo(b.name);
         break;
-      case 'type':
+      case 'Type':
         comparator = (a, b) => a.type.compareTo(b.type);
         break;
-      case 'rating':
+      case 'Rating':
         comparator = (a, b) => a.rating.compareTo(b.rating);
         break;
-      case 'reviews':
+      case 'Reviews':
         comparator = (a, b) => a.reviewCount.compareTo(b.reviewCount);
         break;
       default:

@@ -10,7 +10,7 @@ const dummyProductPostImage = "assets/images/weed 3.jpeg";
 
 //Used for venues
 const venue1 = "assets/images/Weed Company.png";
-const venue2 = "assets/images/Party2.png";
+const venue2 = "assets/images/Party2.jpeg";
 
 //Used for products
 const product1 = "assets/images/Gummies.jpeg";

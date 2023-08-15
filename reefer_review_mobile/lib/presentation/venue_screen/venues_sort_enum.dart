@@ -1,1 +1,1 @@
-enum VenuesSortEnum { Product, Brand, Rating, Reviews }
+enum VenuesSortEnum { Venue, Type, Rating, Reviews }

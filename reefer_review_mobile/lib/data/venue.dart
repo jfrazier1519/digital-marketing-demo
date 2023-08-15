@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expandable_text/expandable_text.dart'; // Ensure this is imported
+import 'package:expandable_text/expandable_text.dart';
 
 class Venue {
   final int venueId;
@@ -61,23 +61,29 @@ class Venue {
                 : Container(width: 100, height: 100),
           ),
           const SizedBox(width: 20),
-
-          // Details to the right of the image
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top Section
+                // Name
+                Text(
+                  name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+
+                const SizedBox(height: 10),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
                     Row(
                       children: [
+                        Icon(Icons.star_border,
+                            color: colorScheme.primary, size: 18),
+                        const SizedBox(
+                          width: 5,
+                        ),
                         Text(
                           rating.toString(),
                           style: TextStyle(
@@ -85,26 +91,23 @@ class Venue {
                               fontSize: 14,
                               color: colorScheme.primary),
                         ),
-                        const SizedBox(width: 5),
-                        Icon(Icons.star_border,
-                            color: colorScheme.primary, size: 30),
+                        Text(" Stars",
+                            style: TextStyle(
+                                color: colorScheme.primary,
+                                fontWeight: FontWeight.bold))
                       ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Text(
+                        '($reviewCount reviews)',
+                      ),
                     ),
                   ],
                 ),
-                Text(location, style: TextStyle(color: colorScheme.primary)),
+
                 const SizedBox(height: 5),
                 Text(type, style: TextStyle(color: colorScheme.primary)),
-                const SizedBox(height: 5), // Space before the expandable text
-                ExpandableText(
-                  description,
-                  expandText: 'See More',
-                  collapseText: 'See Less',
-                  maxLines: 1,
-                  linkColor: colorScheme.primary,
-                  style:
-                      TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
-                ),
               ],
             ),
           ),
