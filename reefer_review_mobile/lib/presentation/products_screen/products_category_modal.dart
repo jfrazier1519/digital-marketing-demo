@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'category_options_enum.dart';
 import '../../bloc/product_bloc/product_bloc.dart';
 
-Future<void> showCategoriesModal(
+Future<void> showProductsCategoriesModal(
     BuildContext context,
     GlobalKey categoryButtonKey,
     ProductBloc productBloc,

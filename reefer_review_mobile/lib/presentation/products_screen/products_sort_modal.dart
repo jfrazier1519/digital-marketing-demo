@@ -5,7 +5,7 @@ import 'category_options_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
-Future<void> showSortModal(
+Future<void> showProductsSortModal(
     BuildContext context,
     GlobalKey sortButtonKey,
     ProductBloc productBloc,
