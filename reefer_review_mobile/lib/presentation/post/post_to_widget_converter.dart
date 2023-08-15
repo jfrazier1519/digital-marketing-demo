@@ -1,5 +1,3 @@
-// post_to_widget_converter.dart
-
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/presentation/post/product_post_widget.dart';
 import 'package:reefer_review_mobile/presentation/post/review_post_widget.dart';
