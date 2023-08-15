@@ -1,4 +1,5 @@
-import 'package:reefer_review_mobile/data/user.dart';
+import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/repositories/auth_repository/auth_repository.dart';
 import '../../res/images.dart';
 
@@ -6,7 +7,7 @@ class FakeAuthRepository implements AuthRepository {
   User? _user;
 
   @override
-  Future<void> login(String email, String password) async {
+  Future<void> login(LoginUserRequest request) async {
     _user = User(
         userId: "someUserId",
         email: "test@mail.com",

@@ -4,10 +4,9 @@ part of 'auth_bloc.dart';
 abstract class AuthEvent {}
 
 class LoginUserUsecase extends AuthEvent {
-  final String email;
-  final String password;
+  final LoginUserRequest request;
 
-  LoginUserUsecase(this.email, this.password);
+  LoginUserUsecase(this.request);
 }
 
 class LogoutUserUsecase extends AuthEvent {}
