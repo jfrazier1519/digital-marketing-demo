@@ -176,7 +176,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
               child: BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
                   if (state is ProductLoading) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state is ProductsLoaded) {
                     return ListView.builder(
                       itemCount: state.products.length,
@@ -184,7 +184,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                           state.products[index].displayContent(context),
                     );
                   } else {
-                    return Text('Something went wrong!');
+                    return const Text('Something went wrong!');
                   }
                 },
               ),

@@ -1,21 +1,21 @@
+import '../../presentation/brands_screen/brands_category_enum.dart';
+
 class Brand {
-  final int venueId;
+  final int brandId;
   final String name;
-  final String location;
-  final String type;
   final double rating;
   final int reviewCount;
   final String description;
   final String image;
+  final List<BrandsCategoryEnum> categories;
 
   Brand({
-    required this.venueId,
+    required this.brandId,
     required this.name,
-    required this.location,
-    required this.type,
     required this.rating,
     required this.reviewCount,
     required this.description,
     required this.image,
+    required this.categories,
   });
 }

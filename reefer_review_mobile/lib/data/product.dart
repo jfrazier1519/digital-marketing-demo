@@ -38,7 +38,7 @@ class Product {
         boxShadow: [
           BoxShadow(
             color: colorScheme.onBackground.withOpacity(0.1),
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
             blurRadius: 4.0,
           )
         ],
@@ -60,7 +60,7 @@ class Product {
                       fit: BoxFit.cover,
                     ),
                   )
-                : Container(width: 100, height: 100),
+                : const SizedBox(width: 100, height: 100),
           ),
           const SizedBox(width: 20),
 

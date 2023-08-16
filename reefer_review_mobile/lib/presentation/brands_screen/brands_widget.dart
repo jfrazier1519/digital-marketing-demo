@@ -4,30 +4,29 @@ import '../../data/models/brand.dart';
 class BrandWidget extends StatelessWidget {
   final Brand brand;
 
-  BrandWidget({required this.brand});
+  const BrandWidget({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
-      decoration: BoxDecoration(
-        color: colorScheme.tertiary,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(8.0),
-          bottomLeft: Radius.circular(8.0),
+        margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
+        decoration: BoxDecoration(
+          color: colorScheme.tertiary,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(8.0),
+            bottomLeft: Radius.circular(8.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.onBackground.withOpacity(0.1),
+              offset: const Offset(0, 2),
+              blurRadius: 4.0,
+            )
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.onBackground.withOpacity(0.1),
-            offset: Offset(0, 2),
-            blurRadius: 4.0,
-          )
-        ],
-      ),
-      child: Row(
-        children: [
+        child: Row(children: [
           Align(
             alignment: Alignment.topLeft,
             child: brand.image.isNotEmpty
@@ -43,7 +42,7 @@ class BrandWidget extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   )
-                : Container(width: 100, height: 100),
+                : const SizedBox(width: 100, height: 100),
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -91,13 +90,28 @@ class BrandWidget extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 5),
-                Text(brand.type, style: TextStyle(color: colorScheme.primary)),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 8.0,
+                  children: brand.categories
+                      .map((category) => Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: colorScheme.primary,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Text(
+                              category.toString().split('.').last,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ))
+                      .toList(),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        ]));
   }
 }

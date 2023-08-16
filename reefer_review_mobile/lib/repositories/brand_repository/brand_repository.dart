@@ -2,7 +2,7 @@ import '../../data/models/brand.dart';
 
 abstract class BrandRepository {
   Future<List<Brand>> getAllBrands();
-  Future<List<Brand>> getBrandsByLocation(String location);
+  Future<List<Brand>> getBrandsByCategory(String category);
   Future<List<Brand>> sortBrands(
       String sortOption, bool isAscending, List<Brand> brands);
   Future<Brand> getBrandById(int id);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../products_screen/products_category_enum.dart';
 import '../products_screen/products_sort_enum.dart';
 
@@ -55,7 +54,7 @@ class SortOptions extends StatefulWidget {
   final bool initialIsAscending;
   final ProductsCategoryEnum? selectedCategory;
 
-  SortOptions({
+  const SortOptions({super.key, 
     required this.colorScheme,
     required this.productBloc,
     required this.onSortSelected,
@@ -90,7 +89,7 @@ class _SortOptionsState extends State<SortOptions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10.0, left: 20.0),
               child: Text('Sort',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -137,7 +136,7 @@ class _SortOptionsState extends State<SortOptions> {
       },
       child: Container(
         color: isSelected ? Colors.green[100] : null,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

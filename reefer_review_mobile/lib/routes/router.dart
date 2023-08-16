@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
+import 'package:reefer_review_mobile/presentation/brands_screen/brands_screen.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
@@ -25,6 +26,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ProductsScreen());
     case venuesScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const VenuesScreen());
+    case brandsScreenViewRoute:
+      return MaterialPageRoute(builder: (context) => const BrandsScreen());
     case signupScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
     case termsAndConditionsViewRoute:
