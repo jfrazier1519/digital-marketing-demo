@@ -54,7 +54,8 @@ class SortOptions extends StatefulWidget {
   final bool initialIsAscending;
   final ProductsCategoryEnum? selectedCategory;
 
-  const SortOptions({super.key, 
+  const SortOptions({
+    super.key,
     required this.colorScheme,
     required this.productBloc,
     required this.onSortSelected,
@@ -64,6 +65,7 @@ class SortOptions extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _SortOptionsState createState() => _SortOptionsState();
 }
 

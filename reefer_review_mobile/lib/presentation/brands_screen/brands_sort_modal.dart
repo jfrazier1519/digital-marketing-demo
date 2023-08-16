@@ -61,6 +61,7 @@ class BrandSortOptions extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _BrandSortOptionsState createState() => _BrandSortOptionsState();
 }
 

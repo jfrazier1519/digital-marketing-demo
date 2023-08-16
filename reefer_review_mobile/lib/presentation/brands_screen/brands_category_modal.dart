@@ -54,6 +54,7 @@ class BrandsCategoriesContent extends StatefulWidget {
       required this.onSelectCategory});
 
   @override
+  // ignore: library_private_types_in_public_api
   _BrandsCategoriesContentState createState() =>
       _BrandsCategoriesContentState();
 }

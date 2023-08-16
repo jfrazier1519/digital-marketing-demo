@@ -54,7 +54,8 @@ class VenueSortOptions extends StatefulWidget {
   final VenuesSortEnum? initialSortOption;
   final bool initialIsAscending;
 
-  const VenueSortOptions({super.key, 
+  const VenueSortOptions({
+    super.key,
     required this.colorScheme,
     required this.venueBloc,
     required this.onSortSelected,
@@ -63,6 +64,7 @@ class VenueSortOptions extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _VenueSortOptionsState createState() => _VenueSortOptionsState();
 }
 
