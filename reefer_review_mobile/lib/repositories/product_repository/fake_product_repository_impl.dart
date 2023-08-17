@@ -20,11 +20,7 @@ class FakeProductRepository implements ProductRepository {
         description:
             "These are great. I think. I can keep going and going and going and going and going.",
         image: product1,
-        prices: [
-          Price("1g", 9.99),
-          Price("1/2oz", 19.99),
-          Price("1/8oz", 29.99)
-        ],
+        prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
         productId: 2,
@@ -36,11 +32,7 @@ class FakeProductRepository implements ProductRepository {
         reviewCount: 5,
         description: "Tasty treat for relaxing.",
         image: product2,
-        prices: [
-          Price("1g", 9.99),
-          Price("1/2oz", 19.99),
-          Price("1/8oz", 29.99)
-        ],
+        prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
         productId: 3,
@@ -52,11 +44,7 @@ class FakeProductRepository implements ProductRepository {
         reviewCount: 7,
         description: "Smooth oil for vaping.",
         image: product3,
-        prices: [
-          Price("1g", 9.99),
-          Price("1/2oz", 19.99),
-          Price("1/8oz", 29.99)
-        ],
+        prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
         productId: 4,
@@ -68,11 +56,7 @@ class FakeProductRepository implements ProductRepository {
         reviewCount: 15,
         description: "Powerful concentrate for experienced users.",
         image: product4,
-        prices: [
-          Price("1g", 9.99),
-          Price("1/2oz", 19.99),
-          Price("1/8oz", 29.99)
-        ],
+        prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
         productId: 5,
@@ -84,11 +68,7 @@ class FakeProductRepository implements ProductRepository {
         reviewCount: 12,
         description: "Convenient and portable vaping solution.",
         image: product5,
-        prices: [
-          Price("1g", 9.99),
-          Price("1/2oz", 19.99),
-          Price("1/8oz", 29.99)
-        ],
+        prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
     ];
   }

@@ -140,7 +140,6 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
                 Divider(thickness: 1, color: Colors.black),
 
-                // Load reviews
                 BlocBuilder<ReviewBloc, ReviewState>(
                   builder: (context, state) {
                     if (state is ReviewLoading) {
