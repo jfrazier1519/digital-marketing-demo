@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/presentation/products_screen/product_widget.dart';
-import '../../bloc/product_bloc/product_bloc.dart';
-import '../../repositories/product_repository/fake_product_repository_impl.dart';
+import 'package:reefer_review_mobile/presentation/brands_screen/brands_widget.dart';
+import '../../bloc/brand_bloc/brand_bloc.dart';
+import '../../repositories/brand_repository/fake_brand_repository_impl.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
-import './products_category_modal.dart';
-import './products_sort_modal.dart';
-import './products_category_enum.dart';
-import './products_sort_enum.dart';
+import './brands_category_enum.dart';
+import './brands_sort_enum.dart';
+import 'brands_category_modal.dart';
+import 'brands_sort_modal.dart';
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+class BrandsScreen extends StatelessWidget {
+  const BrandsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ProductBloc(FakeProductRepository())..add(FetchProducts()),
-      child: _ProductsScreenContent(),
+      create: (context) => BrandBloc(FakeBrandRepository())..add(FetchBrands()),
+      child: _BrandsScreenContent(),
     );
   }
 }
 
-class _ProductsScreenContent extends StatefulWidget {
+class _BrandsScreenContent extends StatefulWidget {
   @override
-  _ProductsScreenContentState createState() => _ProductsScreenContentState();
+  _BrandsScreenContentState createState() => _BrandsScreenContentState();
 }
 
-class _ProductsScreenContentState extends State<_ProductsScreenContent> {
-  int _currentIndex = 1;
+class _BrandsScreenContentState extends State<_BrandsScreenContent> {
+  int _currentIndex = 3;
   bool _filterActive = false;
   bool _isCategorySelected = false;
   bool _isSortSelected = false;
-  ProductsCategoryEnum? selectedCategory;
-  ProductsSortEnum? _selectedSortOption;
+  BrandsCategoryEnum? selectedCategory;
+  BrandsSortEnum? _selectedSortOption;
   bool _isAscending = true;
 
   final GlobalKey _categoryButtonKey = GlobalKey();
@@ -47,18 +46,17 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Products'),
+          title: const Text('Brands'),
           actions: [
             IconButton(
               icon: Icon(
                 Icons.filter_alt_outlined,
-                color: _filterActive
-                    ? colorScheme.outlineVariant
-                    : Colors.white, // Highlighted when active
+                color:
+                    _filterActive ? colorScheme.outlineVariant : Colors.white,
               ),
               onPressed: () {
                 setState(() {
-                  _filterActive = !_filterActive; // Toggle filter state
+                  _filterActive = !_filterActive;
                 });
               },
             ),
@@ -90,10 +88,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = true;
                             _isSortSelected = false;
                           });
-                          showProductsCategoriesModal(
+                          showBrandCategoriesModal(
                             context,
                             _categoryButtonKey,
-                            BlocProvider.of<ProductBloc>(context),
+                            BlocProvider.of<BrandBloc>(context),
                             selectedCategory,
                             (category) {
                               if (category == selectedCategory) {
@@ -115,12 +113,12 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => _isCategorySelected ||
-                                    selectedCategory != null
-                                ? colorScheme.outlineVariant
-                                : null), // Highlight if a category is currently selected or _isCategorySelected is true
+                            (states) =>
+                                _isCategorySelected || selectedCategory != null
+                                    ? colorScheme.outlineVariant
+                                    : null),
                       ),
-                      child: const Text('Product Category'),
+                      child: const Text('Brand Category'),
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
@@ -136,10 +134,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = false;
                             _isSortSelected = true;
                           });
-                          showProductsSortModal(
+                          showBrandSortModal(
                             context,
                             _sortButtonKey,
-                            BlocProvider.of<ProductBloc>(context),
+                            BlocProvider.of<BrandBloc>(context),
                             (sortOption, isAscendingDirection) {
                               setState(() {
                                 _selectedSortOption = sortOption;
@@ -161,7 +159,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                           (states) => _isSortSelected ||
                                   (_selectedSortOption != null &&
                                       !(_selectedSortOption ==
-                                              ProductsSortEnum.Product &&
+                                              BrandsSortEnum.Brand &&
                                           _isAscending))
                               ? colorScheme.outlineVariant
                               : null,
@@ -174,15 +172,15 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
               ),
             const SizedBox(height: 10),
             Expanded(
-              child: BlocBuilder<ProductBloc, ProductState>(
+              child: BlocBuilder<BrandBloc, BrandState>(
                 builder: (context, state) {
-                  if (state is ProductLoading) {
+                  if (state is BrandLoading) {
                     return const CircularProgressIndicator();
-                  } else if (state is ProductsLoaded) {
+                  } else if (state is BrandsLoaded) {
                     return ListView.builder(
-                      itemCount: state.products.length,
+                      itemCount: state.brands.length,
                       itemBuilder: (context, index) =>
-                          ProductWidget(product: state.products[index]),
+                          BrandWidget(brand: state.brands[index]),
                     );
                   } else {
                     return const Text('Something went wrong!');

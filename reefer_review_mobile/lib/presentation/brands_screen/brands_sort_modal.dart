@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import '../products_screen/products_category_enum.dart';
-import '../products_screen/products_sort_enum.dart';
+import '../../bloc/brand_bloc/brand_bloc.dart';
+import './brands_sort_enum.dart';
+import './brands_category_enum.dart';
 
-import '../../bloc/product_bloc/product_bloc.dart';
-
-Future<void> showProductsSortModal(
-    BuildContext context,
-    GlobalKey sortButtonKey,
-    ProductBloc productBloc,
-    void Function(ProductsSortEnum?, bool) onSortSelected,
-    {ProductsSortEnum? initialSortOption,
+Future<void> showBrandSortModal(BuildContext context, GlobalKey sortButtonKey,
+    BrandBloc brandBloc, void Function(BrandsSortEnum?, bool) onSortSelected,
+    {BrandsSortEnum? initialSortOption,
     bool initialIsAscending = true,
-    ProductsCategoryEnum? selectedCategory}) {
+    BrandsCategoryEnum? selectedCategory}) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -32,9 +28,9 @@ Future<void> showProductsSortModal(
           right: MediaQuery.of(context).size.width -
               position.dx -
               renderBox.size.width,
-          child: SortOptions(
+          child: BrandSortOptions(
             colorScheme: colorScheme,
-            productBloc: productBloc,
+            brandBloc: brandBloc,
             onSortSelected: onSortSelected,
             initialSortOption: initialSortOption,
             initialIsAscending: initialIsAscending,
@@ -46,18 +42,18 @@ Future<void> showProductsSortModal(
   );
 }
 
-class SortOptions extends StatefulWidget {
+class BrandSortOptions extends StatefulWidget {
   final ColorScheme colorScheme;
-  final ProductBloc productBloc;
-  final Function(ProductsSortEnum?, bool) onSortSelected;
-  final ProductsSortEnum? initialSortOption;
+  final BrandBloc brandBloc;
+  final Function(BrandsSortEnum?, bool) onSortSelected;
+  final BrandsSortEnum? initialSortOption;
   final bool initialIsAscending;
-  final ProductsCategoryEnum? selectedCategory;
+  final BrandsCategoryEnum? selectedCategory;
 
-  const SortOptions({
+  const BrandSortOptions({
     super.key,
     required this.colorScheme,
-    required this.productBloc,
+    required this.brandBloc,
     required this.onSortSelected,
     required this.initialSortOption,
     required this.initialIsAscending,
@@ -66,17 +62,17 @@ class SortOptions extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _SortOptionsState createState() => _SortOptionsState();
+  _BrandSortOptionsState createState() => _BrandSortOptionsState();
 }
 
-class _SortOptionsState extends State<SortOptions> {
-  ProductsSortEnum? selectedSortOption;
+class _BrandSortOptionsState extends State<BrandSortOptions> {
+  BrandsSortEnum? selectedSortOption;
   bool isAscending = true;
 
   @override
   void initState() {
     super.initState();
-    selectedSortOption = widget.initialSortOption ?? ProductsSortEnum.Product;
+    selectedSortOption = widget.initialSortOption ?? BrandsSortEnum.Brand;
     isAscending = widget.initialIsAscending;
   }
 
@@ -100,7 +96,7 @@ class _SortOptionsState extends State<SortOptions> {
               padding: const EdgeInsets.only(left: 10, right: 10.0),
               child: SingleChildScrollView(
                 child: ListBody(
-                  children: ProductsSortEnum.values
+                  children: BrandsSortEnum.values
                       .map((e) => sortTile(context, e))
                       .toList(),
                 ),
@@ -112,14 +108,14 @@ class _SortOptionsState extends State<SortOptions> {
     );
   }
 
-  Widget sortTile(BuildContext context, ProductsSortEnum sortOption) {
+  Widget sortTile(BuildContext context, BrandsSortEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
 
-    bool isDefault = sortOption == ProductsSortEnum.Product &&
-        selectedSortOption == ProductsSortEnum.Product &&
-        isAscending;
-
     String sortOptionString = sortOption.toString().split('.').last;
+
+    bool isHighlightedGreen =
+        (sortOption == BrandsSortEnum.Brand && isAscending && isSelected) ||
+            isSelected;
 
     return InkWell(
       onTap: () {
@@ -128,12 +124,12 @@ class _SortOptionsState extends State<SortOptions> {
             isAscending = !isAscending;
           } else {
             selectedSortOption = sortOption;
-            if (sortOption == ProductsSortEnum.Product) {
+            if (sortOption == BrandsSortEnum.Brand) {
               isAscending = true;
             }
           }
         });
-        widget.productBloc.add(SortProducts(
+        widget.brandBloc.add(SortBrands(
             sortOption: sortOption,
             isAscending: isAscending,
             category: widget.selectedCategory));
@@ -148,10 +144,9 @@ class _SortOptionsState extends State<SortOptions> {
             Text(
               sortOptionString,
               style: TextStyle(
-                color: isSelected || isDefault ? Colors.green : Colors.black,
-                fontWeight: isSelected || isDefault
-                    ? FontWeight.bold
-                    : FontWeight.normal,
+                color: isHighlightedGreen ? Colors.green : Colors.black,
+                fontWeight:
+                    isHighlightedGreen ? FontWeight.bold : FontWeight.normal,
               ),
             ),
             Icon(
@@ -160,7 +155,7 @@ class _SortOptionsState extends State<SortOptions> {
                       ? Icons.keyboard_arrow_up
                       : Icons.keyboard_arrow_down)
                   : Icons.keyboard_arrow_up,
-              color: isSelected || isDefault ? Colors.green : Colors.grey,
+              color: isHighlightedGreen ? Colors.green : Colors.grey,
             ),
           ],
         ),

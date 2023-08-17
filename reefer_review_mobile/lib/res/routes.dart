@@ -7,3 +7,5 @@ const productDetailsScreenViewRoute = '$productsScreenViewRoute/details';
 const signupScreenViewRoute = '$loginScreenViewRoute/sign-up';
 const termsAndConditionsViewRoute = '$signupScreenViewRoute/terms_&_conditions';
 const emailVerificationViewRoute = '$signupScreenViewRoute/email-verification';
+const venuesScreenViewRoute = '/venues';
+const brandsScreenViewRoute = '/brands';

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../products_screen/products_category_enum.dart';
-import '../../bloc/product_bloc/product_bloc.dart';
+import '../../bloc/brand_bloc/brand_bloc.dart';
+import './brands_category_enum.dart';
 
-Future<void> showProductsCategoriesModal(
+Future<void> showBrandCategoriesModal(
     BuildContext context,
     GlobalKey categoryButtonKey,
-    ProductBloc productBloc,
-    ProductsCategoryEnum? selectedCategory,
-    Function(ProductsCategoryEnum?) onSelectCategory) {
+    BrandBloc brandBloc,
+    BrandsCategoryEnum? selectedCategory,
+    Function(BrandsCategoryEnum?) onSelectCategory) {
   var colorScheme = Theme.of(context).colorScheme;
 
   final RenderBox renderBox =
@@ -31,8 +31,8 @@ Future<void> showProductsCategoriesModal(
             color: colorScheme.background,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
-            child: CategoriesContent(
-                productBloc: productBloc,
+            child: BrandsCategoriesContent(
+                brandBloc: brandBloc,
                 selectedCategory: selectedCategory,
                 onSelectCategory: onSelectCategory),
           ),
@@ -42,24 +42,25 @@ Future<void> showProductsCategoriesModal(
   );
 }
 
-class CategoriesContent extends StatefulWidget {
-  final ProductBloc productBloc;
-  final ProductsCategoryEnum? selectedCategory;
-  final Function(ProductsCategoryEnum?) onSelectCategory;
+class BrandsCategoriesContent extends StatefulWidget {
+  final BrandBloc brandBloc;
+  final BrandsCategoryEnum? selectedCategory;
+  final Function(BrandsCategoryEnum?) onSelectCategory;
 
-  const CategoriesContent(
+  const BrandsCategoriesContent(
       {super.key,
-      required this.productBloc,
+      required this.brandBloc,
       this.selectedCategory,
       required this.onSelectCategory});
 
   @override
   // ignore: library_private_types_in_public_api
-  _CategoriesContentState createState() => _CategoriesContentState();
+  _BrandsCategoriesContentState createState() =>
+      _BrandsCategoriesContentState();
 }
 
-class _CategoriesContentState extends State<CategoriesContent> {
-  ProductsCategoryEnum? selectedCategory;
+class _BrandsCategoriesContentState extends State<BrandsCategoriesContent> {
+  BrandsCategoryEnum? selectedCategory;
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
             padding: const EdgeInsets.only(left: 10, right: 10.0),
             child: SingleChildScrollView(
               child: ListBody(
-                children: ProductsCategoryEnum.values
+                children: BrandsCategoryEnum.values
                     .map((e) => categoryTile(context, e))
                     .toList(),
               ),
@@ -95,7 +96,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
   }
 
   Widget categoryTile(
-      BuildContext context, ProductsCategoryEnum? categoryOption) {
+      BuildContext context, BrandsCategoryEnum? categoryOption) {
     bool isSelected = selectedCategory == categoryOption;
     String categoryOptionString = categoryOption != null
         ? categoryOption.toString().split('.').last
@@ -112,9 +113,9 @@ class _CategoriesContentState extends State<CategoriesContent> {
         });
 
         if (selectedCategory == null) {
-          widget.productBloc.add(FetchProducts());
+          widget.brandBloc.add(FetchBrands());
         } else {
-          widget.productBloc.add(FilterByCategory(selectedCategory!));
+          widget.brandBloc.add(FilterByCategory(selectedCategory!));
         }
         widget.onSelectCategory(selectedCategory);
       },

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import '../products_screen/products_category_enum.dart';
-import '../products_screen/products_sort_enum.dart';
+import './venues_sort_enum.dart';
+import '../../bloc/venue_bloc/venue_bloc.dart';
 
-import '../../bloc/product_bloc/product_bloc.dart';
-
-Future<void> showProductsSortModal(
-    BuildContext context,
-    GlobalKey sortButtonKey,
-    ProductBloc productBloc,
-    void Function(ProductsSortEnum?, bool) onSortSelected,
-    {ProductsSortEnum? initialSortOption,
-    bool initialIsAscending = true,
-    ProductsCategoryEnum? selectedCategory}) {
+Future<void> showVenueSortModal(
+  BuildContext context,
+  GlobalKey sortButtonKey,
+  VenueBloc venueBloc,
+  void Function(VenuesSortEnum?, bool) onSortSelected, {
+  VenuesSortEnum? initialSortOption,
+  bool initialIsAscending = true,
+}) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -26,57 +24,58 @@ Future<void> showProductsSortModal(
     transitionDuration: const Duration(milliseconds: 200),
     pageBuilder: (BuildContext context, Animation animation,
         Animation secondaryAnimation) {
-      return Stack(children: [
-        Positioned(
-          top: position.dy + renderBox.size.height,
-          right: MediaQuery.of(context).size.width -
-              position.dx -
-              renderBox.size.width,
-          child: SortOptions(
-            colorScheme: colorScheme,
-            productBloc: productBloc,
-            onSortSelected: onSortSelected,
-            initialSortOption: initialSortOption,
-            initialIsAscending: initialIsAscending,
-            selectedCategory: selectedCategory,
-          ),
-        )
-      ]);
+      return Stack(
+        children: [
+          Positioned(
+            top: position.dy +
+                renderBox.size.height, // Just below the icon in AppBar
+            right: MediaQuery.of(context).size.width -
+                position.dx -
+                renderBox.size
+                    .width, // Align to the right of the screen based on the icon position
+            child: VenueSortOptions(
+              colorScheme: colorScheme,
+              venueBloc: venueBloc,
+              onSortSelected: onSortSelected,
+              initialSortOption: initialSortOption,
+              initialIsAscending: initialIsAscending,
+            ),
+          )
+        ],
+      );
     },
   );
 }
 
-class SortOptions extends StatefulWidget {
+class VenueSortOptions extends StatefulWidget {
   final ColorScheme colorScheme;
-  final ProductBloc productBloc;
-  final Function(ProductsSortEnum?, bool) onSortSelected;
-  final ProductsSortEnum? initialSortOption;
+  final VenueBloc venueBloc;
+  final Function(VenuesSortEnum?, bool) onSortSelected;
+  final VenuesSortEnum? initialSortOption;
   final bool initialIsAscending;
-  final ProductsCategoryEnum? selectedCategory;
 
-  const SortOptions({
+  const VenueSortOptions({
     super.key,
     required this.colorScheme,
-    required this.productBloc,
+    required this.venueBloc,
     required this.onSortSelected,
     required this.initialSortOption,
     required this.initialIsAscending,
-    required this.selectedCategory,
   });
 
   @override
   // ignore: library_private_types_in_public_api
-  _SortOptionsState createState() => _SortOptionsState();
+  _VenueSortOptionsState createState() => _VenueSortOptionsState();
 }
 
-class _SortOptionsState extends State<SortOptions> {
-  ProductsSortEnum? selectedSortOption;
+class _VenueSortOptionsState extends State<VenueSortOptions> {
+  VenuesSortEnum? selectedSortOption;
   bool isAscending = true;
 
   @override
   void initState() {
     super.initState();
-    selectedSortOption = widget.initialSortOption ?? ProductsSortEnum.Product;
+    selectedSortOption = widget.initialSortOption ?? VenuesSortEnum.Venue;
     isAscending = widget.initialIsAscending;
   }
 
@@ -100,7 +99,7 @@ class _SortOptionsState extends State<SortOptions> {
               padding: const EdgeInsets.only(left: 10, right: 10.0),
               child: SingleChildScrollView(
                 child: ListBody(
-                  children: ProductsSortEnum.values
+                  children: VenuesSortEnum.values
                       .map((e) => sortTile(context, e))
                       .toList(),
                 ),
@@ -112,14 +111,14 @@ class _SortOptionsState extends State<SortOptions> {
     );
   }
 
-  Widget sortTile(BuildContext context, ProductsSortEnum sortOption) {
+  Widget sortTile(BuildContext context, VenuesSortEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
 
-    bool isDefault = sortOption == ProductsSortEnum.Product &&
-        selectedSortOption == ProductsSortEnum.Product &&
-        isAscending;
-
     String sortOptionString = sortOption.toString().split('.').last;
+
+    bool isHighlightedGreen =
+        (sortOption == VenuesSortEnum.Venue && isAscending && isSelected) ||
+            isSelected;
 
     return InkWell(
       onTap: () {
@@ -128,19 +127,17 @@ class _SortOptionsState extends State<SortOptions> {
             isAscending = !isAscending;
           } else {
             selectedSortOption = sortOption;
-            if (sortOption == ProductsSortEnum.Product) {
+            if (sortOption == VenuesSortEnum.Venue) {
               isAscending = true;
             }
           }
         });
-        widget.productBloc.add(SortProducts(
-            sortOption: sortOption,
-            isAscending: isAscending,
-            category: widget.selectedCategory));
+        widget.venueBloc
+            .add(SortVenues(sortOption: sortOption, isAscending: isAscending));
         widget.onSortSelected(selectedSortOption, isAscending);
       },
       child: Container(
-        color: isSelected ? Colors.green[100] : null,
+        color: isHighlightedGreen ? Colors.green[100] : null,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,10 +145,9 @@ class _SortOptionsState extends State<SortOptions> {
             Text(
               sortOptionString,
               style: TextStyle(
-                color: isSelected || isDefault ? Colors.green : Colors.black,
-                fontWeight: isSelected || isDefault
-                    ? FontWeight.bold
-                    : FontWeight.normal,
+                color: isHighlightedGreen ? Colors.green : Colors.black,
+                fontWeight:
+                    isHighlightedGreen ? FontWeight.bold : FontWeight.normal,
               ),
             ),
             Icon(
@@ -160,7 +156,7 @@ class _SortOptionsState extends State<SortOptions> {
                       ? Icons.keyboard_arrow_up
                       : Icons.keyboard_arrow_down)
                   : Icons.keyboard_arrow_up,
-              color: isSelected || isDefault ? Colors.green : Colors.grey,
+              color: isHighlightedGreen ? Colors.green : Colors.grey,
             ),
           ],
         ),
