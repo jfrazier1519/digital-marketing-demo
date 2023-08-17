@@ -10,9 +10,10 @@ import '../../shared/bottom_nav_bar.dart';
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
 
-  const ProductDetailsScreen({required this.product});
+  const ProductDetailsScreen({super.key, required this.product});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
@@ -30,12 +31,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         appBar: AppBar(),
         body: ListView(children: [
           if (widget.product.image.isNotEmpty)
-            Container(
+            SizedBox(
               height: 150.0,
               child: Image.asset(widget.product.image, fit: BoxFit.cover),
             ),
           Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,8 +45,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   children: [
                     Text(
                       widget.product.name,
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
@@ -67,14 +68,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   widget.product.category,
                   style: TextStyle(color: colorScheme.primary),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         Icon(Icons.star_border, color: colorScheme.primary),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           "${widget.product.rating} stars",
                           style: TextStyle(
@@ -84,33 +85,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     Text(
                       "(${widget.product.reviewCount} reviews)",
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Text(
                   widget.product.description,
                   style:
                       TextStyle(color: colorScheme.onSurface.withOpacity(0.7)),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 // Price
-                Text(
+                const Text(
                   "Price",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Divider(thickness: 1, color: Colors.black),
+                const Divider(thickness: 1, color: Colors.black),
                 Wrap(
                   alignment: WrapAlignment.start,
                   spacing: 10.0,
                   children: widget.product.prices.map((price) {
                     return ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 60.0,
                       ),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 4.0),
                         decoration: BoxDecoration(
                           color: colorScheme.tertiary,
@@ -120,7 +121,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(price.size),
-                            Divider(thickness: 1, color: Colors.black),
+                            const Divider(thickness: 1, color: Colors.black),
                             Text('\$${price.value.toStringAsFixed(2)}'),
                           ],
                         ),
@@ -128,26 +129,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "Reviews",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Divider(thickness: 1, color: Colors.black),
+                const Divider(thickness: 1, color: Colors.black),
                 BlocBuilder<ReviewBloc, ReviewState>(
                   builder: (context, state) {
                     if (state is ReviewLoading) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (state is ReviewsLoaded) {
                       return ListView.builder(
                         itemCount: state.reviews.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) =>
                             ProductReviewWidget(review: state.reviews[index]),
                       );
                     } else {
-                      return Center(child: Text('Something went wrong!'));
+                      return const Center(child: Text('Something went wrong!'));
                     }
                   },
                 ),

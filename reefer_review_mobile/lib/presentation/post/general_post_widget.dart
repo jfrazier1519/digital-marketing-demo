@@ -6,7 +6,7 @@ import '../../data/post/general_post.dart';
 class GeneralPostWidget extends StatelessWidget {
   final GeneralPost generalPost;
 
-  GeneralPostWidget({required this.generalPost});
+  const GeneralPostWidget({super.key, required this.generalPost});
 
   @override
   Widget build(BuildContext context) {

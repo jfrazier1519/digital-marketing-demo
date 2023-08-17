@@ -6,7 +6,7 @@ import '../../data/post/event_post.dart';
 class EventPostWidget extends StatelessWidget {
   final EventPost eventPost;
 
-  EventPostWidget({required this.eventPost});
+  const EventPostWidget({super.key, required this.eventPost});
 
   @override
   Widget build(BuildContext context) {

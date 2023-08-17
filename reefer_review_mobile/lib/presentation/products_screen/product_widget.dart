@@ -7,7 +7,7 @@ import '../../res/routes.dart';
 class ProductWidget extends StatelessWidget {
   final Product product;
 
-  ProductWidget({required this.product});
+  const ProductWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ProductWidget extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: colorScheme.onBackground.withOpacity(0.1),
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
               blurRadius: 4.0,
             ),
           ],
@@ -54,7 +54,7 @@ class ProductWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     )
-                  : Container(width: 100, height: 100),
+                  : const SizedBox(width: 100, height: 100),
             ),
             const SizedBox(width: 20),
             // Details to the right of the image

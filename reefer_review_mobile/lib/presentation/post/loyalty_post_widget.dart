@@ -6,7 +6,7 @@ import '../../data/post/loyalty_post.dart';
 class LoyaltyPostWidget extends StatelessWidget {
   final LoyaltyPost loyaltyPost;
 
-  LoyaltyPostWidget({required this.loyaltyPost});
+  const LoyaltyPostWidget({super.key, required this.loyaltyPost});
 
   @override
   Widget build(BuildContext context) {

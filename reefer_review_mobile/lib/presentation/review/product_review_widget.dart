@@ -7,7 +7,7 @@ import '../../data/models/review/product_review.dart';
 class ProductReviewWidget extends StatelessWidget {
   final Review review;
 
-  ProductReviewWidget({required this.review});
+  const ProductReviewWidget({super.key, required this.review});
 
   List<Widget> buildStars(int rating, ColorScheme colorScheme) {
     List<Widget> stars = [];
@@ -34,7 +34,7 @@ class ProductReviewWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: colorScheme.onBackground.withOpacity(0.1),
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
             blurRadius: 4.0,
           )
         ],
@@ -75,7 +75,7 @@ class ProductReviewWidget extends StatelessWidget {
           Row(children: [
             ...buildStars(review.rating, colorScheme),
             const SizedBox(width: 10.0),
-            Text(review.title, style: TextStyle(fontWeight: FontWeight.bold))
+            Text(review.title, style: const TextStyle(fontWeight: FontWeight.bold))
           ]),
           const SizedBox(height: 8.0),
           Text(
