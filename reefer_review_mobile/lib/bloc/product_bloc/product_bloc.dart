@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../data/product.dart';
+import '../../data/models/product/product.dart';
 import '../../presentation/products_screen/products_category_enum.dart';
 import '../../presentation/products_screen/products_sort_enum.dart';
 import '../../repositories/product_repository/product_repository.dart';
@@ -37,6 +37,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           event.isAscending,
           products);
 
+      emit(ProductsLoaded(products));
+    });
+
+    on<FetchProductsByBrand>((event, emit) async {
+      emit(ProductLoading());
+      var products = await productRepository.getProductsByBrand(event.brand);
       emit(ProductsLoaded(products));
     });
   }

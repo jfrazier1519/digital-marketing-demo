@@ -8,7 +8,9 @@ import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/ema
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 
+import '../data/models/route_arguments/brand_details_screen_arguments.dart';
 import '../data/models/route_arguments/product_details_screen_arguments.dart';
+import '../presentation/brands_screen/brand_details_screen/brand_details_screen.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
 import '../presentation/products_screen/products_details_screen/products_details_screen.dart';
@@ -37,6 +39,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const VenuesScreen());
     case brandsScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const BrandsScreen());
+    case brandDetailsScreenViewRoute:
+      final args = settings.arguments as BrandDetailsScreenArguments;
+      return MaterialPageRoute(
+        builder: (context) => BrandDetailsScreen(brand: args.brand),
+      );
     case signupScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
     case termsAndConditionsViewRoute:

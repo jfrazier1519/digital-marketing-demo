@@ -180,10 +180,14 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                     return const CircularProgressIndicator();
                   } else if (state is ProductsLoaded) {
                     return ListView.builder(
-                      itemCount: state.products.length,
-                      itemBuilder: (context, index) =>
-                          ProductWidget(product: state.products[index]),
-                    );
+                        itemCount: state.products.length,
+                        itemBuilder: (context, index) => Container(
+                              // Adding the left margin only in this screen
+                              margin: const EdgeInsets.fromLTRB(
+                                  15.0, 8.0, 0.0, 8.0),
+                              child:
+                                  ProductWidget(product: state.products[index]),
+                            ));
                   } else {
                     return const Text('Something went wrong!');
                   }

@@ -22,7 +22,7 @@ class ProductWidget extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
           color: colorScheme.tertiary,
           borderRadius: const BorderRadius.only(
@@ -91,7 +91,7 @@ class ProductWidget extends StatelessWidget {
                   Text(product.category,
                       style: TextStyle(color: colorScheme.primary)),
                   const SizedBox(height: 5),
-                  Text(product.brand,
+                  Text(product.brand.toString(),
                       style: TextStyle(color: colorScheme.primary)),
                   const SizedBox(height: 5),
                   ExpandableText(

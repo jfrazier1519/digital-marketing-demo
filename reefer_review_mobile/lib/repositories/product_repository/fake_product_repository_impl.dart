@@ -14,7 +14,7 @@ class FakeProductRepository implements ProductRepository {
         name: "Wonderful Gummies",
         category: "Edible",
         strain: "Hybrid",
-        brand: "Brand C",
+        brand: "Empire Weed",
         rating: 4.5,
         reviewCount: 10,
         description:
@@ -27,7 +27,7 @@ class FakeProductRepository implements ProductRepository {
         name: "Sample Product 2",
         category: "Edibles",
         strain: "Indica",
-        brand: "Brand E",
+        brand: "The Weed Company HQ",
         rating: 3.5,
         reviewCount: 5,
         description: "Tasty treat for relaxing.",
@@ -39,7 +39,7 @@ class FakeProductRepository implements ProductRepository {
         name: "Sample Product 3",
         category: "Oils",
         strain: "Sativa",
-        brand: "Brand A",
+        brand: "Empire Weed",
         rating: 4.0,
         reviewCount: 7,
         description: "Smooth oil for vaping.",
@@ -51,7 +51,7 @@ class FakeProductRepository implements ProductRepository {
         name: "Sample Product 4",
         category: "Concentrates",
         strain: "Hybrid",
-        brand: "Brand D",
+        brand: "The Weed Company HQ",
         rating: 5.0,
         reviewCount: 15,
         description: "Powerful concentrate for experienced users.",
@@ -63,7 +63,7 @@ class FakeProductRepository implements ProductRepository {
         name: "Sample Product 5",
         category: "Oils",
         strain: "Sativa",
-        brand: "Brand B",
+        brand: "Empire Weed",
         rating: 4.2,
         reviewCount: 12,
         description: "Convenient and portable vaping solution.",
@@ -143,5 +143,10 @@ class FakeProductRepository implements ProductRepository {
     });
 
     return productList;
+  }
+
+  @override
+  Future<List<Product>> getProductsByBrand(String brandName) async {
+    return _allProducts.where((product) => product.brand == brandName).toList();
   }
 }

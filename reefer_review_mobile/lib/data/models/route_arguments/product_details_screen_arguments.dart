@@ -1,4 +1,4 @@
-import '../../../data/models/product/product.dart';
+import '../product/product.dart';
 
 class ProductDetailsScreenArguments {
   final Product product;
