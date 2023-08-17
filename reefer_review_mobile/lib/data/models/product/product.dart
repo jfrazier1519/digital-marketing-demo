@@ -1,3 +1,5 @@
+import 'package:reefer_review_mobile/data/models/product/product_price.dart';
+
 class Product {
   final int productId;
   final String name;
@@ -8,6 +10,7 @@ class Product {
   final int reviewCount;
   final String description;
   final String image;
+  final List<Price> prices;
 
   Product({
     required this.productId,
@@ -19,5 +22,6 @@ class Product {
     required this.reviewCount,
     required this.description,
     required this.image,
+    required this.prices,
   });
 }

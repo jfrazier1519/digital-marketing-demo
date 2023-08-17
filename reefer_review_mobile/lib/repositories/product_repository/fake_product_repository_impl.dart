@@ -1,6 +1,8 @@
-import 'package:reefer_review_mobile/data/product.dart';
 import 'package:reefer_review_mobile/repositories/product_repository/product_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
+
+import '../../data/models/product/product.dart';
+import '../../data/models/product/product_price.dart';
 
 class FakeProductRepository implements ProductRepository {
   List<Product> _allProducts = [];
@@ -8,56 +10,86 @@ class FakeProductRepository implements ProductRepository {
   FakeProductRepository() {
     _allProducts = [
       Product(
-          productId: 1,
-          name: "Sample Product 1",
-          category: "Flower",
-          strain: "Hybrid",
-          brand: "Brand C",
-          rating: 4.5,
-          reviewCount: 10,
-          description:
-              "These are great. I think. I can keep going and going and going and going and going.",
-          image: product1),
+        productId: 1,
+        name: "Wonderful Gummies",
+        category: "Edible",
+        strain: "Hybrid",
+        brand: "Brand C",
+        rating: 4.5,
+        reviewCount: 10,
+        description:
+            "These are great. I think. I can keep going and going and going and going and going.",
+        image: product1,
+        prices: [
+          Price("1g", 9.99),
+          Price("1/2oz", 19.99),
+          Price("1/8oz", 29.99)
+        ],
+      ),
       Product(
-          productId: 2,
-          name: "Sample Product 2",
-          category: "Edibles",
-          strain: "Indica",
-          brand: "Brand E",
-          rating: 3.5,
-          reviewCount: 5,
-          description: "Tasty treat for relaxing.",
-          image: product2),
+        productId: 2,
+        name: "Sample Product 2",
+        category: "Edibles",
+        strain: "Indica",
+        brand: "Brand E",
+        rating: 3.5,
+        reviewCount: 5,
+        description: "Tasty treat for relaxing.",
+        image: product2,
+        prices: [
+          Price("1g", 9.99),
+          Price("1/2oz", 19.99),
+          Price("1/8oz", 29.99)
+        ],
+      ),
       Product(
-          productId: 3,
-          name: "Sample Product 3",
-          category: "Oils",
-          strain: "Sativa",
-          brand: "Brand A",
-          rating: 4.0,
-          reviewCount: 7,
-          description: "Smooth oil for vaping.",
-          image: product3),
+        productId: 3,
+        name: "Sample Product 3",
+        category: "Oils",
+        strain: "Sativa",
+        brand: "Brand A",
+        rating: 4.0,
+        reviewCount: 7,
+        description: "Smooth oil for vaping.",
+        image: product3,
+        prices: [
+          Price("1g", 9.99),
+          Price("1/2oz", 19.99),
+          Price("1/8oz", 29.99)
+        ],
+      ),
       Product(
-          productId: 4,
-          name: "Sample Product 4",
-          category: "Concentrates",
-          strain: "Hybrid",
-          brand: "Brand D",
-          rating: 5.0,
-          reviewCount: 15,
-          description: "Powerful concentrate for experienced users.",
-          image: product4),
+        productId: 4,
+        name: "Sample Product 4",
+        category: "Concentrates",
+        strain: "Hybrid",
+        brand: "Brand D",
+        rating: 5.0,
+        reviewCount: 15,
+        description: "Powerful concentrate for experienced users.",
+        image: product4,
+        prices: [
+          Price("1g", 9.99),
+          Price("1/2oz", 19.99),
+          Price("1/8oz", 29.99)
+        ],
+      ),
       Product(
-          productId: 5,
-          name: "Sample Product 5",
-          category: "Oils",
-          strain: "Sativa",
-          brand: "Brand B",
-          rating: 4.2,
-          reviewCount: 12,
-          description: "Convenient and portable vaping solution.",
-          image: product5),
+        productId: 5,
+        name: "Sample Product 5",
+        category: "Oils",
+        strain: "Sativa",
+        brand: "Brand B",
+        rating: 4.2,
+        reviewCount: 12,
+        description: "Convenient and portable vaping solution.",
+        image: product5,
+        prices: [
+          Price("1g", 9.99),
+          Price("1/2oz", 19.99),
+          Price("1/8oz", 29.99)
+        ],
+      ),
     ];
   }
 
