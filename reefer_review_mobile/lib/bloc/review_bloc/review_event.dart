@@ -3,10 +3,10 @@ part of 'review_bloc.dart';
 @immutable
 abstract class ReviewEvent {}
 
-class FetchReviews extends ReviewEvent {
+class FetchReviewsForProduct extends ReviewEvent {
   final int productId;
 
-  FetchReviews(this.productId);
+  FetchReviewsForProduct(this.productId);
 }
 
 class ExpandReview extends ReviewEvent {

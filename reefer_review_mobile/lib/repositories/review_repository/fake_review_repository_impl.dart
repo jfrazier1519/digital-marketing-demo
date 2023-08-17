@@ -12,35 +12,42 @@ class FakeReviewRepository implements ReviewRepository {
       userId: 'userID2',
       email: 'alice.smith@example.com',
       name: 'Alice Smith',
+      profileImageUrl: profileImage,
+    );
+
+    User dummyReviewer2 = User(
+      userId: 'userID3',
+      email: 'john.smith@example.com',
+      name: 'John Smith',
       profileImageUrl: dummyProfileImage,
     );
 
     //TODO: add other review types here as they're needed
     _allReviews = [
       ProductReview(
-        reviewId: 1,
-        productId: 1,
-        reviewer: dummyReviewer,
-        content: 'Great product! Really enjoyed it.',
-        date: DateTime.now(),
-        rating: 4.7,
-      ),
+          reviewId: 1,
+          productId: 1,
+          reviewer: dummyReviewer,
+          content: 'Great product! Really enjoyed it.',
+          date: DateTime.now(),
+          rating: 4,
+          title: 'Delicious Gummies'),
       ProductReview(
-        reviewId: 2,
-        productId: 2,
-        reviewer: dummyReviewer,
-        content: 'It was alright, could be better.',
-        date: DateTime.now(),
-        rating: 3.2,
-      ),
+          reviewId: 2,
+          productId: 1,
+          reviewer: dummyReviewer2,
+          content: 'It was alright, could be better.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'The Worst'),
       ProductReview(
-        reviewId: 3,
-        productId: 3,
-        reviewer: dummyReviewer,
-        content: 'Fantastic! I recommend it to everyone.',
-        date: DateTime.now(),
-        rating: 5.0,
-      ),
+          reviewId: 3,
+          productId: 3,
+          reviewer: dummyReviewer,
+          content: 'Fantastic! I recommend it to everyone.',
+          date: DateTime.now(),
+          rating: 5,
+          title: '10/10 JUST DO IT'),
     ];
   }
 

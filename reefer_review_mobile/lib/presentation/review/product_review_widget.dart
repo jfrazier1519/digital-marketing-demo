@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Required for date formatting
 
 import '../../data/models/review/review.dart';
-import '../../data/models/review/product_review.dart'; // You might need to import this if it isn't already.
+import '../../data/models/review/product_review.dart';
 
 class ProductReviewWidget extends StatelessWidget {
   final Review review;
 
   ProductReviewWidget({required this.review});
+
+  List<Widget> buildStars(int rating, ColorScheme colorScheme) {
+    List<Widget> stars = [];
+    for (var i = 1; i <= 5; i++) {
+      stars.add(Icon(
+        i <= rating ? Icons.star_border : Icons.star_border,
+        color: i <= rating ? colorScheme.primary : colorScheme.outlineVariant,
+        size: 20,
+      ));
+    }
+    return stars;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +27,7 @@ class ProductReviewWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(10.0),
-      margin: const EdgeInsets.only(bottom: 8.0),
+      margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       decoration: BoxDecoration(
         color: colorScheme.tertiary,
         borderRadius: BorderRadius.circular(8.0),
@@ -36,7 +49,7 @@ class ProductReviewWidget extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(
+                      backgroundImage: AssetImage(
                           (review as ProductReview).reviewer.profileImageUrl),
                       radius: 16,
                     ),
@@ -48,37 +61,26 @@ class ProductReviewWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              ],
-              Row(
-                children: [
-                  Text(
-                    review.rating.toString(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: colorScheme.primary,
-                    ),
+                Text(
+                  "${DateFormat('h:mma').format(review.date)} - ${DateFormat('M/d/yy').format(review.date)}",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurface.withOpacity(0.5),
                   ),
-                  const SizedBox(width: 5),
-                  Icon(Icons.star_border, color: colorScheme.primary, size: 20),
-                ],
-              ),
+                ),
+              ],
             ],
           ),
+          const SizedBox(height: 8.0),
+          Row(children: [
+            ...buildStars(review.rating, colorScheme),
+            const SizedBox(width: 10.0),
+            Text(review.title, style: TextStyle(fontWeight: FontWeight.bold))
+          ]),
           const SizedBox(height: 8.0),
           Text(
             review.content,
             style: TextStyle(color: colorScheme.onSurface.withOpacity(0.7)),
-          ),
-          const SizedBox(height: 8.0),
-          Text(
-            review.date
-                .toLocal()
-                .toString(), // Formatting the date is up to you
-            style: TextStyle(
-              fontSize: 12,
-              color: colorScheme.onSurface.withOpacity(0.5),
-            ),
           ),
         ],
       ),

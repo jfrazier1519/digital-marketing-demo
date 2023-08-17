@@ -11,12 +11,13 @@ class ProductReview extends Review {
     required User reviewer,
     required String content,
     required DateTime date,
-    required double rating,
+    required int rating,
+    required String title,
   }) : super(
-          reviewId: reviewId,
-          reviewer: reviewer,
-          content: content,
-          date: date,
-          rating: rating,
-        );
+            reviewId: reviewId,
+            reviewer: reviewer,
+            content: content,
+            date: date,
+            rating: rating,
+            title: title);
 }

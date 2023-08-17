@@ -27,9 +27,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case productDetailsScreenViewRoute:
       final args = settings.arguments as ProductDetailsScreenArguments;
       return MaterialPageRoute(
-          builder: (context) => ProductDetailsScreen(
-                product: args.product,
-              ));
+        builder: (context) => ProductDetailsScreen(
+          product: args.product,
+        ),
+      );
     case signupScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
     case termsAndConditionsViewRoute:

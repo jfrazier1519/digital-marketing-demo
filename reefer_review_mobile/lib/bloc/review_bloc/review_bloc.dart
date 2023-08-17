@@ -9,7 +9,7 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
   final ReviewRepository reviewRepository;
 
   ReviewBloc(this.reviewRepository) : super(ReviewInitial()) {
-    on<FetchReviews>((event, emit) async {
+    on<FetchReviewsForProduct>((event, emit) async {
       emit(ReviewLoading());
       var reviews =
           await reviewRepository.getAllReviewsForProduct(event.productId);
