@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
@@ -19,6 +20,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     case homeScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
+    case productsScreenViewRoute:
+      return MaterialPageRoute(builder: (context) => const ProductsScreen());
 
     case signupScreenViewRoute:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
