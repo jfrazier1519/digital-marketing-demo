@@ -1,4 +1,4 @@
-import '../../data/product.dart';
+import '../../data/models/product/product.dart';
 
 abstract class ProductRepository {
   Future<List<Product>> getAllProducts();

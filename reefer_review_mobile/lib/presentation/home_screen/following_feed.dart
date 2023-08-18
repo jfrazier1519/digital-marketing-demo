@@ -3,9 +3,10 @@ import '../../data/post/post_feed_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 import '../../repositories/post_repository.dart/fake_post_repository_impl.dart';
+import '../post/post_to_widget_converter.dart';
 
 class FollowingFeedScreen extends StatelessWidget {
-  const FollowingFeedScreen({super.key});
+  const FollowingFeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,9 @@ class FollowingFeedScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: state.posts.length,
                 itemBuilder: (context, index) {
-                  return state.posts[index].displayContent(context);
+                  final post = state.posts[index];
+
+                  return PostToWidgetConverter.convert(post);
                 },
               );
             } else {

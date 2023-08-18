@@ -23,5 +23,11 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     on<CollapsePost>((event, emit) {
       emit(PostCollapsed(event.postId));
     });
+
+    on<AddPost>((event, emit) async {
+      await postRepository.addPost(event.post);
+      var posts = await postRepository.getPosts();
+      emit(FeedLoaded(posts));
+    });
   }
 }
