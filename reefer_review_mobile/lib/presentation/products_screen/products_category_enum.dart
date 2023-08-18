@@ -1,1 +1,8 @@
-enum ProductsCategoryEnum { Accessories, Concentrates, Flower, Merch, Oils }
+enum ProductsCategoryEnum {
+  Accessories,
+  Concentrates,
+  Edibles,
+  Flower,
+  Merch,
+  Oils
+}
