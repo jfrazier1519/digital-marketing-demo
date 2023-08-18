@@ -5,9 +5,7 @@ import '../../data/post/product_post.dart';
 
 class ProductPostWidget extends StatelessWidget {
   final ProductPost productPost;
-
-  ProductPostWidget({required this.productPost});
-
+  const ProductPostWidget({super.key, required this.productPost});
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../data/product.dart';
+import '../../data/models/product/product.dart';
 import '../../presentation/products_screen/category_options_enum.dart';
 import '../../presentation/products_screen/sort_options_enum.dart';
 import '../../repositories/product_repository/product_repository.dart';
