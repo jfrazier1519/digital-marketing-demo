@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/models/brand.dart';
 import '../../data/models/route_arguments/brand_details_screen_arguments.dart';
 import '../../res/routes.dart';
+import '../shared/category_bubble.dart';
 
 class BrandWidget extends StatelessWidget {
   final Brand brand;
@@ -105,20 +106,11 @@ class BrandWidget extends StatelessWidget {
                       spacing: 8.0,
                       runSpacing: 8.0,
                       children: brand.categories
-                          .map((category) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                decoration: BoxDecoration(
-                                  color: colorScheme.primary,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Text(
-                                  category.toString().split('.').last,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ))
+                          .map((category) => CategoryBubble(
+                              text: category.toString().split('.').last,
+                              colorScheme: colorScheme))
                           .toList(),
-                    ),
+                    )
                   ],
                 ),
               )

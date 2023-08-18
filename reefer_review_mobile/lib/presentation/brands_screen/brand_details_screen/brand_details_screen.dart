@@ -11,6 +11,7 @@ import '../../../repositories/venue_repository/fake_venue_repository_impl.dart';
 import '../../post/post_to_widget_converter.dart';
 import '../../products_screen/product_widget.dart';
 import '../../shared/bottom_nav_bar.dart';
+import '../../shared/category_bubble.dart';
 import '../../shared/tab_button.dart';
 import '../../venue_screen/venue_widget.dart';
 
@@ -76,7 +77,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                   spacing: 8.0,
                   runSpacing: 8.0,
                   children: widget.brand.categories
-                      .map((category) => _CategoryBubble(
+                      .map((category) => CategoryBubble(
                           text: category.toString().split('.').last,
                           colorScheme: colorScheme))
                       .toList(),
@@ -240,62 +241,12 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
             ),
           ),
         );
-      case "Events":
-        // TODO: Return event-specific content
-        break;
       case "Crystals":
         // TODO: Return crystal-specific content
         break;
       default:
-        return Text("Info about brand");
+        return Text(widget.brand.description);
     }
     return SizedBox.shrink();
-  }
-}
-
-class ProductsList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProductBloc, ProductState>(
-      builder: (context, state) {
-        if (state is ProductLoading) {
-          return CircularProgressIndicator();
-        } else if (state is ProductsLoaded) {
-          return ListView.builder(
-            itemCount: state.products.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(state.products[index].name),
-                // Add other details of the product as needed
-              );
-            },
-          );
-        } else {
-          return Text("Error loading products");
-        }
-      },
-    );
-  }
-}
-
-class _CategoryBubble extends StatelessWidget {
-  final String text;
-  final ColorScheme colorScheme;
-
-  const _CategoryBubble({required this.text, required this.colorScheme});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-      decoration: BoxDecoration(
-        color: colorScheme.primary,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
   }
 }
