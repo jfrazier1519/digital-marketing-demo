@@ -8,9 +8,11 @@ import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/ema
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 
+import '../data/models/route_arguments/add_post_screen_arguments.dart';
 import '../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
+import '../presentation/post_screen/add_post_screen.dart';
 import '../presentation/products_screen/products_details_screen/products_details_screen.dart';
 import '../presentation/shared/undefined_view.dart';
 import '../presentation/venue_screen/venues_screen.dart';
@@ -48,6 +50,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => EmailVerificationScreen(
           email: args.email,
         ),
+      );
+    case addPostViewRoute:
+      final args = settings.arguments as AddPostScreenArguments;
+      return MaterialPageRoute(
+        builder: (context) => AddPostScreen(feedBloc: args.feedBloc),
       );
     case loadingModalViewRoute:
       return LoadingModal();
