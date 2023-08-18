@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:expandable_text/expandable_text.dart';
 import '../../presentation/shared/rounded_container.dart';
@@ -53,14 +54,20 @@ class GeneralPostWidget extends StatelessWidget {
               ? SizedBox(
                   height: 200,
                   width: double.infinity,
-                  child: Image.asset(
-                    generalPost.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: _displayImage(generalPost.image),
                 )
               : Container(),
         ],
       ),
     );
+  }
+
+  Widget _displayImage(String imagePath) {
+    // Check if the path is for bundled assets or file
+    if (imagePath.startsWith('assets/')) {
+      return Image.asset(imagePath, fit: BoxFit.cover);
+    } else {
+      return Image.file(File(imagePath), fit: BoxFit.cover);
+    }
   }
 }

@@ -4,5 +4,5 @@ enum ProductsCategoryEnum {
   Edibles,
   Flower,
   Merch,
-  Oils,
+  Oils
 }

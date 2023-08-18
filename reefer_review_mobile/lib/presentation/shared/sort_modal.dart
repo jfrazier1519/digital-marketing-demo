@@ -4,7 +4,7 @@ import '../products_screen/products_sort_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
-Future<void> showProductsSortModal(
+Future<void> showSortModal(
     BuildContext context,
     GlobalKey sortButtonKey,
     ProductBloc productBloc,
@@ -53,6 +53,7 @@ class SortOptions extends StatefulWidget {
   final ProductsSortEnum? initialSortOption;
   final bool initialIsAscending;
   final ProductsCategoryEnum? selectedCategory;
+
   const SortOptions({
     super.key,
     required this.colorScheme,
@@ -113,10 +114,7 @@ class _SortOptionsState extends State<SortOptions> {
 
   Widget sortTile(BuildContext context, ProductsSortEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
-
-    bool isDefault = sortOption == ProductsSortEnum.Product &&
-        selectedSortOption == ProductsSortEnum.Product &&
-        isAscending;
+    bool isDefault = sortOption == ProductsSortEnum.Product && isAscending;
 
     String sortOptionString = sortOption.toString().split('.').last;
 

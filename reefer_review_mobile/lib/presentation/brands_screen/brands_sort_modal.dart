@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../bloc/brand_bloc/brand_bloc.dart';
 import '../products_screen/products_category_enum.dart';
-import './brands_sort_enum.dart';
+import 'brands_sort_enum.dart';
 
 Future<void> showBrandSortModal(BuildContext context, GlobalKey sortButtonKey,
     BrandBloc brandBloc, void Function(BrandsSortEnum?, bool) onSortSelected,
