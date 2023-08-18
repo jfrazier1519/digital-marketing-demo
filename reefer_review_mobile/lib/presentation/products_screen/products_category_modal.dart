@@ -47,13 +47,13 @@ class CategoriesContent extends StatefulWidget {
   final CategoryOptionsEnum? selectedCategory;
   final Function(CategoryOptionsEnum?) onSelectCategory;
 
-
   const CategoriesContent(
       {super.key,
       required this.productBloc,
       this.selectedCategory,
       required this.onSelectCategory});
 
+  @override
   // ignore: library_private_types_in_public_api
   _CategoriesContentState createState() => _CategoriesContentState();
 }
