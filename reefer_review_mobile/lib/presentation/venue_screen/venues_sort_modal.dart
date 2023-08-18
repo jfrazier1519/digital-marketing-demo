@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import './venues_sort_enum.dart';
 import '../../bloc/venue_bloc/venue_bloc.dart';
 
@@ -55,7 +54,8 @@ class VenueSortOptions extends StatefulWidget {
   final VenuesSortEnum? initialSortOption;
   final bool initialIsAscending;
 
-  VenueSortOptions({
+  const VenueSortOptions({
+    super.key,
     required this.colorScheme,
     required this.venueBloc,
     required this.onSortSelected,
@@ -64,6 +64,7 @@ class VenueSortOptions extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _VenueSortOptionsState createState() => _VenueSortOptionsState();
 }
 
@@ -89,7 +90,7 @@ class _VenueSortOptionsState extends State<VenueSortOptions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10.0, left: 20.0),
               child: Text('Sort',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -137,7 +138,7 @@ class _VenueSortOptionsState extends State<VenueSortOptions> {
       },
       child: Container(
         color: isHighlightedGreen ? Colors.green[100] : null,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

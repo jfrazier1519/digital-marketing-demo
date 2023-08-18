@@ -18,3 +18,9 @@ const product2 = "assets/images/weed 3.jpeg";
 const product3 = "assets/images/Glass Bong.jpeg";
 const product4 = "assets/images/Brownies.jpeg";
 const product5 = "assets/images/Canabis Oil.jpeg";
+
+//Used for brands
+const brand1 = "assets/images/Weed Company.png";
+const brand2 = "assets/images/Unknown.jpeg";
+//Used for reviews
+const profileImage = "assets/images/person1.jpeg";

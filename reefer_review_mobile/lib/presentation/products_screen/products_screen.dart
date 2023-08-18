@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/product_widget.dart';
 import '../../bloc/product_bloc/product_bloc.dart';
 import '../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../shared/bottom_nav_bar.dart';
@@ -89,7 +90,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = true;
                             _isSortSelected = false;
                           });
-                          showCategoriesModal(
+                          showProductsCategoriesModal(
                             context,
                             _categoryButtonKey,
                             BlocProvider.of<ProductBloc>(context),
@@ -135,7 +136,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                             _isCategorySelected = false;
                             _isSortSelected = true;
                           });
-                          showSortModal(
+                          showProductsSortModal(
                             context,
                             _sortButtonKey,
                             BlocProvider.of<ProductBloc>(context),
@@ -176,15 +177,15 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
               child: BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
                   if (state is ProductLoading) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state is ProductsLoaded) {
                     return ListView.builder(
                       itemCount: state.products.length,
                       itemBuilder: (context, index) =>
-                          state.products[index].displayContent(context),
+                          ProductWidget(product: state.products[index]),
                     );
                   } else {
-                    return Text('Something went wrong!');
+                    return const Text('Something went wrong!');
                   }
                 },
               ),

@@ -90,7 +90,7 @@ class _VenuesScreenContentState extends State<_VenuesScreenContent> {
               child: BlocBuilder<VenueBloc, VenueState>(
                 builder: (context, state) {
                   if (state is VenueLoading) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state is VenuesLoaded) {
                     return ListView.builder(
                       itemCount: state.venues.length,
@@ -98,7 +98,7 @@ class _VenuesScreenContentState extends State<_VenuesScreenContent> {
                           VenueWidget(venue: state.venues[index]),
                     );
                   } else {
-                    return Text('Something went wrong!');
+                    return const Text('Something went wrong!');
                   }
                 },
               ),

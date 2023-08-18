@@ -4,7 +4,7 @@ import '../../data/venue.dart';
 class VenueWidget extends StatelessWidget {
   final Venue venue;
 
-  VenueWidget({required this.venue});
+  const VenueWidget({super.key, required this.venue});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class VenueWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: colorScheme.onBackground.withOpacity(0.1),
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
             blurRadius: 4.0,
           )
         ],
@@ -43,7 +43,7 @@ class VenueWidget extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   )
-                : Container(width: 100, height: 100),
+                : const SizedBox(width: 100, height: 100),
           ),
           const SizedBox(width: 20),
           Expanded(

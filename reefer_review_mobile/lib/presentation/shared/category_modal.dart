@@ -47,12 +47,14 @@ class CategoriesContent extends StatefulWidget {
   final ProductsCategoryEnum? selectedCategory;
   final Function(ProductsCategoryEnum?) onSelectCategory;
 
-  CategoriesContent(
-      {required this.productBloc,
+  const CategoriesContent(
+      {super.key,
+      required this.productBloc,
       this.selectedCategory,
       required this.onSelectCategory});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CategoriesContentState createState() => _CategoriesContentState();
 }
 
@@ -72,7 +74,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 10.0, left: 20.0),
             child: Text('Categories',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -118,7 +120,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
       },
       child: Container(
         color: isSelected ? Colors.green[100] : null,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Text(
           categoryOptionString,
           style: TextStyle(

@@ -1,6 +1,8 @@
-import 'package:reefer_review_mobile/data/product.dart';
 import 'package:reefer_review_mobile/repositories/product_repository/product_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
+
+import '../../data/models/product/product.dart';
+import '../../data/models/product/product_price.dart';
 
 class FakeProductRepository implements ProductRepository {
   List<Product> _allProducts = [];
@@ -105,16 +107,16 @@ class FakeProductRepository implements ProductRepository {
     Comparator<Product> comparator;
 
     switch (sortOption) {
-      case 'product':
+      case 'Product':
         comparator = (a, b) => a.name.compareTo(b.name);
         break;
-      case 'brand':
+      case 'Brand':
         comparator = (a, b) => a.brand.compareTo(b.brand);
         break;
-      case 'rating':
+      case 'Rating':
         comparator = (a, b) => a.rating.compareTo(b.rating);
         break;
-      case 'reviews':
+      case 'Reviews':
         comparator = (a, b) => a.reviewCount.compareTo(b.reviewCount);
         break;
       default:
@@ -122,8 +124,14 @@ class FakeProductRepository implements ProductRepository {
         break;
     }
 
-    productList
-        .sort((a, b) => isAscending ? comparator(a, b) : -comparator(a, b));
+
+    productList.sort((a, b) {
+      if (isAscending) {
+        return comparator(a, b);
+      } else {
+        return comparator(b, a);
+      }
+    });
 
     return productList;
   }
