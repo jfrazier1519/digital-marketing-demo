@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'sort_options_enum.dart';
 import 'category_options_enum.dart';
 
@@ -55,7 +54,8 @@ class SortOptions extends StatefulWidget {
   final bool initialIsAscending;
   final CategoryOptionsEnum? selectedCategory;
 
-  SortOptions({
+  const SortOptions({
+    super.key,
     required this.colorScheme,
     required this.productBloc,
     required this.onSortSelected,
@@ -65,6 +65,7 @@ class SortOptions extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _SortOptionsState createState() => _SortOptionsState();
 }
 
@@ -90,7 +91,7 @@ class _SortOptionsState extends State<SortOptions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10.0, left: 20.0),
               child: Text('Sort',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -122,8 +123,6 @@ class _SortOptionsState extends State<SortOptions> {
 
     return InkWell(
       onTap: () {
-        print(
-            "Selected Sort Option: $selectedSortOption, Ascending: $isAscending");
         setState(() {
           if (selectedSortOption == sortOption) {
             isAscending = !isAscending;
@@ -142,7 +141,7 @@ class _SortOptionsState extends State<SortOptions> {
       },
       child: Container(
         color: isSelected ? Colors.green[100] : null,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
