@@ -74,7 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 arguments: AddPostScreenArguments(
                                   feedBloc:
                                       BlocProvider.of<FeedBloc>(builderContext),
-                                  authBloc: BlocProvider.of<AuthBloc>(context),
                                 ),
                               );
                             },

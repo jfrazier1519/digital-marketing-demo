@@ -38,8 +38,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case addPostViewRoute:
       final args = settings.arguments as AddPostScreenArguments;
       return MaterialPageRoute(
-        builder: (context) =>
-            AddPostScreen(feedBloc: args.feedBloc, authBloc: args.authBloc),
+        builder: (context) => AddPostScreen(feedBloc: args.feedBloc),
       );
     case loadingModalViewRoute:
       return LoadingModal();

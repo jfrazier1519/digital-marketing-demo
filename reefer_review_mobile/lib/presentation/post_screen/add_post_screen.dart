@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
@@ -12,11 +13,8 @@ import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
   final FeedBloc feedBloc;
-  final AuthBloc authBloc;
 
-  const AddPostScreen(
-      {required this.authBloc, required this.feedBloc, Key? key})
-      : super(key: key);
+  const AddPostScreen({required this.feedBloc, Key? key}) : super(key: key);
 
   @override
   _AddPostScreenState createState() => _AddPostScreenState();
@@ -51,7 +49,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
       return;
     }
 
-    final currentState = widget.authBloc.state;
+    final currentState =
+        BlocProvider.of<AuthBloc>(context).state; // <- Change here
     if (currentState is AuthUserLoggedIn) {
       User user = currentState.user;
 
@@ -80,7 +79,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentState = widget.authBloc.state;
+    final currentState =
+        BlocProvider.of<AuthBloc>(context).state; // <- Change here
     String? userName;
     String? userProfileImageUrl;
 

@@ -3,7 +3,6 @@ import '../../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreenArguments {
   final FeedBloc feedBloc;
-  final AuthBloc authBloc;
 
-  AddPostScreenArguments({required this.feedBloc, required this.authBloc});
+  AddPostScreenArguments({required this.feedBloc});
 }
