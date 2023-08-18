@@ -29,5 +29,11 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       var posts = await postRepository.getPosts();
       emit(FeedLoaded(posts));
     });
+
+    on<FetchPostsByAuthor>((event, emit) async {
+      emit(FeedLoading());
+      var posts = await postRepository.getPostsByAuthor(event.author);
+      emit(FeedLoaded(posts));
+    });
   }
 }

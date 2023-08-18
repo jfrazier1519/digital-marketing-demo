@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import '../models/user.dart';
 
 abstract class Post {
@@ -15,6 +14,4 @@ abstract class Post {
     required this.content,
     required this.image,
   });
-
-  Widget displayContent(BuildContext context);
 }
