@@ -11,7 +11,7 @@ class VenueWidget extends StatelessWidget {
     var colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
         color: colorScheme.tertiary,
         borderRadius: const BorderRadius.only(

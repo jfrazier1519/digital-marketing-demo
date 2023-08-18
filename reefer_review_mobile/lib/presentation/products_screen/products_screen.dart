@@ -182,7 +182,6 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                     return ListView.builder(
                         itemCount: state.products.length,
                         itemBuilder: (context, index) => Container(
-                              // Adding the left margin only in this screen
                               margin: const EdgeInsets.fromLTRB(
                                   15.0, 8.0, 0.0, 8.0),
                               child:

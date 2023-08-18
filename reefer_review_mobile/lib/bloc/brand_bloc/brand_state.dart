@@ -12,3 +12,10 @@ class BrandsLoaded extends BrandState {
 
   BrandsLoaded(this.brands);
 }
+
+class AssociatedVenuesLoaded extends BrandState {
+  final Brand brand;
+  final List<Venue> venues;
+
+  AssociatedVenuesLoaded(this.brand, this.venues);
+}

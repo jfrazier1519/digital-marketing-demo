@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../bloc/brand_bloc/brand_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
 import '../../../data/models/brand.dart';
+import '../../../repositories/brand_repository/fake_brand_repository_impl.dart';
 import '../../../repositories/product_repository/fake_product_repository_impl.dart';
+import '../../../repositories/venue_repository/fake_venue_repository_impl.dart';
 import '../../products_screen/product_widget.dart';
 import '../../shared/bottom_nav_bar.dart';
 import '../../shared/tab_button.dart';
+import '../../venue_screen/venue_widget.dart';
 
 class BrandDetailsScreen extends StatefulWidget {
   final Brand brand;
@@ -104,14 +108,6 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                           });
                         }),
                     TabButton(
-                        text: "Events",
-                        isSelected: _currentTab == "Events",
-                        onTap: () {
-                          setState(() {
-                            _currentTab = "Events";
-                          });
-                        }),
-                    TabButton(
                         text: "Crystals",
                         isSelected: _currentTab == "Crystals",
                         onTap: () {
@@ -127,14 +123,14 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Divider(color: colorScheme.primary),
+                const Divider(thickness: 1, color: Colors.black),
                 _getContentForTab(),
                 const SizedBox(height: 20),
                 const Text(
                   "Feed",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Divider(color: colorScheme.primary),
+                const Divider(thickness: 1, color: Colors.black),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text("Add Review"),
@@ -189,8 +185,35 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
         );
 
       case "Venues":
-        // TODO: Return venue-specific content
-        break;
+        return BlocProvider(
+          create: (context) =>
+              BrandBloc(FakeBrandRepository(), FakeVenueRepository())
+                ..add(FetchAssociatedVenues(widget.brand.brandId)),
+          child: Center(
+            child: BlocBuilder<BrandBloc, BrandState>(
+              builder: (context, state) {
+                if (state is BrandLoading) {
+                  return const CircularProgressIndicator();
+                } else if (state is AssociatedVenuesLoaded) {
+                  if (state.venues.isEmpty) {
+                    return const Text('No venues available.');
+                  }
+                  return SingleChildScrollView(
+                    child: ListView.builder(
+                      itemCount: state.venues.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) =>
+                          VenueWidget(venue: state.venues[index]),
+                    ),
+                  );
+                } else {
+                  return const Text('Something went wrong!');
+                }
+              },
+            ),
+          ),
+        );
       case "Events":
         // TODO: Return event-specific content
         break;
