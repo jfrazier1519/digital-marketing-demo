@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/post/post_feed_type.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
+import '../post/post_to_widget_converter.dart';
 
 class FeedScreen extends StatelessWidget {
   final PostFeedType feedType;
@@ -18,7 +19,9 @@ class FeedScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: state.posts.length,
             itemBuilder: (context, index) {
-              return state.posts[index].displayContent(context);
+              final post = state.posts[index];
+
+              return PostToWidgetConverter.convert(post);
             },
           );
         } else {

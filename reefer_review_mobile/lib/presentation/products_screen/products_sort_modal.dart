@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'sort_options_enum.dart';
-import 'category_options_enum.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_category_enum.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_sort_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 
@@ -8,10 +8,10 @@ Future<void> showProductsSortModal(
     BuildContext context,
     GlobalKey sortButtonKey,
     ProductBloc productBloc,
-    void Function(SortOptionsEnum?, bool) onSortSelected,
-    {SortOptionsEnum? initialSortOption,
+    void Function(ProductsSortEnum?, bool) onSortSelected,
+    {ProductsSortEnum? initialSortOption,
     bool initialIsAscending = true,
-    CategoryOptionsEnum? selectedCategory}) {
+    ProductsCategoryEnum? selectedCategory}) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -49,10 +49,10 @@ Future<void> showProductsSortModal(
 class SortOptions extends StatefulWidget {
   final ColorScheme colorScheme;
   final ProductBloc productBloc;
-  final Function(SortOptionsEnum?, bool) onSortSelected;
-  final SortOptionsEnum? initialSortOption;
+  final Function(ProductsSortEnum?, bool) onSortSelected;
+  final ProductsSortEnum? initialSortOption;
   final bool initialIsAscending;
-  final CategoryOptionsEnum? selectedCategory;
+  final ProductsCategoryEnum? selectedCategory;
   const SortOptions({
     super.key,
     required this.colorScheme,
@@ -69,13 +69,13 @@ class SortOptions extends StatefulWidget {
 }
 
 class _SortOptionsState extends State<SortOptions> {
-  SortOptionsEnum? selectedSortOption;
+  ProductsSortEnum? selectedSortOption;
   bool isAscending = true;
 
   @override
   void initState() {
     super.initState();
-    selectedSortOption = widget.initialSortOption ?? SortOptionsEnum.Product;
+    selectedSortOption = widget.initialSortOption ?? ProductsSortEnum.Product;
     isAscending = widget.initialIsAscending;
   }
 
@@ -99,7 +99,7 @@ class _SortOptionsState extends State<SortOptions> {
               padding: const EdgeInsets.only(left: 10, right: 10.0),
               child: SingleChildScrollView(
                 child: ListBody(
-                  children: SortOptionsEnum.values
+                  children: ProductsSortEnum.values
                       .map((e) => sortTile(context, e))
                       .toList(),
                 ),
@@ -111,11 +111,11 @@ class _SortOptionsState extends State<SortOptions> {
     );
   }
 
-  Widget sortTile(BuildContext context, SortOptionsEnum sortOption) {
+  Widget sortTile(BuildContext context, ProductsSortEnum sortOption) {
     bool isSelected = sortOption == selectedSortOption;
 
-    bool isDefault = sortOption == SortOptionsEnum.Product &&
-        selectedSortOption == SortOptionsEnum.Product &&
+    bool isDefault = sortOption == ProductsSortEnum.Product &&
+        selectedSortOption == ProductsSortEnum.Product &&
         isAscending;
 
     String sortOptionString = sortOption.toString().split('.').last;
@@ -127,7 +127,7 @@ class _SortOptionsState extends State<SortOptions> {
             isAscending = !isAscending;
           } else {
             selectedSortOption = sortOption;
-            if (sortOption == SortOptionsEnum.Product) {
+            if (sortOption == ProductsSortEnum.Product) {
               isAscending = true;
             }
           }

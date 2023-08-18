@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'category_options_enum.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_category_enum.dart';
 import '../../bloc/product_bloc/product_bloc.dart';
 
 Future<void> showProductsCategoriesModal(
     BuildContext context,
     GlobalKey categoryButtonKey,
     ProductBloc productBloc,
-    CategoryOptionsEnum? selectedCategory,
-    Function(CategoryOptionsEnum?) onSelectCategory) {
+    ProductsCategoryEnum? selectedCategory,
+    Function(ProductsCategoryEnum?) onSelectCategory) {
   var colorScheme = Theme.of(context).colorScheme;
 
   final RenderBox renderBox =
@@ -44,8 +44,8 @@ Future<void> showProductsCategoriesModal(
 
 class CategoriesContent extends StatefulWidget {
   final ProductBloc productBloc;
-  final CategoryOptionsEnum? selectedCategory;
-  final Function(CategoryOptionsEnum?) onSelectCategory;
+  final ProductsCategoryEnum? selectedCategory;
+  final Function(ProductsCategoryEnum?) onSelectCategory;
 
   const CategoriesContent(
       {super.key,
@@ -59,7 +59,7 @@ class CategoriesContent extends StatefulWidget {
 }
 
 class _CategoriesContentState extends State<CategoriesContent> {
-  CategoryOptionsEnum? selectedCategory;
+  ProductsCategoryEnum? selectedCategory;
 
   @override
   void initState() {
@@ -83,7 +83,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
             padding: const EdgeInsets.only(left: 10, right: 10.0),
             child: SingleChildScrollView(
               child: ListBody(
-                children: CategoryOptionsEnum.values
+                children: ProductsCategoryEnum.values
                     .map((e) => categoryTile(context, e))
                     .toList(),
               ),
@@ -95,7 +95,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
   }
 
   Widget categoryTile(
-      BuildContext context, CategoryOptionsEnum? categoryOption) {
+      BuildContext context, ProductsCategoryEnum? categoryOption) {
     bool isSelected = selectedCategory == categoryOption;
     String categoryOptionString = categoryOption != null
         ? categoryOption.toString().split('.').last

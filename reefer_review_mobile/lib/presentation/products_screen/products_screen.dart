@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/presentation/products_screen/product_widget.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_category_modal.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_sort_modal.dart';
 import '../../bloc/product_bloc/product_bloc.dart';
 import '../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
-import '../shared/category_modal.dart';
-import '../shared/sort_modal.dart';
 import './products_category_enum.dart';
 import './products_sort_enum.dart';
 

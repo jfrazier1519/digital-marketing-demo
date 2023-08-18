@@ -2,6 +2,7 @@ const loadingScreenViewRoute = '/';
 const loadingModalViewRoute = 'loading';
 const loginScreenViewRoute = '/login';
 const homeScreenViewRoute = '/home';
+const addPostViewRoute = '/addPost';
 const productsScreenViewRoute = '/products';
 const productDetailsScreenViewRoute = '$productsScreenViewRoute/details';
 const signupScreenViewRoute = '$loginScreenViewRoute/sign-up';
