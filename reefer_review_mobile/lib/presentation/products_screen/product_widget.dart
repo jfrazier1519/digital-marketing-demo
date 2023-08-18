@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 import '../../data/models/product/product.dart';
 import '../../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../../res/routes.dart';
-
 class ProductWidget extends StatelessWidget {
   final Product product;
-
   const ProductWidget({super.key, required this.product});
-
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
-
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(

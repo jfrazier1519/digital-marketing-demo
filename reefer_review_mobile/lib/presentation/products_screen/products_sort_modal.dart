@@ -53,7 +53,6 @@ class SortOptions extends StatefulWidget {
   final SortOptionsEnum? initialSortOption;
   final bool initialIsAscending;
   final CategoryOptionsEnum? selectedCategory;
-
   const SortOptions({
     super.key,
     required this.colorScheme,

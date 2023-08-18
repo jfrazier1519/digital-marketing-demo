@@ -5,9 +5,7 @@ import '../../data/post/event_post.dart';
 
 class EventPostWidget extends StatelessWidget {
   final EventPost eventPost;
-
   const EventPostWidget({super.key, required this.eventPost});
-
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
