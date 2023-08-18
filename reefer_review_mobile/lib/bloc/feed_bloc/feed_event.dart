@@ -18,3 +18,9 @@ class CollapsePost extends FeedEvent {
   final int postId;
   CollapsePost(this.postId);
 }
+
+class FetchPostsByAuthor extends FeedEvent {
+  final String author;
+
+  FetchPostsByAuthor({required this.author});
+}

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/brand_bloc/brand_bloc.dart';
+import '../../../bloc/feed_bloc/feed_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
 import '../../../data/models/brand.dart';
 import '../../../repositories/brand_repository/fake_brand_repository_impl.dart';
+import '../../../repositories/post_repository.dart/fake_post_repository_impl.dart';
 import '../../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../../../repositories/venue_repository/fake_venue_repository_impl.dart';
+import '../../post/post_to_widget_converter.dart';
 import '../../products_screen/product_widget.dart';
 import '../../shared/bottom_nav_bar.dart';
 import '../../shared/tab_button.dart';
@@ -135,7 +138,30 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                   onPressed: () {},
                   child: Text("Add Review"),
                 ),
-                // TODO: Insert brand-specific feed here
+                BlocProvider(
+                  create: (context) => FeedBloc(FakePostRepository())
+                    ..add(FetchPostsByAuthor(author: widget.brand.name)),
+                  child: BlocBuilder<FeedBloc, FeedState>(
+                    builder: (context, state) {
+                      if (state is FeedLoading) {
+                        return const CircularProgressIndicator();
+                      } else if (state is FeedLoaded) {
+                        if (state.posts.isEmpty) {
+                          return const Text('No posts available.');
+                        }
+                        return ListView.builder(
+                          itemCount: state.posts.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) =>
+                              PostToWidgetConverter.convert(state.posts[index]),
+                        );
+                      } else {
+                        return const Text('Something went wrong!');
+                      }
+                    },
+                  ),
+                )
               ],
             ),
           ),

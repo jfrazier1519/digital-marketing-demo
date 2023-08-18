@@ -14,10 +14,16 @@ class FakePostRepository implements PostRepository {
 
   FakePostRepository() {
     User dummyUser = User(
-      userId: 'userID1',
+      userId: '1',
       email: 'john.doe@example.com',
       name: 'John Doe',
       profileImageUrl: dummyProfileImage,
+    );
+    User brandUser = User(
+      userId: '2',
+      email: 'john.doe@example.com',
+      name: 'Empire Weed',
+      profileImageUrl: brand2,
     );
 
     _allPosts = [
@@ -60,6 +66,13 @@ class FakePostRepository implements PostRepository {
         content: 'This is a review post.',
         image: dummyReviewPostImage,
         reviewStars: 4.5,
+      ),
+      GeneralPost(
+        postId: 6,
+        author: brandUser,
+        date: DateTime.now(),
+        content: 'New Product Wonder Brownies.',
+        image: product4,
       ),
     ];
   }
@@ -104,5 +117,10 @@ class FakePostRepository implements PostRepository {
   @override
   Future<void> deletePost(int postId) async {
     _allPosts.removeWhere((p) => p.postId == postId);
+  }
+
+  @override
+  Future<List<Post>> getPostsByAuthor(String author) async {
+    return _allPosts.where((post) => post.author.name == author).toList();
   }
 }
