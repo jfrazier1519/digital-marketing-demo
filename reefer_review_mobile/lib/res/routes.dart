@@ -9,5 +9,6 @@ const signupScreenViewRoute = '$loginScreenViewRoute/sign-up';
 const termsAndConditionsViewRoute = '$signupScreenViewRoute/terms_&_conditions';
 const emailVerificationViewRoute = '$signupScreenViewRoute/email-verification';
 const venuesScreenViewRoute = '/venues';
+const venueDetailsScreenViewRoute = '$venuesScreenViewRoute/details';
 const brandsScreenViewRoute = '/brands';
 const brandDetailsScreenViewRoute = '$brandsScreenViewRoute/details';
