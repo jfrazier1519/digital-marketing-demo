@@ -20,10 +20,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AuthBloc(FakeAuthRepository()),
-        ),
-        BlocProvider(
-          create: (context) => AccountBloc(FakeAccountRepository()),
-        ),
+        )
       ],
       child: MaterialApp(
         onGenerateRoute: router.generateRoute,

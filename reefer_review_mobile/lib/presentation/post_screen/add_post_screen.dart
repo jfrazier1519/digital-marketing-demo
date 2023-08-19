@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
+import '../../repositories/account_repository/fake_account_repository.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/rounded_container.dart';
 import '../../data/post/general_post.dart';
@@ -48,11 +49,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
       return;
     }
 
-    final currentState =
-        BlocProvider.of<AuthBloc>(context).state; // <- Change here
-    if (currentState is AuthUserLoggedIn) {
-      User user = currentState.user;
-
+    User? user = FakeAccountRepository.accountRepository.user;
+    if (user != null) {
       GeneralPost post = GeneralPost(
         postId: DateTime.now().millisecondsSinceEpoch,
         author: user,
@@ -78,15 +76,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentState =
-        BlocProvider.of<AuthBloc>(context).state; // <- Change here
-    String? userName;
-    String? userProfileImageUrl;
-
-    if (currentState is AuthUserLoggedIn) {
-      userName = currentState.user.name;
-      userProfileImageUrl = currentState.user.profileImageUrl;
-    }
+    User? user = FakeAccountRepository.accountRepository.user;
+    String? userName = user?.name;
+    String? userProfileImageUrl = user?.profileImageUrl;
 
     return Scaffold(
       appBar: AppBar(
