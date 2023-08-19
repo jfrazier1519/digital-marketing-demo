@@ -178,8 +178,9 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
     switch (_currentTab) {
       case "Products":
         return BlocProvider(
-          create: (context) => ProductBloc(FakeProductRepository())
-            ..add(FetchProductsByBrand(widget.brand.name)),
+          create: (context) =>
+              ProductBloc(FakeProductRepository.productRepository)
+                ..add(FetchProductsByBrand(widget.brand.name)),
           child: Center(
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {

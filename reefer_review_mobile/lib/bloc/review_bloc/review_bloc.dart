@@ -16,6 +16,12 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
       emit(ReviewsLoaded(reviews));
     });
 
+    on<FetchReviewsForVenue>((event, emit) async {
+      emit(ReviewLoading());
+      var reviews = await reviewRepository.getAllReviewsForVenue(event.venueId);
+      emit(ReviewsLoaded(reviews));
+    });
+
     on<ExpandReview>((event, emit) {
       emit(ReviewExpanded(event.reviewId));
     });

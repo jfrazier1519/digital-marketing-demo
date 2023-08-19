@@ -23,3 +23,8 @@ class FetchProductsByBrand extends ProductEvent {
   final String brand;
   FetchProductsByBrand(this.brand);
 }
+
+class FetchProductsByVenue extends ProductEvent {
+  final int venueId;
+  FetchProductsByVenue(this.venueId);
+}

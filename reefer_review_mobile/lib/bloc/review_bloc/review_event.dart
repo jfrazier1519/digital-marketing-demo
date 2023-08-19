@@ -9,6 +9,12 @@ class FetchReviewsForProduct extends ReviewEvent {
   FetchReviewsForProduct(this.productId);
 }
 
+class FetchReviewsForVenue extends ReviewEvent {
+  final int venueId;
+
+  FetchReviewsForVenue(this.venueId);
+}
+
 class ExpandReview extends ReviewEvent {
   final int reviewId;
   ExpandReview(this.reviewId);

@@ -3,11 +3,16 @@ import 'package:reefer_review_mobile/res/images.dart';
 
 import '../../data/models/product/product.dart';
 import '../../data/models/product/product_price.dart';
+import '../../data/venue.dart';
+import '../venue_repository/fake_venue_repository_impl.dart';
 
 class FakeProductRepository implements ProductRepository {
   List<Product> _allProducts = [];
 
-  FakeProductRepository() {
+  static final FakeProductRepository productRepository =
+      FakeProductRepository._internal();
+
+  FakeProductRepository._internal() {
     _allProducts = [
       Product(
         productId: 1,
@@ -148,5 +153,15 @@ class FakeProductRepository implements ProductRepository {
   @override
   Future<List<Product>> getProductsByBrand(String brandName) async {
     return _allProducts.where((product) => product.brand == brandName).toList();
+  }
+
+  @override
+  Future<List<Product>> getProductsByVenue(int venueId) async {
+    Venue venue =
+        await FakeVenueRepository.venueRepository.getVenueById(venueId);
+
+    return _allProducts
+        .where((product) => venue.productIds.contains(product.productId))
+        .toList();
   }
 }

@@ -45,5 +45,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       var products = await productRepository.getProductsByBrand(event.brand);
       emit(ProductsLoaded(products));
     });
+
+    on<FetchProductsByVenue>((event, emit) async {
+      emit(ProductLoading());
+      var products = await productRepository.getProductsByVenue(event.venueId);
+      emit(ProductsLoaded(products));
+    });
   }
 }

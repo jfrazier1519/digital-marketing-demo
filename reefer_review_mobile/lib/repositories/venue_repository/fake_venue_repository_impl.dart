@@ -5,29 +5,33 @@ import 'package:reefer_review_mobile/res/images.dart';
 class FakeVenueRepository implements VenueRepository {
   List<Venue> _allVenues = [];
 
+  static FakeVenueRepository venueRepository = FakeVenueRepository();
+
   FakeVenueRepository() {
     _allVenues = [
       Venue(
           venueId: 1,
           name: "Sample Venue 1",
-          location: "Location A",
+          address: "1245 Strawberry Ln, Luxerburg CO, 88897",
           type: "Distillery",
           rating: 4.5,
           reviewCount: 10,
           description: "Very professional establishment.",
           image: venue1,
-          brandIds: [1]),
+          brandIds: [1],
+          productIds: [1, 2, 3]),
       Venue(
           venueId: 2,
           name: "Sample Venue 2",
-          location: "Location B",
+          address: "Location B",
           type: "Bar",
           rating: 3.8,
           reviewCount: 25,
           description:
               "This is a fantastic bar located in Location B. They sell weed in the back",
           image: venue2,
-          brandIds: [2]),
+          brandIds: [2],
+          productIds: [4, 5]),
     ];
   }
 
@@ -61,8 +65,8 @@ class FakeVenueRepository implements VenueRepository {
   }
 
   @override
-  Future<List<Venue>> getVenuesByLocation(String location) async {
-    return _allVenues.where((venue) => venue.location == location).toList();
+  Future<List<Venue>> getVenuesByAddress(String address) async {
+    return _allVenues.where((venue) => venue.address == address).toList();
   }
 
   @override

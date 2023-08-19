@@ -1,6 +1,7 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
+import '../../data/models/review/venue_review.dart';
 import '../../data/models/user.dart';
 import '../../res/images.dart';
 
@@ -48,6 +49,22 @@ class FakeReviewRepository implements ReviewRepository {
           date: DateTime.now(),
           rating: 5,
           title: '10/10 JUST DO IT'),
+      VenueReview(
+          reviewId: 100,
+          venueId: 1,
+          reviewer: dummyReviewer,
+          content: 'Great place, loved the atmosphere.',
+          date: DateTime.now(),
+          rating: 5,
+          title: 'Perfect Spot'),
+      VenueReview(
+          reviewId: 101,
+          venueId: 1,
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
     ];
   }
 
@@ -57,6 +74,14 @@ class FakeReviewRepository implements ReviewRepository {
         .where((review) =>
             review is ProductReview && review.productId == productId)
         .map((review) => review as ProductReview)
+        .toList();
+  }
+
+  @override
+  Future<List<VenueReview>> getAllReviewsForVenue(int venueId) async {
+    return _allReviews
+        .where((review) => review is VenueReview && review.venueId == venueId)
+        .map((review) => review as VenueReview)
         .toList();
   }
 

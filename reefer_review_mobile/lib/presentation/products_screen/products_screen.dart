@@ -16,8 +16,8 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ProductBloc(FakeProductRepository())..add(FetchProducts()),
+      create: (context) => ProductBloc(FakeProductRepository.productRepository)
+        ..add(FetchProducts()),
       child: _ProductsScreenContent(),
     );
   }
