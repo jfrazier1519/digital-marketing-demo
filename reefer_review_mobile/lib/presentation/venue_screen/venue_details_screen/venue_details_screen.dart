@@ -143,7 +143,6 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                 ),
                 const Divider(thickness: 1, color: Colors.black),
 
-                // Product Bloc integration.
                 BlocBuilder<ProductBloc, ProductState>(
                   builder: (context, state) {
                     if (state is ProductLoading) {
