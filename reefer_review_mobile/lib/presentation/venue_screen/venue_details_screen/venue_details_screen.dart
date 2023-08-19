@@ -60,10 +60,22 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                       style: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.favorite_border,
-                          color: colorScheme.primary),
-                      onPressed: () {},
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Handle the Follow functionality here
+                          },
+                          child: Text('Follow'),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.favorite_border,
+                              color: colorScheme.primary),
+                          onPressed: () {
+                            // Handle the heart icon functionality here
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -115,6 +127,13 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                       },
                     ),
                   ],
+                ),
+
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the Check In functionality here
+                  },
+                  child: Text('Check In'),
                 ),
                 const SizedBox(height: 10),
                 // Price
