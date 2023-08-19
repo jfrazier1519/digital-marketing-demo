@@ -151,12 +151,15 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                           return const Text('No posts available.');
                         }
                         return ListView.builder(
-                          itemCount: state.posts.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) =>
-                              PostToWidgetConverter.convert(state.posts[index]),
-                        );
+                            itemCount: state.posts.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 0.0),
+                                  child: PostToWidgetConverter.convert(
+                                      state.posts[index]),
+                                ));
                       } else {
                         return const Text('Something went wrong!');
                       }
