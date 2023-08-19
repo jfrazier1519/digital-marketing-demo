@@ -96,7 +96,7 @@ class _VenuesScreenContentState extends State<_VenuesScreenContent> {
                         itemCount: state.venues.length,
                         itemBuilder: (context, index) => Container(
                               margin: const EdgeInsets.fromLTRB(
-                                  15.0, 8.0, 0.0, 8.0),
+                                  15.0, 0.0, 0.0, 0.0),
                               child: VenueWidget(venue: state.venues[index]),
                             ));
                   } else {

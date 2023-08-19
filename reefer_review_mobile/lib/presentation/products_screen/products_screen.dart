@@ -183,7 +183,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
                         itemCount: state.products.length,
                         itemBuilder: (context, index) => Container(
                               margin: const EdgeInsets.fromLTRB(
-                                  15.0, 8.0, 0.0, 8.0),
+                                  15.0, 0.0, 0.0, 0.0),
                               child:
                                   ProductWidget(product: state.products[index]),
                             ));
