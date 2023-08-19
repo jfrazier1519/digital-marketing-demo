@@ -15,7 +15,8 @@ class FakeVenueRepository implements VenueRepository {
           rating: 4.5,
           reviewCount: 10,
           description: "Very professional establishment.",
-          image: venue1),
+          image: venue1,
+          brandIds: [1]),
       Venue(
           venueId: 2,
           name: "Sample Venue 2",
@@ -25,7 +26,8 @@ class FakeVenueRepository implements VenueRepository {
           reviewCount: 25,
           description:
               "This is a fantastic bar located in Location B. They sell weed in the back",
-          image: venue2),
+          image: venue2,
+          brandIds: [2]),
     ];
   }
 

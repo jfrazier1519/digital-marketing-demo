@@ -8,6 +8,10 @@ class FetchVenues extends VenueEvent {}
 class SortVenues extends VenueEvent {
   final VenuesSortEnum sortOption;
   final bool isAscending;
-
   SortVenues({required this.sortOption, required this.isAscending});
+}
+
+class FetchAssociatedBrands extends VenueEvent {
+  final int venueId;
+  FetchAssociatedBrands(this.venueId);
 }

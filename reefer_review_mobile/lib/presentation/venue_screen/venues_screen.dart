@@ -93,10 +93,12 @@ class _VenuesScreenContentState extends State<_VenuesScreenContent> {
                     return const CircularProgressIndicator();
                   } else if (state is VenuesLoaded) {
                     return ListView.builder(
-                      itemCount: state.venues.length,
-                      itemBuilder: (context, index) =>
-                          VenueWidget(venue: state.venues[index]),
-                    );
+                        itemCount: state.venues.length,
+                        itemBuilder: (context, index) => Container(
+                              margin: const EdgeInsets.fromLTRB(
+                                  15.0, 0.0, 0.0, 0.0),
+                              child: VenueWidget(venue: state.venues[index]),
+                            ));
                   } else {
                     return const Text('Something went wrong!');
                   }

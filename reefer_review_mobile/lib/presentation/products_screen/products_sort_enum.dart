@@ -1,1 +1,1 @@
-enum ProductsSortEnum { Brand, Product, Rating, Reviews }
+enum ProductsSortEnum { Product, Brand, Rating, Reviews }

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/presentation/brands_screen/brands_widget.dart';
 import '../../bloc/brand_bloc/brand_bloc.dart';
 import '../../repositories/brand_repository/fake_brand_repository_impl.dart';
+import '../products_screen/products_category_enum.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/navigation_menu.dart';
-import './brands_category_enum.dart';
 import './brands_sort_enum.dart';
 import 'brands_category_modal.dart';
 import 'brands_sort_modal.dart';
@@ -32,7 +32,7 @@ class _BrandsScreenContentState extends State<_BrandsScreenContent> {
   bool _filterActive = false;
   bool _isCategorySelected = false;
   bool _isSortSelected = false;
-  BrandsCategoryEnum? selectedCategory;
+  ProductsCategoryEnum? selectedCategory;
   BrandsSortEnum? _selectedSortOption;
   bool _isAscending = true;
 

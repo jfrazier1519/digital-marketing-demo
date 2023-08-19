@@ -144,4 +144,9 @@ class FakeProductRepository implements ProductRepository {
 
     return productList;
   }
+
+  @override
+  Future<List<Product>> getProductsByBrand(String brandName) async {
+    return _allProducts.where((product) => product.brand == brandName).toList();
+  }
 }

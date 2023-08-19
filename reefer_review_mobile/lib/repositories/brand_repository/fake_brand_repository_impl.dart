@@ -1,6 +1,6 @@
 import 'package:reefer_review_mobile/res/images.dart';
 import '../../data/models/brand.dart';
-import '../../presentation/brands_screen/brands_category_enum.dart';
+import '../../presentation/products_screen/products_category_enum.dart';
 import 'brand_repository.dart';
 
 class FakeBrandRepository implements BrandRepository {
@@ -16,8 +16,11 @@ class FakeBrandRepository implements BrandRepository {
           description: "How very weedy it sounds.",
           image: brand1,
           categories: [
-            BrandsCategoryEnum.Accessories,
-            BrandsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.Accessories,
+            ProductsCategoryEnum.Concentrates,
+          ],
+          venueIds: [
+            1
           ]),
       Brand(
           brandId: 2,
@@ -27,9 +30,12 @@ class FakeBrandRepository implements BrandRepository {
           description: "The empire strikes back.",
           image: brand2,
           categories: [
-            BrandsCategoryEnum.Concentrates,
-            BrandsCategoryEnum.Merch,
-            BrandsCategoryEnum.Flower
+            ProductsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.Merch,
+            ProductsCategoryEnum.Flower
+          ],
+          venueIds: [
+            2
           ]),
     ];
   }
@@ -63,8 +69,8 @@ class FakeBrandRepository implements BrandRepository {
     }
   }
 
-  BrandsCategoryEnum getCategoryEnum(String category) {
-    return BrandsCategoryEnum.values.firstWhere(
+  ProductsCategoryEnum getCategoryEnum(String category) {
+    return ProductsCategoryEnum.values.firstWhere(
       (e) => e.toString().split('.').last == category,
       orElse: () =>
           throw ArgumentError('The provided string is not a valid category.'),

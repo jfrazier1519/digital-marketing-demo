@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/presentation/products_screen/products_category_enum.dart';
-import 'package:reefer_review_mobile/presentation/products_screen/products_sort_enum.dart';
+import '../products_screen/products_category_enum.dart';
+import '../products_screen/products_sort_enum.dart';
 
 import '../../bloc/product_bloc/product_bloc.dart';
 

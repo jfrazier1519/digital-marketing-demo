@@ -7,6 +7,7 @@ class Venue {
   final int reviewCount;
   final String description;
   final String image;
+  final List<int> brandIds;
 
   Venue({
     required this.venueId,
@@ -17,5 +18,6 @@ class Venue {
     required this.reviewCount,
     required this.description,
     required this.image,
+    required this.brandIds,
   });
 }

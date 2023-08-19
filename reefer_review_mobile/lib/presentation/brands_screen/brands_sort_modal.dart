@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../bloc/brand_bloc/brand_bloc.dart';
-import './brands_sort_enum.dart';
-import './brands_category_enum.dart';
+import '../products_screen/products_category_enum.dart';
+import 'brands_sort_enum.dart';
 
 Future<void> showBrandSortModal(BuildContext context, GlobalKey sortButtonKey,
     BrandBloc brandBloc, void Function(BrandsSortEnum?, bool) onSortSelected,
     {BrandsSortEnum? initialSortOption,
     bool initialIsAscending = true,
-    BrandsCategoryEnum? selectedCategory}) {
+    ProductsCategoryEnum? selectedCategory}) {
   final RenderBox renderBox =
       sortButtonKey.currentContext!.findRenderObject() as RenderBox;
   final position = renderBox.localToGlobal(Offset.zero);
@@ -48,7 +48,7 @@ class BrandSortOptions extends StatefulWidget {
   final Function(BrandsSortEnum?, bool) onSortSelected;
   final BrandsSortEnum? initialSortOption;
   final bool initialIsAscending;
-  final BrandsCategoryEnum? selectedCategory;
+  final ProductsCategoryEnum? selectedCategory;
 
   const BrandSortOptions({
     super.key,

@@ -39,5 +39,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       emit(ProductsLoaded(products));
     });
+
+    on<FetchProductsByBrand>((event, emit) async {
+      emit(ProductLoading());
+      var products = await productRepository.getProductsByBrand(event.brand);
+      emit(ProductsLoaded(products));
+    });
   }
 }

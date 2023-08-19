@@ -5,7 +5,9 @@ import '../../data/post/review_post.dart';
 
 class ReviewPostWidget extends StatelessWidget {
   final ReviewPost reviewPost;
+
   const ReviewPostWidget({super.key, required this.reviewPost});
+
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;

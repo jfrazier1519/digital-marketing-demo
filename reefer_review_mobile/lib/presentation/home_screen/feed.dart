@@ -20,12 +20,15 @@ class FeedScreen extends StatelessWidget {
             itemCount: state.posts.length,
             itemBuilder: (context, index) {
               final post = state.posts[index];
-
-              return PostToWidgetConverter.convert(post);
+              return Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: PostToWidgetConverter.convert(post),
+              );
             },
           );
         } else {
-          return const Text('Something went wrong');
+          return const Center(child: Text('Something went wrong'));
         }
       },
     );

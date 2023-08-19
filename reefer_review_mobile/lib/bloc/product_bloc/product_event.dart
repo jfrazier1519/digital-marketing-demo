@@ -18,3 +18,8 @@ class SortProducts extends ProductEvent {
   SortProducts(
       {this.category, required this.sortOption, required this.isAscending});
 }
+
+class FetchProductsByBrand extends ProductEvent {
+  final String brand;
+  FetchProductsByBrand(this.brand);
+}
