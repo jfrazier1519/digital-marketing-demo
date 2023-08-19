@@ -5,6 +5,8 @@ import 'package:reefer_review_mobile/res/images.dart';
 class FakeVenueRepository implements VenueRepository {
   List<Venue> _allVenues = [];
 
+  static FakeVenueRepository venueRepository = FakeVenueRepository();
+
   FakeVenueRepository() {
     _allVenues = [
       Venue(
@@ -16,7 +18,8 @@ class FakeVenueRepository implements VenueRepository {
           reviewCount: 10,
           description: "Very professional establishment.",
           image: venue1,
-          brandIds: [1]),
+          brandIds: [1],
+          productIds: [1, 2, 3]),
       Venue(
           venueId: 2,
           name: "Sample Venue 2",
@@ -27,7 +30,8 @@ class FakeVenueRepository implements VenueRepository {
           description:
               "This is a fantastic bar located in Location B. They sell weed in the back",
           image: venue2,
-          brandIds: [2]),
+          brandIds: [2],
+          productIds: [4, 5]),
     ];
   }
 

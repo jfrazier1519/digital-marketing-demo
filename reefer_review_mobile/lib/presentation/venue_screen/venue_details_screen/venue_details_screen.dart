@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:reefer_review_mobile/presentation/venue_screen/venue_details_screen/product_price_widget.dart';
 import '../../../bloc/review_bloc/review_bloc.dart';
+import '../../../bloc/product_bloc/product_bloc.dart';
+import '../../../data/models/product/product.dart';
 import '../../../data/venue.dart';
+import '../../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../../../repositories/review_repository/fake_review_repository_impl.dart';
 import '../../review/venue_review_widget.dart';
+import '../../products_screen/product_widget.dart';
 import '../../shared/bottom_nav_bar.dart';
 
 class VenueDetailsScreen extends StatefulWidget {
@@ -23,9 +27,18 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return BlocProvider(
-      create: (context) => ReviewBloc(FakeReviewRepository())
-        ..add(FetchReviewsForVenue(widget.venue.venueId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ReviewBloc(FakeReviewRepository())
+            ..add(FetchReviewsForVenue(widget.venue.venueId)),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductBloc(FakeProductRepository.productRepository)
+                ..add(FetchProductsByVenue(widget.venue.venueId)),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(),
         body: ListView(children: [
@@ -82,7 +95,32 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                       TextStyle(color: colorScheme.onSurface.withOpacity(0.7)),
                 ),
                 const SizedBox(height: 20),
-                // Add other venue-specific details here
+                // Price
+                const Text(
+                  "Products",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                const Divider(thickness: 1, color: Colors.black),
+
+                // Product Bloc integration.
+                BlocBuilder<ProductBloc, ProductState>(
+                  builder: (context, state) {
+                    if (state is ProductLoading) {
+                      return const CircularProgressIndicator();
+                    } else if (state is ProductsLoaded) {
+                      return Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: 10.0,
+                        children: state.products.map((product) {
+                          return ProductPriceWidget(product: product);
+                        }).toList(),
+                      );
+                    } else {
+                      return const Center(child: Text('Something went wrong!'));
+                    }
+                  },
+                ),
+                const SizedBox(height: 15),
 
                 const Text(
                   "Feed",

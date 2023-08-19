@@ -8,6 +8,7 @@ class Venue {
   final String description;
   final String image;
   final List<int> brandIds;
+  final List<int> productIds;
 
   Venue({
     required this.venueId,
@@ -19,5 +20,6 @@ class Venue {
     required this.description,
     required this.image,
     required this.brandIds,
+    required this.productIds,
   });
 }
