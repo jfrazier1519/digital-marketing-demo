@@ -111,14 +111,6 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                             _currentTab = "Venues";
                           });
                         }),
-                    TabButton(
-                        text: "Crystals",
-                        isSelected: _currentTab == "Crystals",
-                        onTap: () {
-                          setState(() {
-                            _currentTab = "Crystals";
-                          });
-                        }),
                   ],
                 ),
                 const SizedBox(height: 10),
