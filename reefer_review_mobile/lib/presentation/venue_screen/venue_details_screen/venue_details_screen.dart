@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/presentation/venue_screen/venue_details_screen/product_price_widget.dart';
 import '../../../bloc/review_bloc/review_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
-import '../../../data/models/product/product.dart';
 import '../../../data/venue.dart';
 import '../../../repositories/product_repository/fake_product_repository_impl.dart';
 import '../../../repositories/review_repository/fake_review_repository_impl.dart';
 import '../../review/venue_review_widget.dart';
-import '../../products_screen/product_widget.dart';
+
 import '../../shared/bottom_nav_bar.dart';
 
 class VenueDetailsScreen extends StatefulWidget {
@@ -88,13 +88,35 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 15),
-                Text(
-                  widget.venue.description,
-                  style:
-                      TextStyle(color: colorScheme.onSurface.withOpacity(0.7)),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.venue.address,
+                        style: TextStyle(
+                            color: colorScheme.onSurface.withOpacity(0.7)),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.copy,
+                        color: colorScheme.primary,
+                      ),
+                      onPressed: () {
+                        Clipboard.setData(
+                            ClipboardData(text: widget.venue.address));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Address copied"),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 // Price
                 const Text(
                   "Products",

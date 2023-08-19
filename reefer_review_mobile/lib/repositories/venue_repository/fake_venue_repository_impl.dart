@@ -12,7 +12,7 @@ class FakeVenueRepository implements VenueRepository {
       Venue(
           venueId: 1,
           name: "Sample Venue 1",
-          location: "Location A",
+          address: "1245 Strawberry Ln, Luxerburg CO, 88897",
           type: "Distillery",
           rating: 4.5,
           reviewCount: 10,
@@ -23,7 +23,7 @@ class FakeVenueRepository implements VenueRepository {
       Venue(
           venueId: 2,
           name: "Sample Venue 2",
-          location: "Location B",
+          address: "Location B",
           type: "Bar",
           rating: 3.8,
           reviewCount: 25,
@@ -65,8 +65,8 @@ class FakeVenueRepository implements VenueRepository {
   }
 
   @override
-  Future<List<Venue>> getVenuesByLocation(String location) async {
-    return _allVenues.where((venue) => venue.location == location).toList();
+  Future<List<Venue>> getVenuesByAddress(String address) async {
+    return _allVenues.where((venue) => venue.address == address).toList();
   }
 
   @override

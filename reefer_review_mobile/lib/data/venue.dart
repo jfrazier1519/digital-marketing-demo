@@ -1,7 +1,7 @@
 class Venue {
   final int venueId;
   final String name;
-  final String location;
+  final String address;
   final String type;
   final double rating;
   final int reviewCount;
@@ -13,7 +13,7 @@ class Venue {
   Venue({
     required this.venueId,
     required this.name,
-    required this.location,
+    required this.address,
     required this.type,
     required this.rating,
     required this.reviewCount,
