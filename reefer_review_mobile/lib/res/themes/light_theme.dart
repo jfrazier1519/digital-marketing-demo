@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../colors.dart';
 
 var lightTheme = ThemeData(
+  iconTheme: const IconThemeData(
+    color: secondaryGreen,
+  ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: secondaryGreen,
     selectedItemColor: secondaryOrange,
@@ -15,10 +18,13 @@ var lightTheme = ThemeData(
     ),
   ),
   colorScheme: const ColorScheme.light(
-      background: primaryBackground,
-      secondary: secondaryGreen,
-      primary: secondaryGreen,
-      tertiary: secondaryBackground),
+    onSecondary: secondaryOrange,
+    background: primaryBackground,
+    secondary: secondaryGreen,
+    primary: secondaryGreen,
+    tertiary: secondaryBackground,
+    secondaryContainer: secondaryBackground,
+  ),
   scaffoldBackgroundColor: primaryBackground,
   inputDecorationTheme: const InputDecorationTheme(
     errorMaxLines: 4,
@@ -63,6 +69,11 @@ var lightTheme = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
       fillColor: secondaryBackground,
       focusColor: secondaryBackground,
+    ),
+  ),
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      splashFactory: NoSplash.splashFactory,
     ),
   ),
 );

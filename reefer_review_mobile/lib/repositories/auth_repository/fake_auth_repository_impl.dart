@@ -8,11 +8,21 @@ class FakeAuthRepository implements AuthRepository {
 
   @override
   Future<void> login(LoginUserRequest request) async {
-    _user = User(
+    if (request.password == '1234') {
+      _user = User(
+        userId: "1",
+        email: "test@mail.com",
+        name: null,
+        profileImageUrl: dummyProfileImage,
+      );
+    } else {
+      _user = User(
         userId: "someUserId",
         email: "test@mail.com",
         name: "Test User",
-        profileImageUrl: dummyProfileImage);
+        profileImageUrl: dummyProfileImage,
+      );
+    }
   }
 
   @override

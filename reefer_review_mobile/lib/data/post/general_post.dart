@@ -34,7 +34,7 @@ class GeneralPost extends Post {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(author.profileImageUrl),
+                  backgroundImage: AssetImage(author.profileImageUrl ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),
@@ -43,7 +43,7 @@ class GeneralPost extends Post {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        author.name,
+                        author.name ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
