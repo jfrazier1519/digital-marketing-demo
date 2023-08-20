@@ -23,7 +23,7 @@ class LoyaltyPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(loyaltyPost.author.profileImageUrl ?? ''),
+                      AssetImage(loyaltyPost.author.profileImage ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),

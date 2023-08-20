@@ -23,7 +23,7 @@ class EventPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(eventPost.author.profileImageUrl ?? ''),
+                      AssetImage(eventPost.author.profileImage ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),

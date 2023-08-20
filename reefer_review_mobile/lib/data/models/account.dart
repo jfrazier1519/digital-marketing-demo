@@ -19,7 +19,7 @@ class Account extends Profile {
   }) : super(
           type: ProfileType.UserProfile,
           profileName: displayName,
-          profileImageUrl: photoUrl,
-          userId: uid,
+          profileImage: photoUrl,
+          uid: uid,
         );
 }

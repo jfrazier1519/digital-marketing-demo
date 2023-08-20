@@ -23,7 +23,7 @@ class ProductPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(productPost.author.profileImageUrl ?? ''),
+                      AssetImage(productPost.author.profileImage ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),

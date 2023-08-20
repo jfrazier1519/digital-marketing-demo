@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/profile_screen/profile_screen.dart';
 
 import '../../data/models/profile.dart';
 
@@ -15,10 +16,10 @@ class ProfileImage extends StatelessWidget {
       child: CircleAvatar(
         radius: radius,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        backgroundImage: profile.profileImageUrl != null
-            ? AssetImage(profile.profileImageUrl!)
+        backgroundImage: profile.profileImage != null
+            ? AssetImage(profile.profileImage!)
             : null,
-        child: profile.profileImageUrl == null
+        child: profile.profileImage == null
             ? Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.primary,
@@ -30,6 +31,6 @@ class ProfileImage extends StatelessWidget {
   }
 
   _photoTapped(BuildContext context) {
-    Navigator.pushNamed(context, profile.route);
+    Navigator.pushNamed(context, ProfileScreen.route);
   }
 }

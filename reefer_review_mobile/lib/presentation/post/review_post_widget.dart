@@ -23,7 +23,7 @@ class ReviewPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(reviewPost.author.profileImageUrl ?? ''),
+                      AssetImage(reviewPost.author.profileImage ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),

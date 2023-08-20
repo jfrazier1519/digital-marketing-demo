@@ -50,7 +50,7 @@ class ProductReviewWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage(
-                          (review as ProductReview).reviewer.profileImageUrl ??
+                          (review as ProductReview).reviewer.profileImage ??
                               ''),
                       radius: 16,
                     ),
