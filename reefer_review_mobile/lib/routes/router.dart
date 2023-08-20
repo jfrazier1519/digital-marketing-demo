@@ -46,15 +46,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           product: args.product,
         ),
       );
-    case venuesScreenViewRoute:
-      return MaterialPageRoute(builder: (context) => const VenuesScreen());
+
     case venueDetailsScreenViewRoute:
       final args = settings.arguments as VenueDetailsScreenArguments;
       return MaterialPageRoute(
         builder: (context) => VenueDetailsScreen(venue: args.venue),
       );
-    case brandsScreenViewRoute:
-      return MaterialPageRoute(builder: (context) => const BrandsScreen());
+
     case brandDetailsScreenViewRoute:
       final args = settings.arguments as BrandDetailsScreenArguments;
       return MaterialPageRoute(

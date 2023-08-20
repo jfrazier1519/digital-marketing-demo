@@ -66,7 +66,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                           onPressed: () {
                             // Handle the Follow functionality here
                           },
-                          child: Text('Follow'),
+                          child: const Text('Follow'),
                         ),
                         IconButton(
                           icon: Icon(Icons.favorite_border,
@@ -119,7 +119,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                         Clipboard.setData(
                             ClipboardData(text: widget.venue.address));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text("Address copied"),
                             duration: Duration(seconds: 2),
                           ),
@@ -133,7 +133,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                   onPressed: () {
                     // Handle the Check In functionality here
                   },
-                  child: Text('Check In'),
+                  child: const Text('Check In'),
                 ),
                 const SizedBox(height: 10),
                 // Price

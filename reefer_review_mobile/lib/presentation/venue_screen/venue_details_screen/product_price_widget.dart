@@ -12,7 +12,7 @@ class ProductPriceWidget extends StatelessWidget {
     if (text.length <= limit) {
       return text;
     }
-    return text.substring(0, limit) + '...';
+    return '${text.substring(0, limit)}...';
   }
 
   @override
@@ -95,16 +95,16 @@ class ProductPriceWidget extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Transform.translate(
-                              offset: Offset(0, 2),
+                              offset: const Offset(0, 2),
                               child: Text(price.size,
-                                  style: TextStyle(fontSize: 12)),
+                                  style: const TextStyle(fontSize: 12)),
                             ),
                             const Divider(thickness: 1, color: Colors.black),
                             Transform.translate(
-                              offset: Offset(0, -2),
+                              offset: const Offset(0, -2),
                               child: Text(
                                 '\$${price.value.toStringAsFixed(2)}',
-                                style: TextStyle(fontSize: 12),
+                                style: const TextStyle(fontSize: 12),
                               ),
                             ),
                           ],

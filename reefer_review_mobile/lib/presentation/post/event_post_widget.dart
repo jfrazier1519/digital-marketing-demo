@@ -22,7 +22,8 @@ class EventPostWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(eventPost.author.profileImageUrl),
+                  backgroundImage:
+                      AssetImage(eventPost.author.profileImageUrl ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),
@@ -31,7 +32,7 @@ class EventPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        eventPost.author.name,
+                        eventPost.author.name ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
