@@ -14,6 +14,7 @@ class FakeReviewRepository implements ReviewRepository {
       email: 'alice.smith@example.com',
       name: 'Alice Smith',
       profileImageUrl: profileImage,
+      followedBrands: [],
     );
 
     User dummyReviewer2 = User(
@@ -21,6 +22,7 @@ class FakeReviewRepository implements ReviewRepository {
       email: 'john.smith@example.com',
       name: 'John Smith',
       profileImageUrl: dummyProfileImage,
+      followedBrands: [],
     );
 
     //TODO: add other review types here as they're needed

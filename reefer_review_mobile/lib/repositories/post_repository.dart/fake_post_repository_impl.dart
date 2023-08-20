@@ -18,12 +18,14 @@ class FakePostRepository implements PostRepository {
       email: 'john.doe@example.com',
       name: 'John Doe',
       profileImageUrl: dummyProfileImage,
+      followedBrands: [],
     );
     User brandUser = User(
       userId: '2',
       email: 'john.doe@example.com',
       name: 'Empire Weed',
       profileImageUrl: brand2,
+      followedBrands: [],
     );
 
     _allPosts = [

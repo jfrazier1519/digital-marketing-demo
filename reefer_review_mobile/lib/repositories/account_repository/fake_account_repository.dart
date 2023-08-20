@@ -16,7 +16,8 @@ class FakeAccountRepository extends AccountRepository {
         userId: "someUserId",
         email: "test@mail.com",
         name: "Test User",
-        profileImageUrl: dummyProfileImage);
+        profileImageUrl: dummyProfileImage,
+        followedBrands: []);
   }
 
   User? get user => _user;

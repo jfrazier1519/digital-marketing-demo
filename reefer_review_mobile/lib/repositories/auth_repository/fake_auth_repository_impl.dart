@@ -12,7 +12,8 @@ class FakeAuthRepository implements AuthRepository {
         userId: "someUserId",
         email: "test@mail.com",
         name: "Test User",
-        profileImageUrl: dummyProfileImage);
+        profileImageUrl: dummyProfileImage,
+        followedBrands: []);
   }
 
   @override
