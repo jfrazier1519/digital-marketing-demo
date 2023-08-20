@@ -1,4 +1,4 @@
-import 'package:reefer_review_mobile/data/models/account.dart';
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/post_repository.dart';
 import '../../data/post/post.dart';
 import '../../data/post/event_post.dart';
@@ -12,7 +12,7 @@ class FakePostRepository implements PostRepository {
   List<Post> _allPosts = [];
 
   FakePostRepository() {
-    Account dummyUser = Account(
+    User dummyUser = User(
       uid: '1',
       email: 'john.doe@example.com',
       displayName: 'John Doe',
@@ -20,7 +20,7 @@ class FakePostRepository implements PostRepository {
       productExperiences: [],
       productPreferences: [],
     );
-    Account dummyUser2 = Account(
+    User dummyUser2 = User(
       uid: '2',
       email: 'john.doe@example.com',
       displayName: 'John Doe',

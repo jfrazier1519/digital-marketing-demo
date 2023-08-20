@@ -1,49 +1,49 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/data/models/account.dart';
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
-import 'package:reefer_review_mobile/repositories/account_repository/account_repository.dart';
+import 'package:reefer_review_mobile/repositories/user_repository/user_repository.dart';
 
 import '../../data/models/requests/register_user_request.dart';
 import '../../data/models/requests/update_profile_request.dart';
 
-part 'account_event.dart';
-part 'account_state.dart';
+part 'user_event.dart';
+part 'user_state.dart';
 
-class AccountBloc extends Bloc<AccountEvent, AccountState> {
-  final AccountRepository repository;
+class UserBloc extends Bloc<UserEvent, UserState> {
+  final UserRepository repository;
 
-  AccountBloc(this.repository) : super(AccountInitial()) {
-    on<RegisterUserUseCase>((event, emit) async {
-      emit(AccountLoading());
+  UserBloc(this.repository) : super(UserInitial()) {
+    on<RegisterUserUsecase>((event, emit) async {
+      emit(UserLoading());
       await (Future.delayed(const Duration(seconds: 1)));
-      emit(AccountRequestSuccessful());
+      emit(UserRequestSuccessful());
     });
     on<SendEmailVerifcationLinkUseCase>((event, emit) async {
-      emit(AccountLoading());
+      emit(UserLoading());
       await repository.sendEmailVerificationLink(event.request);
-      emit(AccountRequestSuccessful());
+      emit(UserRequestSuccessful());
     });
-    on<UpdateProfileUsecase>((event, emit) async {
-      emit(AccountLoading());
+    on<UpdateUserprofileUsecase>((event, emit) async {
+      emit(UserLoading());
       await repository.updateProfile(event.request);
       if (repository.currentAccount != null) {
-        emit(AccountLoaded(repository.currentAccount!));
+        emit(UserLoaded(repository.currentAccount!));
       }
     });
 
     on<LogoutUserUsecase>((event, emit) async {
-      emit(AccountLoading());
+      emit(UserLoading());
       await repository.logout();
-      emit(AccountInitial());
+      emit(UserInitial());
     });
 
     on<LoginUserUsecase>((event, emit) async {
-      emit(AccountLoading());
+      emit(UserLoading());
       await repository.login(event.request);
       if (repository.currentAccount != null) {
-        emit(AccountLoaded(repository.currentAccount!));
+        emit(UserLoaded(repository.currentAccount!));
       }
     });
   }

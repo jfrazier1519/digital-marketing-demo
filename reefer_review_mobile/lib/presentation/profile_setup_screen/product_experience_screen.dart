@@ -4,7 +4,7 @@ import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_s
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/product_experience_row.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 
-import '../../bloc/account_bloc/account_bloc.dart';
+import '../../bloc/user_bloc/user_bloc.dart';
 
 class ProductExperiencesScreen extends StatefulWidget {
   const ProductExperiencesScreen({super.key});
@@ -21,9 +21,9 @@ class _ProductExperiencesScreenState extends State<ProductExperiencesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is AccountLoaded) {
+        if (state is UserLoaded) {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(

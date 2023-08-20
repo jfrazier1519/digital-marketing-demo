@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/product_preference.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
+
+import '../../../bloc/user_bloc/user_bloc.dart';
 
 class ProductPreferenceRow extends StatelessWidget {
   const ProductPreferenceRow({
@@ -49,7 +50,7 @@ class ProductPreferenceRow extends StatelessWidget {
   }
 
   _starPressed(BuildContext context) {
-    BlocProvider.of<AccountBloc>(context).add(
-        UpdateProfileUsecase(UpdateProfileRequest(preference: preference)));
+    BlocProvider.of<UserBloc>(context).add(
+        UpdateUserprofileUsecase(UpdateProfileRequest(preference: preference)));
   }
 }

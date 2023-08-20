@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/presentation/shared/profile_image.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
-import '../../bloc/account_bloc/account_bloc.dart';
+import '../../bloc/user_bloc/user_bloc.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({
@@ -13,11 +13,11 @@ class NavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         return Drawer(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          child: state is AccountLoaded
+          child: state is UserLoaded
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -89,7 +89,7 @@ class NavigationMenu extends StatelessWidget {
   }
 
   _logoutButtonPressed(BuildContext context) {
-    BlocProvider.of<AccountBloc>(context).add(LogoutUserUsecase());
+    BlocProvider.of<UserBloc>(context).add(LogoutUserUsecase());
   }
 
   _onSubmit(BuildContext context, NavMenuItem item) {

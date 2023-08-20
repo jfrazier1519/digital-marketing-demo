@@ -4,7 +4,7 @@ import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_e
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/product_preference_row.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 
-import '../../bloc/account_bloc/account_bloc.dart';
+import '../../bloc/user_bloc/user_bloc.dart';
 
 class ProductPreferencesScreen extends StatelessWidget {
   const ProductPreferencesScreen({super.key});
@@ -26,9 +26,9 @@ class ProductPreferencesScreen extends StatelessWidget {
             horizontal: 20,
             vertical: 20,
           ),
-          child: BlocBuilder<AccountBloc, AccountState>(
+          child: BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
-              if (state is AccountLoaded) {
+              if (state is UserLoaded) {
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

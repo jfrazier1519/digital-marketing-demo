@@ -1,5 +1,5 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
-import '../../data/models/account.dart';
+import '../../data/models/user.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
 import '../../data/models/review/venue_review.dart';
@@ -9,7 +9,7 @@ class FakeReviewRepository implements ReviewRepository {
   List<Review> _allReviews = [];
 
   FakeReviewRepository() {
-    Account dummyReviewer = Account(
+    User dummyReviewer = User(
       uid: '2',
       email: 'john.doe@example.com',
       displayName: 'John Doe',
@@ -17,7 +17,7 @@ class FakeReviewRepository implements ReviewRepository {
       productExperiences: [],
       productPreferences: [],
     );
-    Account dummyReviewer2 = Account(
+    User dummyReviewer2 = User(
       uid: '1',
       email: 'john.doe@example.com',
       displayName: 'John Moe',

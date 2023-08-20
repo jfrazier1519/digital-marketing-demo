@@ -2,14 +2,14 @@ import 'package:reefer_review_mobile/data/models/product_experience.dart';
 import 'package:reefer_review_mobile/data/models/product_preference.dart';
 import 'package:reefer_review_mobile/data/models/profile.dart';
 
-class Account extends Profile {
+class User extends Profile {
   List<ProductPreference> productPreferences;
   List<ProductExperience> productExperiences;
   String? displayName;
   String? photoUrl;
   String email;
 
-  Account({
+  User({
     required String uid,
     this.displayName,
     this.photoUrl,

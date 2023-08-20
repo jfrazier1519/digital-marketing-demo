@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/star_row.dart';
 
+import '../../../bloc/user_bloc/user_bloc.dart';
 import '../../../data/models/product_experience.dart';
 
 class ProductExperienceRow extends StatelessWidget {
@@ -63,8 +63,8 @@ class ProductExperienceRow extends StatelessWidget {
     final newExperience = experience;
     experience.rating = rating;
 
-    BlocProvider.of<AccountBloc>(context).add(
-      UpdateProfileUsecase(
+    BlocProvider.of<UserBloc>(context).add(
+      UpdateUserprofileUsecase(
         UpdateProfileRequest(experience: newExperience),
       ),
     );

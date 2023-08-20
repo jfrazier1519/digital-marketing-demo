@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
+import 'package:reefer_review_mobile/bloc/user_bloc/user_bloc.dart';
 import 'package:reefer_review_mobile/res/routes.dart';
 
 class AuthChecker extends StatelessWidget {
@@ -10,9 +10,9 @@ class AuthChecker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AccountBloc, AccountState>(
+    return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is AccountInitial) {
+        if (state is UserInitial) {
           Navigator.of(context)
               .pushNamedAndRemoveUntil(loginScreenViewRoute, (route) => false);
         }
