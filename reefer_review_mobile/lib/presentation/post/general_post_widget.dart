@@ -24,7 +24,7 @@ class GeneralPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(generalPost.author.profileImageUrl),
+                      AssetImage(generalPost.author.profileImageUrl ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),
@@ -33,7 +33,7 @@ class GeneralPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        generalPost.author.name,
+                        generalPost.author.name ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),

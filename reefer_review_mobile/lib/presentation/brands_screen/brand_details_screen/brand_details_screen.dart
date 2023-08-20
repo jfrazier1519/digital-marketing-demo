@@ -18,7 +18,7 @@ import '../../venue_screen/venue_widget.dart';
 class BrandDetailsScreen extends StatefulWidget {
   final Brand brand;
 
-  const BrandDetailsScreen({required this.brand});
+  const BrandDetailsScreen({super.key, required this.brand});
 
   @override
   _BrandDetailsScreenState createState() => _BrandDetailsScreenState();
@@ -58,7 +58,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Follow'),
+                          child: const Text('Follow'),
                         ),
                         IconButton(
                           icon: Icon(Icons.favorite_border,
@@ -69,7 +69,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                     ),
                   ],
                 ),
-                Divider(
+                const Divider(
                   color: Colors.black,
                   thickness: 1,
                 ),
@@ -129,7 +129,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                 const Divider(thickness: 1, color: Colors.black),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Add Review"),
+                  child: const Text("Add Review"),
                 ),
                 BlocProvider(
                   create: (context) => FeedBloc(FakePostRepository())
@@ -243,6 +243,6 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
       default:
         return Text(widget.brand.description);
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }

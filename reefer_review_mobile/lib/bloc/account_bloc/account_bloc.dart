@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/data/models/account.dart';
+import 'package:reefer_review_mobile/data/models/requests/get_account_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/account_repository.dart';
 
 import '../../data/models/requests/register_user_request.dart';
+import '../../data/models/requests/update_profile_request.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';
@@ -21,6 +24,21 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(AccountLoading());
       await repository.sendEmailVerificationLink(event.request);
       emit(AccountRequestSuccessful());
+    });
+    on<UpdateProfileUsecase>((event, emit) async {
+      emit(AccountLoading());
+      await repository.updateProfile(event.request);
+      if (repository.currentAccount != null) {
+        emit(AccountLoaded(repository.currentAccount!));
+      }
+    });
+
+    on<GetAccountUsecase>((event, emit) async {
+      emit(AccountLoading());
+      await repository.getAccount(event.request);
+      if (repository.currentAccount != null) {
+        emit(AccountLoaded(repository.currentAccount!));
+      }
     });
   }
 }

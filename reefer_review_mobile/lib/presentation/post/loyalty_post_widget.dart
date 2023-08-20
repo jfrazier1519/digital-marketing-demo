@@ -23,7 +23,7 @@ class LoyaltyPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(loyaltyPost.author.profileImageUrl),
+                      AssetImage(loyaltyPost.author.profileImageUrl ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),
@@ -32,7 +32,7 @@ class LoyaltyPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        loyaltyPost.author.name,
+                        loyaltyPost.author.name ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
