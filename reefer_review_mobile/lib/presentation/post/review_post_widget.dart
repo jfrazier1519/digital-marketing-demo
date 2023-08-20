@@ -32,7 +32,7 @@ class ReviewPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        reviewPost.author.name ?? '',
+                        reviewPost.author.profileName ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),

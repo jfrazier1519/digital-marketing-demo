@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../shared/rounded_container.dart';
-import '../../data/post/general_post.dart';
 import '../../data/models/user.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 

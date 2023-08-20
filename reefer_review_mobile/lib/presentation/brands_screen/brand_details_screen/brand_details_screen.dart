@@ -10,7 +10,6 @@ import '../../../repositories/product_repository/fake_product_repository_impl.da
 import '../../../repositories/venue_repository/fake_venue_repository_impl.dart';
 import '../../post/post_to_widget_converter.dart';
 import '../../products_screen/product_widget.dart';
-import '../../shared/bottom_nav_bar.dart';
 import '../../shared/category_bubble.dart';
 import '../../shared/tab_button.dart';
 import '../../venue_screen/venue_widget.dart';
@@ -27,7 +26,7 @@ class BrandDetailsScreen extends StatefulWidget {
 }
 
 class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
-  int _currentIndex = 3;
+  final int _currentIndex = 3;
   String _currentTab = "Info";
 
   @override
@@ -164,14 +163,6 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }

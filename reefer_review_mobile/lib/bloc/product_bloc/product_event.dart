@@ -3,7 +3,7 @@ part of 'product_bloc.dart';
 @immutable
 abstract class ProductEvent {}
 
-class FetchProducts extends ProductEvent {}
+class FetchProductsUsecase extends ProductEvent {}
 
 class FilterByCategory extends ProductEvent {
   final ProductsCategoryEnum category;

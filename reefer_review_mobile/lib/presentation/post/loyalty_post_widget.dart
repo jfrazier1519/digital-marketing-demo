@@ -32,7 +32,7 @@ class LoyaltyPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        loyaltyPost.author.name ?? '',
+                        loyaltyPost.author.profileName ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),

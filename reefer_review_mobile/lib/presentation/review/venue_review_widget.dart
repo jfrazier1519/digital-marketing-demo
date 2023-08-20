@@ -56,7 +56,7 @@ class VenueReviewWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      (review as VenueReview).reviewer.name ?? '',
+                      (review as VenueReview).reviewer.profileName ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),

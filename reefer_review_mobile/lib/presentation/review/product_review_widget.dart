@@ -56,7 +56,7 @@ class ProductReviewWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      (review as ProductReview).reviewer.name ?? '',
+                      (review as ProductReview).reviewer.profileName ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),

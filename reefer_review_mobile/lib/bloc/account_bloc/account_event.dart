@@ -21,8 +21,10 @@ class UpdateProfileUsecase extends AccountEvent {
   UpdateProfileUsecase(this.request);
 }
 
-class GetAccountUsecase extends AccountEvent {
-  final GetAccountRequest? request;
+class LogoutUserUsecase extends AccountEvent {}
 
-  GetAccountUsecase({this.request});
+class LoginUserUsecase extends AccountEvent {
+  final LoginUserRequest request;
+
+  LoginUserUsecase(this.request);
 }

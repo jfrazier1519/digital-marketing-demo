@@ -112,7 +112,7 @@ class _CategoriesContentState extends State<CategoriesContent> {
         });
 
         if (selectedCategory == null) {
-          widget.productBloc.add(FetchProducts());
+          widget.productBloc.add(FetchProductsUsecase());
         } else {
           widget.productBloc.add(FilterByCategory(selectedCategory!));
         }

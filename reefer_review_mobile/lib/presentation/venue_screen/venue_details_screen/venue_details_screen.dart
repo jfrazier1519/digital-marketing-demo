@@ -9,8 +9,6 @@ import '../../../repositories/product_repository/fake_product_repository_impl.da
 import '../../../repositories/review_repository/fake_review_repository_impl.dart';
 import '../../review/venue_review_widget.dart';
 
-import '../../shared/bottom_nav_bar.dart';
-
 class VenueDetailsScreen extends StatefulWidget {
   final Venue venue;
 
@@ -22,7 +20,7 @@ class VenueDetailsScreen extends StatefulWidget {
 }
 
 class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
-  int _currentIndex = 2;
+  final int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -189,14 +187,6 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
             ),
           ),
         ]),
-        bottomNavigationBar: BottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
       ),
     );
   }

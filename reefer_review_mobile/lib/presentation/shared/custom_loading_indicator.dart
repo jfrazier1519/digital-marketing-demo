@@ -17,6 +17,7 @@ class CustomLoadingIndicator extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Ranchers',
               fontSize: 30,
+              color: Colors.black,
             ),
           ),
           SizedBox(

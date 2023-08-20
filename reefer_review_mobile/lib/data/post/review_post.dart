@@ -1,12 +1,12 @@
+import 'package:reefer_review_mobile/data/models/account.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
-import '../models/user.dart';
 
 class ReviewPost extends Post {
   final double reviewStars;
 
   ReviewPost({
     required int postId,
-    required User author,
+    required Account author,
     required DateTime date,
     required String content,
     required String image,

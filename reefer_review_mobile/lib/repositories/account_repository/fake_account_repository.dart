@@ -1,7 +1,7 @@
 import 'package:reefer_review_mobile/data/models/account.dart';
 import 'package:reefer_review_mobile/data/models/product_experience.dart';
 import 'package:reefer_review_mobile/data/models/product_preference.dart';
-import 'package:reefer_review_mobile/data/models/requests/get_account_request.dart';
+import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
@@ -75,27 +75,39 @@ class FakeAccountRepository extends AccountRepository {
     exp.rating = experience.rating;
   }
 
-  @override
-  Future<void> getAccount(GetAccountRequest? request) async {
-    if (request != null) {
-      _account = _generateAccount(request.uid);
-    }
-  }
-
-  Account _generateAccount(String uid) {
-    switch (uid) {
+  Account _generateAccount({bool firstTime = false}) {
+    final userId = firstTime ? '1' : '0';
+    switch (userId) {
       case '1':
         return Account(
+          email: 'Test@mail.com',
+          uid: '1',
           productPreferences: _preferences,
           productExperiences: _productExperiences,
         );
       default:
         return Account(
+          uid: '2',
+          email: 'Test1@mail.com',
           productPreferences: _preferences,
           productExperiences: _productExperiences,
           displayName: 'Test',
           photoUrl: dummyProfileImage,
         );
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    _account = null;
+  }
+
+  @override
+  Future<void> login(LoginUserRequest request) async {
+    if (request.password == '1234') {
+      _account = _generateAccount(firstTime: true);
+    } else {
+      _account = _generateAccount();
     }
   }
 }

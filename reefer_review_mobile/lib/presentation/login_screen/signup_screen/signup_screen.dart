@@ -2,13 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
-import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
-import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
 import 'package:reefer_review_mobile/res/colors.dart';
 import 'package:reefer_review_mobile/res/regex.dart' as regex;
 
@@ -61,9 +60,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BlocConsumer<AccountBloc, AccountState>(
       listener: (context, state) {
         if (state is AccountLoading) {
-          LoadingModal.display(context);
+          context.loaderOverlay.show();
         } else {
-          LoadingModal.dismiss(context);
+          context.loaderOverlay.hide();
         }
         if (state is AccountRequestSuccessful) {
           Navigator.of(context).pushNamed(
@@ -73,172 +72,169 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
       },
       builder: (context, state) {
-        return BlocProvider(
-          create: (context) => AccountBloc(FakeAccountRepository.repository),
-          child: SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  'Signup',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: primaryBackground),
-                ),
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Signup',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: primaryBackground),
               ),
-              body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Form(
-                  key: _formKey,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          validator: _checkIfValidEmail,
-                          decoration: const InputDecoration(
-                            labelText: 'Email*',
-                          ),
-                          controller: _emailController,
+            ),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: _checkIfValidEmail,
+                        decoration: const InputDecoration(
+                          labelText: 'Email*',
                         ),
-                        const SizedBox(
-                          height: 20,
+                        controller: _emailController,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkIfValidPassword,
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Password*',
                         ),
-                        TextFormField(
-                          validator: _checkIfValidPassword,
-                          controller: _passwordController,
-                          decoration: const InputDecoration(
-                            labelText: 'Password*',
-                          ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkConfirmPassword,
+                        controller: _confirmPasswordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Confirm Password*',
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkIfItsAState,
+                        controller: _stateController,
+                        decoration: const InputDecoration(
+                          labelText: 'State*',
                         ),
-                        TextFormField(
-                          validator: _checkConfirmPassword,
-                          controller: _confirmPasswordController,
-                          decoration: const InputDecoration(
-                            labelText: 'Confirm Password*',
-                          ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        'In some states you may be required to have a medical card. Please Enter that information.',
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InputDatePickerFormField(
+                        initialDate: _dob,
+                        errorInvalidText:
+                            'Must be at least 18 years or older to signup',
+                        fieldLabelText: "DOB*",
+                        firstDate: _getYearsAgo(100),
+                        lastDate: _getYearsAgo(18),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkIfEmpty,
+                        decoration: const InputDecoration(
+                          labelText: 'ID#*',
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkIfEmpty,
+                        decoration: const InputDecoration(
+                          labelText: 'First Name*',
                         ),
-                        TextFormField(
-                          validator: _checkIfItsAState,
-                          controller: _stateController,
-                          decoration: const InputDecoration(
-                            labelText: 'State*',
-                          ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: _checkIfEmpty,
+                        decoration: const InputDecoration(
+                          labelText: 'Last Name*',
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'In some states you may be required to have a medical card. Please Enter that information.',
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        InputDatePickerFormField(
-                          initialDate: _dob,
-                          errorInvalidText:
-                              'Must be at least 18 years or older to signup',
-                          fieldLabelText: "DOB*",
-                          firstDate: _getYearsAgo(100),
-                          lastDate: _getYearsAgo(18),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          validator: _checkIfEmpty,
-                          decoration: const InputDecoration(
-                            labelText: 'ID#*',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          validator: _checkIfEmpty,
-                          decoration: const InputDecoration(
-                            labelText: 'First Name*',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          validator: _checkIfEmpty,
-                          decoration: const InputDecoration(
-                            labelText: 'Last Name*',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        FormField<bool>(
-                            initialValue: hasAgreedToTemsAndConditions,
-                            validator: _checkTermsAndConditions,
-                            builder: (formState) {
-                              return Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                          value: hasAgreedToTemsAndConditions,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              hasAgreedToTemsAndConditions =
-                                                  value ?? false;
-                                            });
-                                          }),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'I agree to the ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormField<bool>(
+                          initialValue: hasAgreedToTemsAndConditions,
+                          validator: _checkTermsAndConditions,
+                          builder: (formState) {
+                            return Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                        value: hasAgreedToTemsAndConditions,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            hasAgreedToTemsAndConditions =
+                                                value ?? false;
+                                          });
+                                        }),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'I agree to the ',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          TextSpan(
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = _goToTermsOfService,
+                                            style: const TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: secondaryGreen,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            TextSpan(
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = _goToTermsOfService,
-                                              style: const TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                color: secondaryGreen,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              text: 'terms and conditions',
-                                            ),
-                                          ],
-                                        ),
+                                            text: 'terms and conditions',
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  if (formState.hasError)
-                                    Text(
-                                      formState.errorText ?? "",
-                                      style: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .errorStyle,
                                     ),
-                                ],
-                              );
-                            }),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.35,
-                          child: ElevatedButton(
-                              onPressed: () => _signUpPressed(context),
-                              child: const Center(child: Text('Sign Up'))),
-                        ),
-                      ],
-                    ),
+                                  ],
+                                ),
+                                if (formState.hasError)
+                                  Text(
+                                    formState.errorText ?? "",
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .errorStyle,
+                                  ),
+                              ],
+                            );
+                          }),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: ElevatedButton(
+                            onPressed: () => _signUpPressed(context),
+                            child: const Center(child: Text('Sign Up'))),
+                      ),
+                    ],
                   ),
                 ),
               ),

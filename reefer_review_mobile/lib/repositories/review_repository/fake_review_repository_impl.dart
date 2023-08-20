@@ -1,26 +1,29 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
+import '../../data/models/account.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
 import '../../data/models/review/venue_review.dart';
-import '../../data/models/user.dart';
 import '../../res/images.dart';
 
 class FakeReviewRepository implements ReviewRepository {
   List<Review> _allReviews = [];
 
   FakeReviewRepository() {
-    User dummyReviewer = User(
-      userId: 'userID2',
-      email: 'alice.smith@example.com',
-      name: 'Alice Smith',
-      profileImageUrl: profileImage,
+    Account dummyReviewer = Account(
+      uid: '2',
+      email: 'john.doe@example.com',
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
     );
-
-    User dummyReviewer2 = User(
-      userId: 'userID3',
-      email: 'john.smith@example.com',
-      name: 'John Smith',
-      profileImageUrl: dummyProfileImage,
+    Account dummyReviewer2 = Account(
+      uid: '1',
+      email: 'john.doe@example.com',
+      displayName: 'John Moe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
     );
 
     //TODO: add other review types here as they're needed
