@@ -18,6 +18,8 @@ import '../../venue_screen/venue_widget.dart';
 class BrandDetailsScreen extends StatefulWidget {
   final Brand brand;
 
+  static const route = '/brands/detail';
+
   const BrandDetailsScreen({super.key, required this.brand});
 
   @override

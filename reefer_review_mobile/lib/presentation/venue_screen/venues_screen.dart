@@ -10,6 +10,8 @@ import 'venues_sort_enum.dart';
 class VenuesScreen extends StatelessWidget {
   const VenuesScreen({Key? key}) : super(key: key);
 
+  static const route = '/venues';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

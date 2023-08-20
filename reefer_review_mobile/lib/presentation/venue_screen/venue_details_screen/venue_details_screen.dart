@@ -14,6 +14,7 @@ import '../../shared/bottom_nav_bar.dart';
 class VenueDetailsScreen extends StatefulWidget {
   final Venue venue;
 
+  static const route = '/venues/detail';
   const VenueDetailsScreen({super.key, required this.venue});
 
   @override

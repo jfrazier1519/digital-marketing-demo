@@ -10,6 +10,8 @@ import '../../shared/bottom_nav_bar.dart';
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
 
+  static const route = '/products/detail';
+
   const ProductDetailsScreen({super.key, required this.product});
 
   @override

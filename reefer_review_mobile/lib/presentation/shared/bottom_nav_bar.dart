@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../res/routes.dart';
+import 'package:reefer_review_mobile/presentation/brands_screen/brands_screen.dart';
+import 'package:reefer_review_mobile/presentation/home_screen/home_screen.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
+import 'package:reefer_review_mobile/presentation/venue_screen/venues_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -19,16 +22,16 @@ class BottomNavBar extends StatelessWidget {
             return;
           }
           if (index == 0) {
-            Navigator.of(context).pushReplacementNamed(homeScreenViewRoute);
+            Navigator.of(context).pushReplacementNamed(HomeScreen.route);
           }
           if (index == 1) {
-            Navigator.of(context).pushReplacementNamed(productsScreenViewRoute);
+            Navigator.of(context).pushReplacementNamed(ProductsScreen.route);
           }
           if (index == 2) {
-            Navigator.of(context).pushReplacementNamed(venuesScreenViewRoute);
+            Navigator.of(context).pushReplacementNamed(VenuesScreen.route);
           }
           if (index == 3) {
-            Navigator.of(context).pushReplacementNamed(brandsScreenViewRoute);
+            Navigator.of(context).pushReplacementNamed(BrandsScreen.route);
           } else {
             onTap(index);
           }

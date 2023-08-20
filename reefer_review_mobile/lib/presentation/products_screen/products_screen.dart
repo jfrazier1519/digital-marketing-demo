@@ -13,6 +13,8 @@ import './products_sort_enum.dart';
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
 
+  static const route = '/products';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

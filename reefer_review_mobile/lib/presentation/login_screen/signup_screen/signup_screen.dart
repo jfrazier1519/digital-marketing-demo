@@ -5,16 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
 import 'package:reefer_review_mobile/res/colors.dart';
 import 'package:reefer_review_mobile/res/regex.dart' as regex;
-import 'package:reefer_review_mobile/res/routes.dart';
 
 import '../../../res/files.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  static const route = '/sign-up';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -64,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
         if (state is AccountRequestSuccessful) {
           Navigator.of(context).pushNamed(
-            emailVerificationViewRoute,
+            EmailVerificationScreen.route,
             arguments: EmailVerifcationScreenArguments(_emailController.text),
           );
         }
@@ -306,7 +309,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _goToTermsOfService() {
-    Navigator.of(context).pushNamed(termsAndConditionsViewRoute);
+    Navigator.of(context).pushNamed(TermsAndConditionsScreen.route);
   }
 
   DateTime _getYearsAgo(int years) {

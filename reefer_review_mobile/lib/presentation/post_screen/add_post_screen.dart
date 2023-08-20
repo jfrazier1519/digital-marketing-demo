@@ -11,6 +11,7 @@ import '../../data/models/user.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 
 class AddPostScreen extends StatefulWidget {
+  static const route = '/feed/add-post';
   final FeedBloc feedBloc;
 
   const AddPostScreen({required this.feedBloc, Key? key}) : super(key: key);
