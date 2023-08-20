@@ -74,19 +74,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case LoadingModal.route:
       return LoadingModal();
-    case profileSetupScreenViewRoute:
+    case ProfileSetupScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProfileSetupScreen(),
       );
-    case preferencesSetupScreenViewRoute:
+    case ProductPreferencesScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProductPreferencesScreen(),
       );
-    case productExperienceViewRoute:
+    case ProductExperiencesScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProductExperiencesScreen(),
       );
-    case profileSetupSuccessModalRoute:
+    case ProfileSetupSuccessModal.route:
       return ProfileSetupSuccessModal();
     default:
       return MaterialPageRoute(

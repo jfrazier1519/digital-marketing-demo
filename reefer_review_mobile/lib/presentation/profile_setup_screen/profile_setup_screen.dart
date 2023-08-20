@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/image_selector_round.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
 
-import '../../res/routes.dart';
-
 class ProfileSetupScreen extends StatefulWidget {
   const ProfileSetupScreen({super.key});
+
+  static const route = '/profile/setup';
 
   @override
   State<ProfileSetupScreen> createState() => _ProfileSetupScreenState();
@@ -103,7 +104,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
           ),
         ),
       );
-      Navigator.of(context).pushNamed(preferencesSetupScreenViewRoute);
+      Navigator.of(context).pushNamed(ProductPreferencesScreen.route);
     }
   }
 }

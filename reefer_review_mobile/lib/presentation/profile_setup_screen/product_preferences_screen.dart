@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_experience_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/product_preference_row.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
 
 import '../../bloc/account_bloc/account_bloc.dart';
 
 class ProductPreferencesScreen extends StatelessWidget {
   const ProductPreferencesScreen({super.key});
+
+  static const route = '/profile/setup/product-preferences';
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,6 @@ class ProductPreferencesScreen extends StatelessWidget {
   }
 
   _nextPressed(BuildContext context) {
-    Navigator.of(context).pushNamed(productExperienceViewRoute);
+    Navigator.of(context).pushNamed(ProductExperiencesScreen.route);
   }
 }
