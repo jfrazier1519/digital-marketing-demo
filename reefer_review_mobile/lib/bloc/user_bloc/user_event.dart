@@ -1,16 +1,13 @@
+// Inside user_event.dart
+
 part of 'user_bloc.dart';
 
 @immutable
 abstract class UserEvent {}
 
-class FollowBrand extends UserEvent {
+class ToggleFollowBrand extends UserEvent {
   final String userId;
   final int brandId;
-  FollowBrand(this.userId, this.brandId);
-}
 
-class UnfollowBrand extends UserEvent {
-  final String userId;
-  final int brandId;
-  UnfollowBrand(this.userId, this.brandId);
+  ToggleFollowBrand(this.userId, this.brandId);
 }

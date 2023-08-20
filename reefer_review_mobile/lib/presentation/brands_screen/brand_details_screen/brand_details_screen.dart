@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/repositories/user_repository/fake_user_repository_impl.dart';
 import '../../../bloc/brand_bloc/brand_bloc.dart';
 import '../../../bloc/feed_bloc/feed_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
 import '../../../bloc/user_bloc/user_bloc.dart';
 import '../../../data/models/brand.dart';
+import '../../../data/models/user.dart';
 import '../../../repositories/account_repository/fake_account_repository.dart';
 import '../../../repositories/brand_repository/fake_brand_repository_impl.dart';
 import '../../../repositories/post_repository.dart/fake_post_repository_impl.dart';
@@ -30,6 +32,14 @@ class BrandDetailsScreen extends StatefulWidget {
 class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
   int _currentIndex = 3;
   String _currentTab = "Info";
+
+  @override
+  void initState() {
+    super.initState();
+    final accountBloc = BlocProvider.of<AccountBloc>(context);
+    accountBloc.add(
+        FetchUserDetails(FakeAccountRepository.accountRepository.user!.userId));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,34 +74,24 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                               ),
                               Row(
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      final userBloc =
-                                          BlocProvider.of<UserBloc>(context);
-                                      final currentUser = FakeAccountRepository
-                                          .accountRepository.user;
-                                      if (currentUser != null) {
-                                        if (currentUser.followedBrands
-                                            .contains(widget.brand.brandId)) {
-                                          userBloc.add(UnfollowBrand(
-                                              currentUser.userId,
+                                  BlocBuilder<AccountBloc, AccountState>(
+                                    builder: (context, state) {
+                                      final accountBloc = state as account
+                                      return ElevatedButton(
+                                        onPressed: () {
+                                          final userBloc =
+                                              BlocProvider.of<UserBloc>(
+                                                  context);
+                                          userBloc.add(ToggleFollowBrand(
+                                              FakeAccountRepository
+                                                  .accountRepository
+                                                  .user!
+                                                  .userId,
                                               widget.brand.brandId));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "You unfollowed ${widget.brand.name}")));
-                                        } else {
-                                          userBloc.add(FollowBrand(
-                                              currentUser.userId,
-                                              widget.brand.brandId));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "You followed ${widget.brand.name}")));
-                                        }
-                                      }
+                                        },
+                                        child: _followUnfollowText(state),
+                                      );
                                     },
-                                    child: _followUnfollowText(),
                                   ),
                                   IconButton(
                                     icon: Icon(Icons.favorite_border,
@@ -285,13 +285,15 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
     return SizedBox.shrink();
   }
 
-  Widget _followUnfollowText() {
-    final currentUser = FakeAccountRepository.accountRepository.user;
-    if (currentUser != null &&
-        currentUser.followedBrands.contains(widget.brand.brandId)) {
-      return Text('Unfollow');
+  Widget _followUnfollowText(UserState state) {
+    if (state is UserUpdated) {
+      if (state.user.followedBrands.contains(widget.brand.brandId)) {
+        return Text('Unfollow');
+      } else {
+        return Text('Follow');
+      }
     } else {
-      return Text('Follow');
+      return SizedBox.shrink();
     }
   }
 }

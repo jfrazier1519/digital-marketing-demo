@@ -14,3 +14,9 @@ class SendEmailVerifcationLinkUseCase extends AccountEvent {
 
   SendEmailVerifcationLinkUseCase(this.request);
 }
+
+class FetchUserDetails extends AccountEvent {
+  final String userId;
+
+  FetchUserDetails(this.userId);
+}

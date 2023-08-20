@@ -28,4 +28,12 @@ class FakeAccountRepository extends AccountRepository {
   @override
   Future<void> sendEmailVerificationLink(
       SendEmailVerifcationLinkRequest request) async {}
+
+  @override
+  Future<User?> getUserById(String userId) async {
+    if (_user != null && _user!.userId == userId) {
+      return _user;
+    }
+    return null;
+  }
 }

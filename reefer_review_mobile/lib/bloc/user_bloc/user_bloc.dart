@@ -1,3 +1,5 @@
+// Inside user_bloc.dart
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -10,16 +12,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final FakeUserRepository userRepository;
 
   UserBloc(this.userRepository) : super(UserInitial()) {
-    on<FollowBrand>((event, emit) async {
+    on<ToggleFollowBrand>((event, emit) async {
       emit(UserLoading());
-      await userRepository.followBrand(event.userId, event.brandId);
-      User updatedUser = await userRepository.getUserById(event.userId);
-      emit(UserUpdated(updatedUser));
-    });
 
-    on<UnfollowBrand>((event, emit) async {
-      emit(UserLoading());
-      await userRepository.unfollowBrand(event.userId, event.brandId);
+      User user = await userRepository.getUserById(event.userId);
+
+      if (user.followedBrands.contains(event.brandId)) {
+        await userRepository.unfollowBrand(event.userId, event.brandId);
+      } else {
+        await userRepository.followBrand(event.userId, event.brandId);
+      }
+
       User updatedUser = await userRepository.getUserById(event.userId);
       emit(UserUpdated(updatedUser));
     });
