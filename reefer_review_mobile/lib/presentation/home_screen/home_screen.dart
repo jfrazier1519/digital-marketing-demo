@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/repositories/auth_repository/fake_auth_repository_impl.dart';
 import 'package:reefer_review_mobile/res/routes.dart';
-import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 import 'package:reefer_review_mobile/data/post/post_feed_type.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/fake_post_repository_impl.dart';
 import '../../data/models/route_arguments/add_post_screen_arguments.dart';
 import 'feed.dart';
-import '../post_screen/add_post_screen.dart';
 import '../shared/navigation_menu.dart';
 import '../shared/bottom_nav_bar.dart';
 
@@ -22,7 +19,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   int _selectedTabIndex = 0;
-  bool _isSearching = false;
 
   Widget _switchContent() {
     switch (_selectedTabIndex) {

@@ -12,3 +12,9 @@ const venuesScreenViewRoute = '/venues';
 const venueDetailsScreenViewRoute = '$venuesScreenViewRoute/details';
 const brandsScreenViewRoute = '/brands';
 const brandDetailsScreenViewRoute = '$brandsScreenViewRoute/details';
+const profileSetupScreenViewRoute = '/profileSetup';
+const preferencesSetupScreenViewRoute =
+    '$profileSetupScreenViewRoute/preferences';
+const productExperienceViewRoute =
+    '$preferencesSetupScreenViewRoute/experience';
+const profileSetupSuccessModalRoute = '$profileSetupScreenViewRoute/success';

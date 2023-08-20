@@ -59,7 +59,7 @@ class LoadingModal extends ModalRoute<Route> {
   }
 
   @override
-  bool get maintainState => true;
+  bool get maintainState => false;
 
   @override
   bool get opaque => false;

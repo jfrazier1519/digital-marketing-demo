@@ -14,3 +14,15 @@ class SendEmailVerifcationLinkUseCase extends AccountEvent {
 
   SendEmailVerifcationLinkUseCase(this.request);
 }
+
+class UpdateProfileUsecase extends AccountEvent {
+  final UpdateProfileRequest request;
+
+  UpdateProfileUsecase(this.request);
+}
+
+class GetAccountUsecase extends AccountEvent {
+  final GetAccountRequest? request;
+
+  GetAccountUsecase({this.request});
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/data/models/route_arguments/add_post_screen_arguments.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
 import 'package:reefer_review_mobile/presentation/brands_screen/brands_screen.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
@@ -6,8 +7,11 @@ import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart
 import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_experience_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/profile_setup_success_modal.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
-import '../data/models/route_arguments/add_post_screen_arguments.dart';
 import '../data/models/route_arguments/brand_details_screen_arguments.dart';
 import '../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../data/models/route_arguments/venue_details_screen_arguments.dart';
@@ -75,6 +79,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case loadingModalViewRoute:
       return LoadingModal();
+    case profileSetupScreenViewRoute:
+      return MaterialPageRoute(
+        builder: (context) => const ProfileSetupScreen(),
+      );
+    case preferencesSetupScreenViewRoute:
+      return MaterialPageRoute(
+        builder: (context) => const ProductPreferencesScreen(),
+      );
+    case productExperienceViewRoute:
+      return MaterialPageRoute(
+        builder: (context) => const ProductExperiencesScreen(),
+      );
+    case profileSetupSuccessModalRoute:
+      return ProfileSetupSuccessModal();
     default:
       return MaterialPageRoute(
         builder: (context) => UndefinedView(
