@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
+import 'package:reefer_review_mobile/bloc/user_bloc/user_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/image_selector_round.dart';
@@ -28,9 +28,9 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        return BlocListener<AccountBloc, AccountState>(
+        return BlocListener<UserBloc, UserState>(
           listener: (context, state) {},
           child: SafeArea(
             child: Scaffold(
@@ -91,8 +91,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
   _submitDetails(BuildContext context) {
     if (_globalKey.currentState!.validate()) {
-      BlocProvider.of<AccountBloc>(context).add(
-        UpdateProfileUsecase(
+      BlocProvider.of<UserBloc>(context).add(
+        UpdateUserprofileUsecase(
           UpdateProfileRequest(
             displayName: _displayNameController.text,
             photoUrl: _profileImage,

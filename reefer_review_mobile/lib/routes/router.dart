@@ -11,6 +11,7 @@ import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_e
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/profile_setup_success_modal.dart';
+import 'package:reefer_review_mobile/presentation/shared/home_menu.dart';
 import '../data/models/route_arguments/brand_details_screen_arguments.dart';
 import '../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../data/models/route_arguments/venue_details_screen_arguments.dart';
@@ -29,7 +30,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LoginScreen.route:
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     case HomeScreen.route:
-      return MaterialPageRoute(builder: (context) => const HomeScreen());
+      return MaterialPageRoute(builder: (context) => const HomeMenu());
     case ProductsScreen.route:
       return MaterialPageRoute(builder: (context) => const ProductsScreen());
     case VenuesScreen.route:

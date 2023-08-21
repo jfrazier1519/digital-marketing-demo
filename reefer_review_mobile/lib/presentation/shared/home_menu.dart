@@ -56,7 +56,6 @@ class _HomeMenuState extends State<HomeMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final body = _widgetOptions.elementAt(_selectedIndex);
     return AuthChecker(
       child: Scaffold(
         drawer: const NavigationMenu(),
@@ -76,12 +75,10 @@ class _HomeMenuState extends State<HomeMenu> {
       case 0:
         return AppBar(
           title: const Text('Home'),
-          actions: [
+          actions: const [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, 'Search Screen');
-              },
+              icon: Icon(Icons.search, color: Colors.white),
+              onPressed: null,
             ),
           ],
         );
