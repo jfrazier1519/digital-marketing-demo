@@ -5,6 +5,8 @@ import '../../../../res/colors.dart';
 class TermsAndConditionsScreen extends StatelessWidget {
   const TermsAndConditionsScreen({super.key});
 
+  static const route = '/sign-up/terms-&-conditions';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

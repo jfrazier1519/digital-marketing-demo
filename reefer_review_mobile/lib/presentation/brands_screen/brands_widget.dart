@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/brands_screen/brand_details_screen/brand_details_screen.dart';
 import '../../data/models/brand.dart';
 import '../../data/models/route_arguments/brand_details_screen_arguments.dart';
-import '../../res/routes.dart';
 import '../shared/category_bubble.dart';
 
 class BrandWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class BrandWidget extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            brandDetailsScreenViewRoute,
+            BrandDetailsScreen.route,
             arguments: BrandDetailsScreenArguments(brand: brand),
           );
         },

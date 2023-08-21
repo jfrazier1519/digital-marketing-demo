@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/product_experience_row.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
 
 import '../../bloc/account_bloc/account_bloc.dart';
 
 class ProductExperiencesScreen extends StatefulWidget {
   const ProductExperiencesScreen({super.key});
+
+  static const route = '/profile/setup/product-experience';
 
   @override
   State<ProductExperiencesScreen> createState() =>
@@ -100,7 +102,7 @@ class _ProductExperiencesScreenState extends State<ProductExperiencesScreen> {
 
   _finishPressed(BuildContext context) {
     if (_globalKey.currentState!.validate()) {
-      Navigator.of(context).pushNamed(profileSetupSuccessModalRoute);
+      Navigator.of(context).pushNamed(ProfileSetupScreen.route);
     }
   }
 }

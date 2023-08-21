@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
+import 'package:reefer_review_mobile/presentation/post_screen/add_post_screen.dart';
 import '../../bloc/feed_bloc/feed_bloc.dart';
 import 'package:reefer_review_mobile/data/post/post_feed_type.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/fake_post_repository_impl.dart';
@@ -11,6 +11,8 @@ import '../shared/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  static const route = '/home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                addPostViewRoute,
+                                AddPostScreen.route,
                                 arguments: AddPostScreenArguments(
                                   feedBloc:
                                       BlocProvider.of<FeedBloc>(builderContext),

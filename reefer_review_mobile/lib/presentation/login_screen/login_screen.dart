@@ -3,15 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/get_account_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
+import 'package:reefer_review_mobile/presentation/home_screen/home_screen.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
 import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
 import '../../bloc/auth_bloc/auth_bloc.dart';
-import '../../res/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  static const route = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -67,11 +71,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     listener: (context, state) {
                       if (state is AccountLoaded) {
                         if (state.account.displayName == null) {
-                          Navigator.of(context).pushReplacementNamed(
-                              profileSetupScreenViewRoute);
+                          Navigator.of(context)
+                              .pushReplacementNamed(ProfileSetupScreen.route);
                         } else {
                           Navigator.of(context)
-                              .pushReplacementNamed(homeScreenViewRoute);
+                              .pushReplacementNamed(HomeScreen.route);
                         }
                       }
                     },
@@ -141,6 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
   _forgotPasswordPressed() {}
 
   _signUpPressed() {
-    Navigator.of(context).pushNamed(signupScreenViewRoute);
+    Navigator.of(context).pushNamed(SignUpScreen.route);
   }
 }

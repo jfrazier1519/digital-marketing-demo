@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
+import 'package:reefer_review_mobile/presentation/home_screen/home_screen.dart';
 
 class ProfileSetupSuccessModal extends ModalRoute {
+  static const route = '/profile/setup/success';
+
   @override
   Color? get barrierColor => Colors.black.withOpacity(0.2);
 
@@ -72,6 +74,6 @@ class ProfileSetupSuccessModal extends ModalRoute {
   Duration get transitionDuration => Duration.zero;
 
   _goToHomePressed(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(homeScreenViewRoute);
+    Navigator.of(context).pushReplacementNamed(HomeScreen.route);
   }
 }

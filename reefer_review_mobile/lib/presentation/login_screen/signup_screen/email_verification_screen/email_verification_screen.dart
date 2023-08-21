@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key, required this.email});
+
+  static const route = '/sign-up/email-verification';
 
   final String email;
 
@@ -46,7 +48,7 @@ class EmailVerificationScreen extends StatelessWidget {
 
   _backToLoginPressed(BuildContext context) {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(loginScreenViewRoute, (route) => false);
+        .pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
   }
 
   _resendEmailVerificationLink(BuildContext context) {

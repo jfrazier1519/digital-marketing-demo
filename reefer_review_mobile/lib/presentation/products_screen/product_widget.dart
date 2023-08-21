@@ -1,8 +1,8 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_details_screen/products_details_screen.dart';
 import '../../data/models/product/product.dart';
 import '../../data/models/route_arguments/product_details_screen_arguments.dart';
-import '../../res/routes.dart';
 
 class ProductWidget extends StatelessWidget {
   final Product product;
@@ -17,7 +17,7 @@ class ProductWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          productDetailsScreenViewRoute,
+          ProductDetailsScreen.route,
           arguments: ProductDetailsScreenArguments(product: product),
         );
       },

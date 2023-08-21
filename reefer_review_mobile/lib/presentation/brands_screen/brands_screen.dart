@@ -12,6 +12,7 @@ import 'brands_sort_modal.dart';
 
 class BrandsScreen extends StatelessWidget {
   const BrandsScreen({Key? key}) : super(key: key);
+  static const route = '/brands';
 
   @override
   Widget build(BuildContext context) {

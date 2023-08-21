@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import '../../../data/models/product/product.dart';
 import '../../../data/models/route_arguments/product_details_screen_arguments.dart';
-import '../../../res/routes.dart';
 
 class ProductPriceWidget extends StatelessWidget {
   final Product product;
@@ -23,7 +23,7 @@ class ProductPriceWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          productDetailsScreenViewRoute,
+          ProductsScreen.route,
           arguments: ProductDetailsScreenArguments(product: product),
         );
       },

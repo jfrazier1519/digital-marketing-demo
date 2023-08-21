@@ -23,73 +23,70 @@ import '../presentation/products_screen/products_details_screen/products_details
 import '../presentation/shared/undefined_view.dart';
 import '../presentation/venue_screen/venue_details_screen/venue_details_screen.dart';
 import '../presentation/venue_screen/venues_screen.dart';
-import '../res/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case loadingScreenViewRoute:
+    case LoadingScreen.route:
       return MaterialPageRoute(builder: (context) => const LoadingScreen());
-    case loginScreenViewRoute:
+    case LoginScreen.route:
       return MaterialPageRoute(builder: (context) => const LoginScreen());
-    case homeScreenViewRoute:
+    case HomeScreen.route:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
-    case productsScreenViewRoute:
+    case ProductsScreen.route:
       return MaterialPageRoute(builder: (context) => const ProductsScreen());
-    case venuesScreenViewRoute:
+    case VenuesScreen.route:
       return MaterialPageRoute(builder: (context) => const VenuesScreen());
-    case brandsScreenViewRoute:
+    case BrandsScreen.route:
       return MaterialPageRoute(builder: (context) => const BrandsScreen());
-    case productDetailsScreenViewRoute:
+    case ProductDetailsScreen.route:
       final args = settings.arguments as ProductDetailsScreenArguments;
       return MaterialPageRoute(
         builder: (context) => ProductDetailsScreen(
           product: args.product,
         ),
       );
-
-    case venueDetailsScreenViewRoute:
+    case VenueDetailsScreen.route:
       final args = settings.arguments as VenueDetailsScreenArguments;
       return MaterialPageRoute(
         builder: (context) => VenueDetailsScreen(venue: args.venue),
       );
-
-    case brandDetailsScreenViewRoute:
+    case BrandDetailsScreen.route:
       final args = settings.arguments as BrandDetailsScreenArguments;
       return MaterialPageRoute(
         builder: (context) => BrandDetailsScreen(brand: args.brand),
       );
-    case signupScreenViewRoute:
+    case SignUpScreen.route:
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
-    case termsAndConditionsViewRoute:
+    case TermsAndConditionsScreen.route:
       return MaterialPageRoute(
           builder: (context) => const TermsAndConditionsScreen());
-    case emailVerificationViewRoute:
+    case EmailVerificationScreen.route:
       final args = settings.arguments as EmailVerifcationScreenArguments;
       return MaterialPageRoute(
         builder: (context) => EmailVerificationScreen(
           email: args.email,
         ),
       );
-    case addPostViewRoute:
+    case AddPostScreen.route:
       final args = settings.arguments as AddPostScreenArguments;
       return MaterialPageRoute(
         builder: (context) => AddPostScreen(feedBloc: args.feedBloc),
       );
-    case loadingModalViewRoute:
+    case LoadingModal.route:
       return LoadingModal();
-    case profileSetupScreenViewRoute:
+    case ProfileSetupScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProfileSetupScreen(),
       );
-    case preferencesSetupScreenViewRoute:
+    case ProductPreferencesScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProductPreferencesScreen(),
       );
-    case productExperienceViewRoute:
+    case ProductExperiencesScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProductExperiencesScreen(),
       );
-    case profileSetupSuccessModalRoute:
+    case ProfileSetupSuccessModal.route:
       return ProfileSetupSuccessModal();
     default:
       return MaterialPageRoute(

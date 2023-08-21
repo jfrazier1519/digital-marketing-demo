@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
-import '../../res/routes.dart';
-
 class LoadingModal extends ModalRoute<Route> {
+  static const route = '/loading-modal';
+
   static display(BuildContext context) {
-    Navigator.of(context).pushNamed(loadingModalViewRoute);
+    Navigator.of(context).pushNamed(LoadingModal.route);
   }
 
   static dismiss(BuildContext context) {
-    if (ModalRoute.of(context)?.settings.name == loadingModalViewRoute) {
+    if (ModalRoute.of(context)?.settings.name == LoadingModal.route) {
       Navigator.of(context).popUntil((route) => route is! LoadingModal);
     }
   }
