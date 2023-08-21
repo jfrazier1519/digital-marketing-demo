@@ -16,13 +16,15 @@ class FeedScreen extends StatelessWidget {
     return BlocBuilder<FeedBloc, FeedState>(
       builder: (context, state) {
         if (state is FeedLoaded) {
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 20,
+            ),
             itemCount: state.posts.length,
             itemBuilder: (context, index) {
               final post = state.posts[index];
               return Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: PostToWidgetConverter.convert(post),
               );
             },

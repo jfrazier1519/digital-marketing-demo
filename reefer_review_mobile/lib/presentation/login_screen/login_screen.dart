@@ -4,7 +4,7 @@ import 'package:reefer_review_mobile/bloc/user_bloc/user_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/presentation/home_screen/home_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
-import 'package:reefer_review_mobile/presentation/profile_screen/profile_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               if (state is UserLoaded) {
                 if (state.account.displayName == null) {
                   Navigator.of(context)
-                      .pushReplacementNamed(ProfileScreen.route);
+                      .pushReplacementNamed(ProfileSetupScreen.route);
                 } else {
                   Navigator.of(context).pushReplacementNamed(HomeScreen.route);
                 }
