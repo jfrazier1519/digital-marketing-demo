@@ -1,12 +1,12 @@
+import 'package:reefer_review_mobile/data/models/profile.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
-import '../models/user.dart';
 
 class ProductPost extends Post {
   final String productUrl;
 
   ProductPost({
     required int postId,
-    required User author,
+    required Profile author,
     required DateTime date,
     required String content,
     required String image,

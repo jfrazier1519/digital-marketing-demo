@@ -50,13 +50,13 @@ class ProductReviewWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage(
-                          (review as ProductReview).reviewer.profileImageUrl ??
+                          (review as ProductReview).reviewer.profileImage ??
                               ''),
                       radius: 16,
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      (review as ProductReview).reviewer.name ?? '',
+                      (review as ProductReview).reviewer.profileName ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),

@@ -23,7 +23,7 @@ class ProductPostWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      AssetImage(productPost.author.profileImageUrl ?? ''),
+                      AssetImage(productPost.author.profileImage ?? ''),
                   radius: 25,
                 ),
                 const SizedBox(width: 20),
@@ -32,7 +32,7 @@ class ProductPostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        productPost.author.name ?? '',
+                        productPost.author.profileName ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),

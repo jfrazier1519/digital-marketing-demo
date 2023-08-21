@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
+
+import '../../../../bloc/user_bloc/user_bloc.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key, required this.email});
@@ -52,7 +53,7 @@ class EmailVerificationScreen extends StatelessWidget {
   }
 
   _resendEmailVerificationLink(BuildContext context) {
-    BlocProvider.of<AccountBloc>(context).add(
+    BlocProvider.of<UserBloc>(context).add(
       SendEmailVerifcationLinkUseCase(
         SendEmailVerifcationLinkRequest(email),
       ),

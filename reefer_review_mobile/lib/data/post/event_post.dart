@@ -1,4 +1,4 @@
-import 'package:reefer_review_mobile/data/models/user.dart';
+import 'package:reefer_review_mobile/data/models/profile.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
 
 class EventPost extends Post {
@@ -6,7 +6,7 @@ class EventPost extends Post {
 
   EventPost({
     required int postId,
-    required User author,
+    required Profile author,
     required DateTime date,
     required String content,
     required String image,

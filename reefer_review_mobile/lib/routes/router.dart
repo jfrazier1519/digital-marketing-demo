@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/data/models/route_arguments/add_post_screen_arguments.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
 import 'package:reefer_review_mobile/presentation/brands_screen/brands_screen.dart';
 import 'package:reefer_review_mobile/presentation/loading_screen/loading_screen.dart';
@@ -7,18 +6,18 @@ import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart
 import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
 import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/signup_screen.dart';
+import 'package:reefer_review_mobile/presentation/profile_screen/profile_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_experience_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/profile_setup_success_modal.dart';
-import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
+import 'package:reefer_review_mobile/presentation/shared/home_menu.dart';
 import '../data/models/route_arguments/brand_details_screen_arguments.dart';
 import '../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../data/models/route_arguments/venue_details_screen_arguments.dart';
 import '../presentation/brands_screen/brand_details_screen/brand_details_screen.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
-import '../presentation/post_screen/add_post_screen.dart';
 import '../presentation/products_screen/products_details_screen/products_details_screen.dart';
 import '../presentation/shared/undefined_view.dart';
 import '../presentation/venue_screen/venue_details_screen/venue_details_screen.dart';
@@ -31,7 +30,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LoginScreen.route:
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     case HomeScreen.route:
-      return MaterialPageRoute(builder: (context) => const HomeScreen());
+      return MaterialPageRoute(builder: (context) => const HomeMenu());
     case ProductsScreen.route:
       return MaterialPageRoute(builder: (context) => const ProductsScreen());
     case VenuesScreen.route:
@@ -67,13 +66,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           email: args.email,
         ),
       );
-    case AddPostScreen.route:
-      final args = settings.arguments as AddPostScreenArguments;
-      return MaterialPageRoute(
-        builder: (context) => AddPostScreen(feedBloc: args.feedBloc),
-      );
-    case LoadingModal.route:
-      return LoadingModal();
+
     case ProfileSetupScreen.route:
       return MaterialPageRoute(
         builder: (context) => const ProfileSetupScreen(),
@@ -88,6 +81,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case ProfileSetupSuccessModal.route:
       return ProfileSetupSuccessModal();
+    case ProfileScreen.route:
+      return MaterialPageRoute(
+        builder: (context) => const ProfileScreen(),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => UndefinedView(

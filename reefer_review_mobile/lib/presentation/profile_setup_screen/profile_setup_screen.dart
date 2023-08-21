@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
+import 'package:reefer_review_mobile/bloc/user_bloc/user_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/image_selector_round.dart';
-import 'package:reefer_review_mobile/repositories/account_repository/fake_account_repository.dart';
 
 class ProfileSetupScreen extends StatefulWidget {
   const ProfileSetupScreen({super.key});
@@ -29,64 +28,60 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AccountBloc(FakeAccountRepository.repository)
-        ..add(GetAccountUsecase()),
-      child: BlocBuilder<AccountBloc, AccountState>(
-        builder: (context, state) {
-          return BlocListener<AccountBloc, AccountState>(
-            listener: (context, state) {},
-            child: SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  centerTitle: false,
-                  title: const Text('Profile Details'),
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return BlocListener<UserBloc, UserState>(
+          listener: (context, state) {},
+          child: SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                centerTitle: false,
+                title: const Text('Profile Details'),
+              ),
+              body: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 20,
                 ),
-                body: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: Form(
-                    key: _globalKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ImageSelector(
-                          radius: MediaQuery.of(context).size.width * 0.5,
-                          onSubmit: _imageSelected,
+                child: Form(
+                  key: _globalKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ImageSelector(
+                        radius: MediaQuery.of(context).size.width * 0.5,
+                        onSubmit: _imageSelected,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _displayNameController,
+                        validator: (value) => value?.isNotEmpty ?? false
+                            ? null
+                            : 'This field is required',
+                        decoration:
+                            const InputDecoration(labelText: 'Display Name'),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: ElevatedButton(
+                          onPressed: () => _submitDetails(context),
+                          child: const Center(child: Text('Next')),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: _displayNameController,
-                          validator: (value) => value?.isNotEmpty ?? false
-                              ? null
-                              : 'This field is required',
-                          decoration:
-                              const InputDecoration(labelText: 'Display Name'),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.35,
-                          child: ElevatedButton(
-                            onPressed: () => _submitDetails(context),
-                            child: const Center(child: Text('Next')),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -96,8 +91,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
   _submitDetails(BuildContext context) {
     if (_globalKey.currentState!.validate()) {
-      BlocProvider.of<AccountBloc>(context).add(
-        UpdateProfileUsecase(
+      BlocProvider.of<UserBloc>(context).add(
+        UpdateUserprofileUsecase(
           UpdateProfileRequest(
             displayName: _displayNameController.text,
             photoUrl: _profileImage,

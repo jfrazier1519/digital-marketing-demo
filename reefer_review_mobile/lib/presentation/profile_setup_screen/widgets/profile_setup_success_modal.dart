@@ -43,9 +43,7 @@ class ProfileSetupSuccessModal extends ModalRoute {
               ),
               const Text(
                 'Success you have setup your profile',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
