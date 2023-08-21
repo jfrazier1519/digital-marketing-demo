@@ -4,7 +4,6 @@ class Product {
   final int productId;
   final String name;
   final String category;
-  final String strain;
   final String brand;
   final double rating;
   final int reviewCount;
@@ -16,7 +15,6 @@ class Product {
     required this.productId,
     required this.name,
     required this.category,
-    required this.strain,
     required this.brand,
     required this.rating,
     required this.reviewCount,
