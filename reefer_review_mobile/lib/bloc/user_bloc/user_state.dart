@@ -11,3 +11,13 @@ class UserUpdated extends UserState {
   final User user;
   UserUpdated(this.user);
 }
+
+class UserRequestSuccessful extends UserState {
+  UserRequestSuccessful();
+}
+
+class UserLoaded extends UserState {
+  final User account;
+
+  UserLoaded(this.account);
+}

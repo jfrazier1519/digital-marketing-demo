@@ -5,10 +5,11 @@ import 'package:reefer_review_mobile/repositories/review_repository/fake_review_
 import '../../../bloc/review_bloc/review_bloc.dart';
 import '../../../data/models/product/product.dart';
 import '../../review/product_review_widget.dart';
-import '../../shared/bottom_nav_bar.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
+
+  static const route = '/products/detail';
 
   const ProductDetailsScreen({super.key, required this.product});
 
@@ -18,7 +19,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  int _currentIndex = 1;
+  final int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -156,14 +157,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
           ),
         ]),
-        bottomNavigationBar: BottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
       ),
     );
   }

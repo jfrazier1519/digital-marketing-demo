@@ -2,18 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/bloc/account_bloc/account_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/route_arguments/email_verification_screen_arguments.dart';
-import 'package:reefer_review_mobile/presentation/shared/loading_modal.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/email_verification_screen/email_verification_screen.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/signup_screen/terms_and_conditions_screen/terms_and_conditions_screen.dart';
 import 'package:reefer_review_mobile/res/colors.dart';
 import 'package:reefer_review_mobile/res/regex.dart' as regex;
-import 'package:reefer_review_mobile/res/routes.dart';
 
+import '../../../bloc/user_bloc/user_bloc.dart';
 import '../../../res/files.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  static const route = '/sign-up';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -54,16 +57,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AccountBloc, AccountState>(
+    return BlocConsumer<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is AccountLoading) {
-          LoadingModal.display(context);
+        if (state is UserLoading) {
+          context.loaderOverlay.show();
         } else {
-          LoadingModal.dismiss(context);
+          context.loaderOverlay.hide();
         }
-        if (state is AccountRequestSuccessful) {
+        if (state is UserRequestSuccessful) {
           Navigator.of(context).pushNamed(
-            emailVerificationViewRoute,
+            EmailVerificationScreen.route,
             arguments: EmailVerifcationScreenArguments(_emailController.text),
           );
         }
@@ -228,7 +231,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.35,
                         child: ElevatedButton(
-                            onPressed: _signUpPressed,
+                            onPressed: () => _signUpPressed(context),
                             child: const Center(child: Text('Sign Up'))),
                       ),
                     ],
@@ -283,10 +286,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  _signUpPressed() {
+  _signUpPressed(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      BlocProvider.of<AccountBloc>(context).add(
-        RegisterUserUseCase(
+      BlocProvider.of<UserBloc>(context).add(
+        RegisterUserUsecase(
           RegisterUserRequest(
             email: _emailController.text,
             password: _passwordController.text,
@@ -302,7 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _goToTermsOfService() {
-    Navigator.of(context).pushNamed(termsAndConditionsViewRoute);
+    Navigator.of(context).pushNamed(TermsAndConditionsScreen.route);
   }
 
   DateTime _getYearsAgo(int years) {

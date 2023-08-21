@@ -1,6 +1,6 @@
 import 'package:reefer_review_mobile/data/models/review/review.dart';
 
-import '../user.dart';
+import '../profile.dart';
 
 class ProductReview extends Review {
   final int productId;
@@ -8,7 +8,7 @@ class ProductReview extends Review {
   ProductReview({
     required int reviewId,
     required this.productId,
-    required User reviewer,
+    required Profile reviewer,
     required String content,
     required DateTime date,
     required int rating,

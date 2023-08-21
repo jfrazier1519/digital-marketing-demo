@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import '../../../data/models/product/product.dart';
 import '../../../data/models/route_arguments/product_details_screen_arguments.dart';
-import '../../../res/routes.dart';
 
 class ProductPriceWidget extends StatelessWidget {
   final Product product;
@@ -12,7 +12,7 @@ class ProductPriceWidget extends StatelessWidget {
     if (text.length <= limit) {
       return text;
     }
-    return text.substring(0, limit) + '...';
+    return '${text.substring(0, limit)}...';
   }
 
   @override
@@ -23,7 +23,7 @@ class ProductPriceWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          productDetailsScreenViewRoute,
+          ProductsScreen.route,
           arguments: ProductDetailsScreenArguments(product: product),
         );
       },
@@ -95,16 +95,16 @@ class ProductPriceWidget extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Transform.translate(
-                              offset: Offset(0, 2),
+                              offset: const Offset(0, 2),
                               child: Text(price.size,
-                                  style: TextStyle(fontSize: 12)),
+                                  style: const TextStyle(fontSize: 12)),
                             ),
                             const Divider(thickness: 1, color: Colors.black),
                             Transform.translate(
-                              offset: Offset(0, -2),
+                              offset: const Offset(0, -2),
                               child: Text(
                                 '\$${price.value.toStringAsFixed(2)}',
-                                style: TextStyle(fontSize: 12),
+                                style: const TextStyle(fontSize: 12),
                               ),
                             ),
                           ],

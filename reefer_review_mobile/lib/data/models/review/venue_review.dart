@@ -1,6 +1,5 @@
+import 'package:reefer_review_mobile/data/models/profile.dart';
 import 'package:reefer_review_mobile/data/models/review/review.dart';
-
-import '../user.dart';
 
 class VenueReview extends Review {
   final int venueId;
@@ -8,7 +7,7 @@ class VenueReview extends Review {
   VenueReview({
     required int reviewId,
     required this.venueId,
-    required User reviewer,
+    required Profile reviewer,
     required String content,
     required DateTime date,
     required int rating,

@@ -9,11 +9,10 @@ import '../../../repositories/product_repository/fake_product_repository_impl.da
 import '../../../repositories/review_repository/fake_review_repository_impl.dart';
 import '../../review/venue_review_widget.dart';
 
-import '../../shared/bottom_nav_bar.dart';
-
 class VenueDetailsScreen extends StatefulWidget {
   final Venue venue;
 
+  static const route = '/venues/detail';
   const VenueDetailsScreen({super.key, required this.venue});
 
   @override
@@ -21,7 +20,7 @@ class VenueDetailsScreen extends StatefulWidget {
 }
 
 class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
-  int _currentIndex = 2;
+  final int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +65,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                           onPressed: () {
                             // Handle the Follow functionality here
                           },
-                          child: Text('Follow'),
+                          child: const Text('Follow'),
                         ),
                         IconButton(
                           icon: Icon(Icons.favorite_border,
@@ -119,7 +118,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                         Clipboard.setData(
                             ClipboardData(text: widget.venue.address));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text("Address copied"),
                             duration: Duration(seconds: 2),
                           ),
@@ -133,7 +132,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                   onPressed: () {
                     // Handle the Check In functionality here
                   },
-                  child: Text('Check In'),
+                  child: const Text('Check In'),
                 ),
                 const SizedBox(height: 10),
                 // Price
@@ -188,14 +187,6 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
             ),
           ),
         ]),
-        bottomNavigationBar: BottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
       ),
     );
   }

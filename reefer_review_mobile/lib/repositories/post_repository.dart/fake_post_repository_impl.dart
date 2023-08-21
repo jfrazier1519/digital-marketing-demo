@@ -1,8 +1,7 @@
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/post_repository.dart';
-import '../../data/models/user.dart';
 import '../../data/post/post.dart';
 import '../../data/post/event_post.dart';
-import '../../data/post/general_post.dart';
 import '../../data/post/loyalty_post.dart';
 import '../../data/post/product_post.dart';
 import '../../data/post/review_post.dart';
@@ -14,28 +13,25 @@ class FakePostRepository implements PostRepository {
 
   FakePostRepository() {
     User dummyUser = User(
-      userId: '1',
+      uid: '1',
       email: 'john.doe@example.com',
-      name: 'John Doe',
-      profileImageUrl: dummyProfileImage,
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
       followedBrands: [],
     );
-    User brandUser = User(
-      userId: '2',
+    User dummyUser2 = User(
+      uid: '2',
       email: 'john.doe@example.com',
-      name: 'Empire Weed',
-      profileImageUrl: brand2,
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
       followedBrands: [],
     );
 
     _allPosts = [
-      GeneralPost(
-        postId: 1,
-        author: dummyUser,
-        date: DateTime.now(),
-        content: 'This is a general post.',
-        image: dummyGeneralPostImage,
-      ),
       EventPost(
         postId: 2,
         author: dummyUser,
@@ -68,13 +64,6 @@ class FakePostRepository implements PostRepository {
         content: 'This is a review post.',
         image: dummyReviewPostImage,
         reviewStars: 4.5,
-      ),
-      GeneralPost(
-        postId: 6,
-        author: brandUser,
-        date: DateTime.now(),
-        content: 'New Product Wonder Brownies.',
-        image: product4,
       ),
     ];
   }
@@ -123,6 +112,8 @@ class FakePostRepository implements PostRepository {
 
   @override
   Future<List<Post>> getPostsByAuthor(String author) async {
-    return _allPosts.where((post) => post.author.name == author).toList();
+    return _allPosts
+        .where((post) => post.author.profileName == author)
+        .toList();
   }
 }

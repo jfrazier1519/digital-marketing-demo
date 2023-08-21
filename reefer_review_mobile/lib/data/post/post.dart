@@ -1,8 +1,8 @@
-import '../models/user.dart';
+import 'package:reefer_review_mobile/data/models/profile.dart';
 
 abstract class Post {
   final int postId;
-  final User author;
+  final Profile author;
   final DateTime date;
   final String content;
   final String image;

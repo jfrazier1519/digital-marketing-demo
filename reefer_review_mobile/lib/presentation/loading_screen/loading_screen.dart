@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 import 'package:reefer_review_mobile/res/images.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
+
+  static const route = '/';
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -36,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       // If the delay is complete, use a post-frame callback to execute the navigation
       // This ensures that the navigation doesn't cause a black screen issue
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, loginScreenViewRoute);
+        Navigator.pushReplacementNamed(context, LoginScreen.route);
       });
     }
 

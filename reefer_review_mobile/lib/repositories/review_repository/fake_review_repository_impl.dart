@@ -1,8 +1,8 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
+import '../../data/models/user.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
 import '../../data/models/review/venue_review.dart';
-import '../../data/models/user.dart';
 import '../../res/images.dart';
 
 class FakeReviewRepository implements ReviewRepository {
@@ -10,18 +10,21 @@ class FakeReviewRepository implements ReviewRepository {
 
   FakeReviewRepository() {
     User dummyReviewer = User(
-      userId: 'userID2',
-      email: 'alice.smith@example.com',
-      name: 'Alice Smith',
-      profileImageUrl: profileImage,
+      uid: '2',
+      email: 'john.doe@example.com',
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
       followedBrands: [],
     );
-
     User dummyReviewer2 = User(
-      userId: 'userID3',
-      email: 'john.smith@example.com',
-      name: 'John Smith',
-      profileImageUrl: dummyProfileImage,
+      uid: '1',
+      email: 'john.doe@example.com',
+      displayName: 'John Moe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
       followedBrands: [],
     );
 

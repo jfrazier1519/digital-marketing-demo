@@ -50,12 +50,13 @@ class ProductReviewWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage(
-                          (review as ProductReview).reviewer.profileImageUrl),
+                          (review as ProductReview).reviewer.profileImage ??
+                              ''),
                       radius: 16,
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      (review as ProductReview).reviewer.name,
+                      (review as ProductReview).reviewer.profileName ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),
@@ -75,7 +76,8 @@ class ProductReviewWidget extends StatelessWidget {
           Row(children: [
             ...buildStars(review.rating, colorScheme),
             const SizedBox(width: 10.0),
-            Text(review.title, style: const TextStyle(fontWeight: FontWeight.bold))
+            Text(review.title,
+                style: const TextStyle(fontWeight: FontWeight.bold))
           ]),
           const SizedBox(height: 8.0),
           Text(

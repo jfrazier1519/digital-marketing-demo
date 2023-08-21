@@ -1,5 +1,5 @@
+import 'package:reefer_review_mobile/data/models/user.dart';
 import 'package:reefer_review_mobile/data/post/post.dart';
-import '../models/user.dart';
 
 class ReviewPost extends Post {
   final double reviewStars;

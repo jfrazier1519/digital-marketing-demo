@@ -50,12 +50,12 @@ class VenueReviewWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage(
-                          (review as VenueReview).reviewer.profileImageUrl),
+                          (review as VenueReview).reviewer.profileImage ?? ''),
                       radius: 16,
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      (review as VenueReview).reviewer.name,
+                      (review as VenueReview).reviewer.profileName ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),

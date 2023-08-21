@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reefer_review_mobile/res/routes.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 
 class UndefinedView extends StatelessWidget {
   final String name;
@@ -23,7 +23,7 @@ class UndefinedView extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                      loginScreenViewRoute, (route) => false);
+                      LoginScreen.route, (route) => false);
                 },
                 child: const Text(
                   "Go Home",

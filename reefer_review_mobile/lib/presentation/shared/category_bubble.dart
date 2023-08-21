@@ -4,7 +4,8 @@ class CategoryBubble extends StatelessWidget {
   final String text;
   final ColorScheme colorScheme;
 
-  const CategoryBubble({required this.text, required this.colorScheme});
+  const CategoryBubble(
+      {super.key, required this.text, required this.colorScheme});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,8 @@ class CategoryBubble extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style:
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
