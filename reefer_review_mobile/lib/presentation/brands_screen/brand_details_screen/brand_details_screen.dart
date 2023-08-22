@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 import '../../../bloc/brand_bloc/brand_bloc.dart';
 import '../../../bloc/feed_bloc/feed_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
 import '../../../bloc/user_bloc/user_bloc.dart';
 import '../../../data/models/brand.dart';
+import '../../../data/models/user.dart';
 import '../../../repositories/brand_repository/fake_brand_repository_impl.dart';
 import '../../../repositories/post_repository.dart/fake_post_repository_impl.dart';
 import '../../../repositories/product_repository/fake_product_repository_impl.dart';
@@ -36,164 +38,211 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
-        appBar: AppBar(),
-        body: BlocListener<UserBloc, UserState>(
-          listener: (context, state) {
-            if (state is UserUpdated) {
-              final isFollowing =
-                  state.user.followedBrands.contains(widget.brand.brandId);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                    content: Text(isFollowing ? 'Followed' : 'Unfollowed')),
-              );
-            }
-          },
-          child: ListView(
-            children: [
-              if (widget.brand.image.isNotEmpty)
-                SizedBox(
-                  height: 150.0,
-                  child: Image.asset(widget.brand.image, fit: BoxFit.cover),
-                ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return Scaffold(
+            appBar: AppBar(),
+            body: state is UserLoaded
+                ? BlocListener<UserBloc, UserState>(
+                    listener: (context, state) {
+                      if (state is UserUpdated) {
+                        final isFollowing = state.user.followedBrands
+                            .contains(widget.brand.brandId);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(
+                                  isFollowing ? 'Followed' : 'Unfollowed')),
+                        );
+                      }
+                    },
+                    child: ListView(
                       children: [
-                        Text(
-                          widget.brand.name,
-                          style: const TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                          children: [
-                            // The following BlocBuilder will replace the ElevatedButton you had
-                            BlocBuilder<UserBloc, UserState>(
-                              builder: (context, state) {
-                                final isFollowed = (state is UserLoaded) &&
-                                    state.account.followedBrands.contains(
-                                        widget.brand.brandId.toString());
+                        if (widget.brand.image.isNotEmpty)
+                          SizedBox(
+                            height: 150.0,
+                            child: Image.asset(widget.brand.image,
+                                fit: BoxFit.cover),
+                          ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    widget.brand.name,
+                                    style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Row(
+                                    children: [
+                                      BlocBuilder<UserBloc, UserState>(
+                                        builder: (context, state) {
+                                          bool isFollowed = false;
+                                          User? currentUser;
 
-                                return ElevatedButton(
-                                  onPressed: () {
-                                    context.read<UserBloc>().add(
-                                        ToggleFollowBrand(widget.brand.brandId
-                                            .toString())); // Converted to string here
+                                          if (state is UserLoaded) {
+                                            isFollowed = state
+                                                .user.followedBrands
+                                                .contains(widget.brand.brandId);
+                                            currentUser = state.user;
+                                            print(
+                                                "UserLoaded state: userId = ${currentUser.uid}");
+                                          } else if (state is UserUpdated) {
+                                            isFollowed = state
+                                                .user.followedBrands
+                                                .contains(widget.brand.brandId);
+                                            currentUser = state.user;
+                                            print(
+                                                "UserUpdated state: userId = ${currentUser.uid}");
+                                          } else {
+                                            print(
+                                                "State is neither UserLoaded nor UserUpdated: state = $state");
+                                          }
+
+                                          return ElevatedButton(
+                                            onPressed: () {
+                                              if (currentUser != null) {
+                                                context.read<UserBloc>().add(
+                                                    ToggleFollowBrand(
+                                                        currentUser,
+                                                        widget.brand.brandId));
+                                              } else {
+                                                print(
+                                                    "User data is not available");
+                                              }
+                                            },
+                                            child: Text(isFollowed
+                                                ? 'Unfollow'
+                                                : 'Follow'),
+                                          );
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.favorite_border,
+                                            color: colorScheme.primary),
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 1,
+                              ),
+                              Wrap(
+                                spacing: 8.0,
+                                runSpacing: 8.0,
+                                children: widget.brand.categories
+                                    .map((category) => CategoryBubble(
+                                        text:
+                                            category.toString().split('.').last,
+                                        colorScheme: colorScheme))
+                                    .toList(),
+                              ),
+                              const SizedBox(height: 10),
+                              Wrap(
+                                alignment: WrapAlignment.spaceBetween,
+                                spacing: 10.0,
+                                children: [
+                                  TabButton(
+                                      text: "Info",
+                                      isSelected: _currentTab == "Info",
+                                      onTap: () {
+                                        setState(() {
+                                          _currentTab = "Info";
+                                        });
+                                      }),
+                                  TabButton(
+                                      text: "Products",
+                                      isSelected: _currentTab == "Products",
+                                      onTap: () {
+                                        setState(() {
+                                          _currentTab = "Products";
+                                        });
+                                      }),
+                                  TabButton(
+                                      text: "Venues",
+                                      isSelected: _currentTab == "Venues",
+                                      onTap: () {
+                                        setState(() {
+                                          _currentTab = "Venues";
+                                        });
+                                      }),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                _currentTab,
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              const Divider(thickness: 1, color: Colors.black),
+                              _getContentForTab(),
+                              const SizedBox(height: 20),
+                              const Text(
+                                "Feed",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              const Divider(thickness: 1, color: Colors.black),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text("Add Review"),
+                              ),
+                              BlocProvider(
+                                create: (context) =>
+                                    FeedBloc(FakePostRepository())
+                                      ..add(FetchPostsByAuthor(
+                                          author: widget.brand.name)),
+                                child: BlocBuilder<FeedBloc, FeedState>(
+                                  builder: (context, state) {
+                                    if (state is FeedLoading) {
+                                      return const CircularProgressIndicator();
+                                    } else if (state is FeedLoaded) {
+                                      if (state.posts.isEmpty) {
+                                        return const Text(
+                                            'No posts available.');
+                                      }
+                                      return ListView.builder(
+                                          itemCount: state.posts.length,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, index) =>
+                                              Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0,
+                                                        horizontal: 0.0),
+                                                child: PostToWidgetConverter
+                                                    .convert(
+                                                        state.posts[index]),
+                                              ));
+                                    } else {
+                                      return const Text(
+                                          'Something went wrong!');
+                                    }
                                   },
-                                  child:
-                                      Text(isFollowed ? 'Unfollow' : 'Follow'),
-                                );
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.favorite_border,
-                                  color: colorScheme.primary),
-                              onPressed: () {},
-                            ),
-                          ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    const Divider(
-                      color: Colors.black,
-                      thickness: 1,
-                    ),
-                    Wrap(
-                      spacing: 8.0,
-                      runSpacing: 8.0,
-                      children: widget.brand.categories
-                          .map((category) => CategoryBubble(
-                              text: category.toString().split('.').last,
-                              colorScheme: colorScheme))
-                          .toList(),
-                    ),
-                    const SizedBox(height: 10),
-                    Wrap(
-                      alignment: WrapAlignment.spaceBetween,
-                      spacing: 10.0,
-                      children: [
-                        TabButton(
-                            text: "Info",
-                            isSelected: _currentTab == "Info",
-                            onTap: () {
-                              setState(() {
-                                _currentTab = "Info";
-                              });
-                            }),
-                        TabButton(
-                            text: "Products",
-                            isSelected: _currentTab == "Products",
-                            onTap: () {
-                              setState(() {
-                                _currentTab = "Products";
-                              });
-                            }),
-                        TabButton(
-                            text: "Venues",
-                            isSelected: _currentTab == "Venues",
-                            onTap: () {
-                              setState(() {
-                                _currentTab = "Venues";
-                              });
-                            }),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      _currentTab,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    const Divider(thickness: 1, color: Colors.black),
-                    _getContentForTab(),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Feed",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    const Divider(thickness: 1, color: Colors.black),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Add Review"),
-                    ),
-                    BlocProvider(
-                      create: (context) => FeedBloc(FakePostRepository())
-                        ..add(FetchPostsByAuthor(author: widget.brand.name)),
-                      child: BlocBuilder<FeedBloc, FeedState>(
-                        builder: (context, state) {
-                          if (state is FeedLoading) {
-                            return const CircularProgressIndicator();
-                          } else if (state is FeedLoaded) {
-                            if (state.posts.isEmpty) {
-                              return const Text('No posts available.');
-                            }
-                            return ListView.builder(
-                                itemCount: state.posts.length,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) => Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 0.0),
-                                      child: PostToWidgetConverter.convert(
-                                          state.posts[index]),
-                                    ));
-                          } else {
-                            return const Text('Something went wrong!');
-                          }
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ));
+                  )
+                : const Center(
+                    child: CustomLoadingIndicator(),
+                  ));
+      },
+    );
   }
 
   Widget _getContentForTab() {

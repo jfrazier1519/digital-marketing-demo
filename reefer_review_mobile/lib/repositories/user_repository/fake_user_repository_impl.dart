@@ -132,8 +132,7 @@ class FakeUserRepository extends UserRepository {
   }
 
   @override
-  Future<void> followBrand(String uid, int brandId) async {
-    User user = await getUserById(uid);
+  Future<void> followBrand(User user, int brandId) async {
     if (!user.followedBrands.contains(brandId)) {
       user.followedBrands.add(brandId);
       await updateUser(user);
@@ -141,8 +140,7 @@ class FakeUserRepository extends UserRepository {
   }
 
   @override
-  Future<void> unfollowBrand(String uid, int brandId) async {
-    User user = await getUserById(uid);
+  Future<void> unfollowBrand(User user, int brandId) async {
     user.followedBrands.remove(brandId);
     await updateUser(user);
   }

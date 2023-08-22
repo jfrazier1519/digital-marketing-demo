@@ -17,7 +17,7 @@ class UserRequestSuccessful extends UserState {
 }
 
 class UserLoaded extends UserState {
-  final User account;
+  final User user;
 
-  UserLoaded(this.account);
+  UserLoaded(this.user);
 }

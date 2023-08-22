@@ -30,8 +30,8 @@ class LoginUserUsecase extends UserEvent {
 }
 
 class ToggleFollowBrand extends UserEvent {
-  final String uid;
+  final User user;
   final int brandId;
 
-  ToggleFollowBrand(this.uid, this.brandId);
+  ToggleFollowBrand(this.user, this.brandId);
 }

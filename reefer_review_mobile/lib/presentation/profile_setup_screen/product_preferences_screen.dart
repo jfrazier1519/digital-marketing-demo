@@ -44,11 +44,10 @@ class ProductPreferencesScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) => ProductPreferenceRow(
-                            preference:
-                                state.account.productPreferences[index]),
+                            preference: state.user.productPreferences[index]),
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 20),
-                        itemCount: state.account.productPreferences.length,
+                        itemCount: state.user.productPreferences.length,
                       ),
                       const SizedBox(
                         height: 10,

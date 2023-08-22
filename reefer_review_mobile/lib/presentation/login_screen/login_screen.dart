@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: BlocListener<UserBloc, UserState>(
             listener: (context, state) {
               if (state is UserLoaded) {
-                if (state.account.displayName == null) {
+                if (state.user.displayName == null) {
                   Navigator.of(context)
                       .pushReplacementNamed(ProfileSetupScreen.route);
                 } else {

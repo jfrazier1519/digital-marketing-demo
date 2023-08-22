@@ -16,6 +16,6 @@ abstract class UserRepository {
   Future<List<User>> getAllUsers();
   Future<User> getUserById(String uid);
   Future<void> updateUser(User user);
-  Future<void> followBrand(String uid, int brandId);
-  Future<void> unfollowBrand(String uid, int brandId);
+  Future<void> followBrand(User user, int brandId);
+  Future<void> unfollowBrand(User user, int brandId);
 }

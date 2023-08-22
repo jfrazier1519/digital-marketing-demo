@@ -50,7 +50,7 @@ class BrandWidget extends StatelessWidget {
                           brand.image,
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       )
                     : const SizedBox(width: 100, height: 100),
