@@ -15,7 +15,8 @@ class VenuesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VenueBloc(FakeVenueRepository())..add(FetchVenues()),
+      create: (context) =>
+          VenueBloc(FakeVenueRepository.repository)..add(FetchVenues()),
       child: _VenuesScreenContent(),
     );
   }

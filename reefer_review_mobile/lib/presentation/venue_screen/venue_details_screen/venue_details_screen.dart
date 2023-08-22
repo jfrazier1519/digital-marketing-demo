@@ -30,21 +30,21 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
       providers: [
         BlocProvider(
           create: (context) => ReviewBloc(FakeReviewRepository())
-            ..add(FetchReviewsForVenue(widget.venue.venueId)),
+            ..add(FetchReviewsForVenue(widget.venue.uid)),
         ),
         BlocProvider(
           create: (context) =>
               ProductBloc(FakeProductRepository.productRepository)
-                ..add(FetchProductsByVenue(widget.venue.venueId)),
+                ..add(FetchProductsByVenue(widget.venue.uid)),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(),
         body: ListView(children: [
-          if (widget.venue.image.isNotEmpty)
+          if (widget.venue.profileImage!.isNotEmpty)
             SizedBox(
               height: 150.0,
-              child: Image.asset(widget.venue.image, fit: BoxFit.cover),
+              child: Image.asset(widget.venue.profileImage!, fit: BoxFit.cover),
             ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
@@ -55,7 +55,7 @@ class _VenueDetailsScreenState extends State<VenueDetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.venue.name,
+                      widget.venue.profileName!,
                       style: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold),
                     ),

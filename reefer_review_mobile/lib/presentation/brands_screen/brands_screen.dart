@@ -16,7 +16,8 @@ class BrandsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BrandBloc(FakeBrandRepository())..add(FetchBrands()),
+      create: (context) =>
+          BrandBloc(FakeBrandRepository.repository)..add(FetchBrands()),
       child: _BrandsScreenContent(),
     );
   }

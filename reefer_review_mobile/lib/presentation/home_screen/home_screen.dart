@@ -34,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var colorScheme = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => FeedBloc(FakePostRepository()),
+      create: (context) =>
+          FeedBloc(postRepository: FakePostRepository.repository),
       child: Scaffold(
         body: Stack(
           children: [

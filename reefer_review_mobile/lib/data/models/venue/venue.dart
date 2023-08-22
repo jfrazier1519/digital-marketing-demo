@@ -1,25 +1,29 @@
-class Venue {
-  final String venueId;
-  final String name;
+import 'package:reefer_review_mobile/data/models/profile/profile.dart';
+
+class Venue extends Profile {
   final String address;
-  final String type;
+  final String venueType;
   final double rating;
   final int reviewCount;
   final String description;
-  final String image;
   final List<String> brandIds;
   final List<String> productIds;
 
   Venue({
-    required this.venueId,
-    required this.name,
     required this.address,
-    required this.type,
+    required this.venueType,
     required this.rating,
     required this.reviewCount,
     required this.description,
-    required this.image,
     required this.brandIds,
     required this.productIds,
-  });
+    required String name,
+    required String image,
+    required String uid,
+  }) : super(
+          profileName: name,
+          profileImage: image,
+          type: ProfileType.VenueProfile,
+          uid: uid,
+        );
 }

@@ -6,6 +6,7 @@ import '../../../bloc/feed_bloc/feed_bloc.dart';
 import '../../../bloc/product_bloc/product_bloc.dart';
 import '../../../bloc/user_bloc/user_bloc.dart';
 import '../../../data/models/brand/brand.dart';
+import '../../../data/models/profile/profile.dart';
 import '../../../data/models/user/user.dart';
 import '../../../repositories/brand_repository/fake_brand_repository_impl.dart';
 import '../../../repositories/post_repository.dart/fake_post_repository_impl.dart';
@@ -47,7 +48,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                     listener: (context, state) {
                       if (state is UserUpdated) {
                         final isFollowing = state.user.followedBrands
-                            .contains(widget.brand.brandId);
+                            .contains(widget.brand.uid);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Text(
@@ -57,10 +58,10 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                     },
                     child: ListView(
                       children: [
-                        if (widget.brand.image.isNotEmpty)
+                        if (widget.brand.profileImage!.isNotEmpty)
                           SizedBox(
                             height: 150.0,
-                            child: Image.asset(widget.brand.image,
+                            child: Image.asset(widget.brand.profileImage!,
                                 fit: BoxFit.cover),
                           ),
                         Padding(
@@ -74,7 +75,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    widget.brand.name,
+                                    widget.brand.profileName!,
                                     style: const TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold),
@@ -89,21 +90,14 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                           if (state is UserLoaded) {
                                             isFollowed = state
                                                 .user.followedBrands
-                                                .contains(widget.brand.brandId);
+                                                .contains(widget.brand.uid);
                                             currentUser = state.user;
-                                            print(
-                                                "UserLoaded state: userId = ${currentUser.uid}");
                                           } else if (state is UserUpdated) {
                                             isFollowed = state
                                                 .user.followedBrands
-                                                .contains(widget.brand.brandId);
+                                                .contains(widget.brand.uid);
                                             currentUser = state.user;
-                                            print(
-                                                "UserUpdated state: userId = ${currentUser.uid}");
-                                          } else {
-                                            print(
-                                                "State is neither UserLoaded nor UserUpdated: state = $state");
-                                          }
+                                          } else {}
 
                                           return ElevatedButton(
                                             onPressed: () {
@@ -111,7 +105,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                                 context.read<UserBloc>().add(
                                                     ToggleFollowBrand(
                                                         currentUser,
-                                                        widget.brand.brandId));
+                                                        widget.brand.uid));
                                               } else {
                                                 print(
                                                     "User data is not available");
@@ -197,10 +191,12 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                 child: const Text("Add Review"),
                               ),
                               BlocProvider(
-                                create: (context) =>
-                                    FeedBloc(FakePostRepository())
-                                      ..add(FetchPostsByAuthor(
-                                          author: widget.brand.name)),
+                                create: (context) => FeedBloc(
+                                    postRepository:
+                                        FakePostRepository.repository)
+                                  ..add(FetchPostsByAuthor(
+                                      authorId: widget.brand.uid,
+                                      profileType: ProfileType.BrandProfile)),
                                 child: BlocBuilder<FeedBloc, FeedState>(
                                   builder: (context, state) {
                                     if (state is FeedLoading) {
@@ -227,7 +223,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                               ));
                                     } else {
                                       return const Text(
-                                          'Something went wrong!');
+                                          'Something went wrong with the feed!');
                                     }
                                   },
                                 ),
@@ -251,7 +247,7 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
         return BlocProvider(
           create: (context) =>
               ProductBloc(FakeProductRepository.productRepository)
-                ..add(FetchProductsByBrand(widget.brand.name)),
+                ..add(FetchProductsByBrand(widget.brand.profileName!)),
           child: Center(
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
@@ -280,9 +276,9 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
 
       case "Venues":
         return BlocProvider(
-          create: (context) =>
-              BrandBloc(FakeBrandRepository(), FakeVenueRepository())
-                ..add(FetchAssociatedVenues(widget.brand.brandId)),
+          create: (context) => BrandBloc(
+              FakeBrandRepository.repository, FakeVenueRepository.repository)
+            ..add(FetchAssociatedVenues(widget.brand.uid)),
           child: Center(
             child: BlocBuilder<BrandBloc, BrandState>(
               builder: (context, state) {

@@ -152,8 +152,8 @@ class FakeProductRepository implements ProductRepository {
 
   @override
   Future<List<Product>> getProductsByVenue(String venueId) async {
-    Venue venue =
-        await FakeVenueRepository.venueRepository.getVenueById(venueId);
+    Venue venue = await FakeVenueRepository.repository.getVenueById(venueId);
+    print('Fetched Venue: $venue'); // Add this line to debug
 
     return _allProducts
         .where((product) => venue.productIds.contains(product.productId))

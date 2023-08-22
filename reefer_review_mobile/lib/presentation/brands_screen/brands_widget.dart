@@ -40,14 +40,14 @@ class BrandWidget extends StatelessWidget {
             child: Row(children: [
               Align(
                 alignment: Alignment.topLeft,
-                child: brand.image.isNotEmpty
+                child: brand.profileImage!.isNotEmpty
                     ? ClipRRect(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8.0),
                           bottomLeft: Radius.circular(8.0),
                         ),
                         child: Image.asset(
-                          brand.image,
+                          brand.profileImage!,
                           width: 100,
                           height: 100,
                           fit: BoxFit.fill,
@@ -62,7 +62,7 @@ class BrandWidget extends StatelessWidget {
                   children: [
                     // Name
                     Text(
-                      brand.name,
+                      brand.profileName!,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18),
                     ),

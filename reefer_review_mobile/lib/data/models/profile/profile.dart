@@ -12,6 +12,4 @@ abstract class Profile {
   });
 }
 
-enum ProfileType {
-  UserProfile,
-}
+enum ProfileType { UserProfile, BrandProfile, VenueProfile }

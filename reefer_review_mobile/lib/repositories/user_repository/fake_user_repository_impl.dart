@@ -8,6 +8,8 @@ import 'package:reefer_review_mobile/data/models/requests/update_profile_request
 import 'package:reefer_review_mobile/repositories/user_repository/user_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
+import '../utilities/custom_entity_exception.dart';
+
 class FakeUserRepository extends UserRepository {
   static UserRepository repository = FakeUserRepository._internal();
 
@@ -146,7 +148,11 @@ class FakeUserRepository extends UserRepository {
 
   @override
   Future<User> getUserById(String uid) async {
-    return _users.firstWhere((user) => user.uid == uid);
+    try {
+      return _users.firstWhere((user) => user.uid == uid);
+    } catch (_) {
+      throw EntityNotFoundException('User with id $uid not found');
+    }
   }
 
   @override

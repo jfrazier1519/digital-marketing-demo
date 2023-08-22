@@ -40,14 +40,14 @@ class VenueWidget extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.topLeft,
-                child: venue.image.isNotEmpty
+                child: venue.profileImage!.isNotEmpty
                     ? ClipRRect(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8.0),
                           bottomLeft: Radius.circular(8.0),
                         ),
                         child: Image.asset(
-                          venue.image,
+                          venue.profileImage!,
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -62,7 +62,7 @@ class VenueWidget extends StatelessWidget {
                   children: [
                     // Name
                     Text(
-                      venue.name,
+                      venue.profileName!,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18),
                     ),
@@ -102,7 +102,7 @@ class VenueWidget extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 5),
-                    Text(venue.type,
+                    Text(venue.venueType,
                         style: TextStyle(color: colorScheme.primary)),
                   ],
                 ),

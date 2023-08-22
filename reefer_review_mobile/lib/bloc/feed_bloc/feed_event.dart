@@ -27,6 +27,7 @@ class CollapsePost extends FeedEvent {
 
 class FetchPostsByAuthor extends FeedEvent {
   final String authorId;
+  final ProfileType profileType;
 
-  FetchPostsByAuthor({required this.authorId});
+  FetchPostsByAuthor({required this.authorId, required this.profileType});
 }
