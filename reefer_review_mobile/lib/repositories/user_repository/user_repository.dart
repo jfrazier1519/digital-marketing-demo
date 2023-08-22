@@ -14,8 +14,8 @@ abstract class UserRepository {
   Future<void> logout();
   Future<void> login(LoginUserRequest request);
   Future<List<User>> getAllUsers();
-  Future<User> getUserById(String userId);
+  Future<User> getUserById(String uid);
   Future<void> updateUser(User user);
-  Future<void> followBrand(String userId, int brandId);
-  Future<void> unfollowBrand(String userId, int brandId);
+  Future<void> followBrand(String uid, int brandId);
+  Future<void> unfollowBrand(String uid, int brandId);
 }

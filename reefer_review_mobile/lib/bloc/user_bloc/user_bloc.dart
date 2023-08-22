@@ -49,15 +49,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<ToggleFollowBrand>((event, emit) async {
       emit(UserLoading());
 
-      User user = await repository.getUserById(event.userId);
+      User user = await repository.getUserById(event.uid);
 
       if (user.followedBrands.contains(event.brandId)) {
-        await repository.unfollowBrand(event.userId, event.brandId);
+        await repository.unfollowBrand(event.uid, event.brandId);
       } else {
-        await repository.followBrand(event.userId, event.brandId);
+        await repository.followBrand(event.uid, event.brandId);
       }
 
-      User updatedUser = await repository.getUserById(event.userId);
+      User updatedUser = await repository.getUserById(event.uid);
       emit(UserUpdated(updatedUser));
     });
   }
