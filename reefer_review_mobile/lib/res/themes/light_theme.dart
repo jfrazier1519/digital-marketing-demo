@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../colors.dart';
 
 var lightTheme = ThemeData(
+  appBarTheme: const AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+  ),
   iconTheme: const IconThemeData(
     color: secondaryGreen,
   ),
