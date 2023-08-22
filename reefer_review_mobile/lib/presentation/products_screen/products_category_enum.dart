@@ -1,8 +1,13 @@
 enum ProductsCategoryEnum {
-  Accessories,
-  Concentrates,
-  Edibles,
   Flower,
+  Wax,
+  Tincure,
+  Distilate,
+  Dab,
+  PreRolls,
+  PreRoll,
+  Edibles,
+  CBD,
+  Accesories,
   Merch,
-  Oils
 }

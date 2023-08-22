@@ -16,8 +16,8 @@ class FakeBrandRepository implements BrandRepository {
           description: "How very weedy it sounds.",
           image: brand1,
           categories: [
-            ProductsCategoryEnum.Accessories,
-            ProductsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.Accesories,
+            ProductsCategoryEnum.Edibles,
           ],
           venueIds: [
             1
@@ -30,7 +30,7 @@ class FakeBrandRepository implements BrandRepository {
           description: "The empire strikes back.",
           image: brand2,
           categories: [
-            ProductsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.CBD,
             ProductsCategoryEnum.Merch,
             ProductsCategoryEnum.Flower
           ],
