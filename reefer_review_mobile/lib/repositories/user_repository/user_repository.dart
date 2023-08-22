@@ -1,4 +1,4 @@
-import '../../data/models/user.dart';
+import '../../data/models/user/user.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
@@ -16,6 +16,6 @@ abstract class UserRepository {
   Future<List<User>> getAllUsers();
   Future<User> getUserById(String uid);
   Future<void> updateUser(User user);
-  Future<void> followBrand(User user, int brandId);
-  Future<void> unfollowBrand(User user, int brandId);
+  Future<void> followBrand(User user, String brandId);
+  Future<void> unfollowBrand(User user, String brandId);
 }

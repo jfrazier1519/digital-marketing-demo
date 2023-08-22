@@ -1,5 +1,5 @@
-import 'package:reefer_review_mobile/data/models/product_experience.dart';
-import 'package:reefer_review_mobile/data/models/product_preference.dart';
+import 'package:reefer_review_mobile/data/models/product/product_experience.dart';
+import 'package:reefer_review_mobile/data/models/product/product_preference.dart';
 
 class UpdateProfileRequest {
   final String? displayName;

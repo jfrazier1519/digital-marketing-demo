@@ -1,4 +1,4 @@
-import 'package:reefer_review_mobile/data/models/user.dart';
+import 'package:reefer_review_mobile/data/models/user/user.dart';
 import 'package:reefer_review_mobile/repositories/post_repository.dart/post_repository.dart';
 import '../../data/post/post.dart';
 import '../../data/post/event_post.dart';
@@ -12,29 +12,10 @@ class FakePostRepository implements PostRepository {
   List<Post> _allPosts = [];
 
   FakePostRepository() {
-    User dummyUser = User(
-      uid: '1',
-      email: 'john.doe@example.com',
-      displayName: 'John Doe',
-      photoUrl: dummyProfileImage,
-      productExperiences: [],
-      productPreferences: [],
-      followedBrands: [],
-    );
-    User dummyUser2 = User(
-      uid: '2',
-      email: 'john.doe@example.com',
-      displayName: 'John Doe',
-      photoUrl: dummyProfileImage,
-      productExperiences: [],
-      productPreferences: [],
-      followedBrands: [],
-    );
-
     _allPosts = [
       EventPost(
-        postId: 2,
-        author: dummyUser,
+        postId: '2',
+        authorId: '1',
         date: DateTime.now(),
         content:
             'This is an event post. Im going to keep adding words here until I run out of things to say. Ill just keep going and going and going and going. alright. done now. hopefully. maybe? please be done',
@@ -42,24 +23,24 @@ class FakePostRepository implements PostRepository {
         eventUrl: 'event_screen_route',
       ),
       LoyaltyPost(
-        postId: 3,
-        author: dummyUser,
+        postId: '3',
+        authorId: '1',
         date: DateTime.now(),
         content: 'This is a loyalty post.',
         image: dummyLoyaltyPostImage,
         crystals: '5',
       ),
       ProductPost(
-        postId: 4,
-        author: dummyUser,
+        postId: '4',
+        authorId: '1',
         date: DateTime.now(),
         content: 'This is a product post.',
         image: dummyProductPostImage,
         productUrl: 'product_screen_route',
       ),
       ReviewPost(
-        postId: 5,
-        author: dummyUser,
+        postId: '5',
+        authorId: '1',
         date: DateTime.now(),
         content: 'This is a review post.',
         image: dummyReviewPostImage,
@@ -81,10 +62,13 @@ class FakePostRepository implements PostRepository {
   }
 
   @override
-  Future<List<Post>> getPosts({PostFeedType? feedType}) async {
+  Future<List<Post>> getPosts({PostFeedType? feedType, User? user}) async {
     switch (feedType) {
       case PostFeedType.Following:
-        return _followingPosts;
+        return _allPosts
+            .where(
+                (post) => user?.followedBrands.contains(post.authorId) ?? false)
+            .toList();
       case PostFeedType.Suggested:
         return _suggestedPosts;
       default:
@@ -106,14 +90,12 @@ class FakePostRepository implements PostRepository {
   }
 
   @override
-  Future<void> deletePost(int postId) async {
+  Future<void> deletePost(String postId) async {
     _allPosts.removeWhere((p) => p.postId == postId);
   }
 
   @override
-  Future<List<Post>> getPostsByAuthor(String author) async {
-    return _allPosts
-        .where((post) => post.author.profileName == author)
-        .toList();
+  Future<List<Post>> getPostsByAuthorId(String authorId) async {
+    return _allPosts.where((post) => post.authorId == authorId).toList();
   }
 }

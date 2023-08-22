@@ -1,14 +1,14 @@
-import '../../presentation/products_screen/products_category_enum.dart';
+import '../../../presentation/products_screen/products_category_enum.dart';
 
 class Brand {
-  final int brandId;
+  final String brandId;
   final String name;
   final double rating;
   final int reviewCount;
   final String description;
   final String image;
   final List<ProductsCategoryEnum> categories;
-  final List<int> venueIds;
+  final List<String> venueIds;
 
   Brand(
       {required this.brandId,

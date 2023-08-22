@@ -1,7 +1,7 @@
-import 'package:reefer_review_mobile/data/models/profile.dart';
+import 'package:reefer_review_mobile/data/models/profile/profile.dart';
 
 abstract class Review {
-  final int reviewId;
+  final String reviewId;
   final Profile reviewer;
   final String content;
   final DateTime date;

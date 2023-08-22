@@ -1,6 +1,6 @@
-import 'package:reefer_review_mobile/data/models/user.dart';
-import 'package:reefer_review_mobile/data/models/product_experience.dart';
-import 'package:reefer_review_mobile/data/models/product_preference.dart';
+import 'package:reefer_review_mobile/data/models/user/user.dart';
+import 'package:reefer_review_mobile/data/models/product/product_experience.dart';
+import 'package:reefer_review_mobile/data/models/product/product_preference.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
@@ -14,7 +14,31 @@ class FakeUserRepository extends UserRepository {
   FakeUserRepository._internal();
 
   User? _account;
-  List<User> _users = [];
+
+  final List<User> _users = [
+    User(
+      uid: '1',
+      email: 'john.doe@example.com',
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
+      followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
+    ),
+    User(
+      uid: '2',
+      email: 'john.doe2@example.com',
+      displayName: 'John Doe 2',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
+      followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
+    ),
+  ];
 
   final _preferences = [
     ProductPreference('Flower', false),
@@ -88,6 +112,8 @@ class FakeUserRepository extends UserRepository {
           productPreferences: _preferences,
           productExperiences: _productExperiences,
           followedBrands: [],
+          followedUsers: [],
+          followedVenues: [],
         );
       default:
         return User(
@@ -98,6 +124,8 @@ class FakeUserRepository extends UserRepository {
           displayName: 'Test',
           photoUrl: dummyProfileImage,
           followedBrands: [],
+          followedUsers: [],
+          followedVenues: [],
         );
     }
   }
@@ -132,7 +160,7 @@ class FakeUserRepository extends UserRepository {
   }
 
   @override
-  Future<void> followBrand(User user, int brandId) async {
+  Future<void> followBrand(User user, String brandId) async {
     if (!user.followedBrands.contains(brandId)) {
       user.followedBrands.add(brandId);
       await updateUser(user);
@@ -140,7 +168,7 @@ class FakeUserRepository extends UserRepository {
   }
 
   @override
-  Future<void> unfollowBrand(User user, int brandId) async {
+  Future<void> unfollowBrand(User user, String brandId) async {
     user.followedBrands.remove(brandId);
     await updateUser(user);
   }

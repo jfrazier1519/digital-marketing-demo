@@ -1,4 +1,4 @@
-import 'package:reefer_review_mobile/data/venue.dart';
+import 'package:reefer_review_mobile/data/models/venue/venue.dart';
 import 'package:reefer_review_mobile/repositories/venue_repository/venue_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
@@ -10,7 +10,7 @@ class FakeVenueRepository implements VenueRepository {
   FakeVenueRepository() {
     _allVenues = [
       Venue(
-          venueId: 1,
+          venueId: "1",
           name: "Sample Venue 1",
           address: "1245 Strawberry Ln, Luxerburg CO, 88897",
           type: "Distillery",
@@ -18,10 +18,10 @@ class FakeVenueRepository implements VenueRepository {
           reviewCount: 10,
           description: "Very professional establishment.",
           image: venue1,
-          brandIds: [1],
-          productIds: [1, 2, 3]),
+          brandIds: ['1'],
+          productIds: ['1', '2', '3']),
       Venue(
-          venueId: 2,
+          venueId: "2",
           name: "Sample Venue 2",
           address: "Location B",
           type: "Bar",
@@ -30,8 +30,8 @@ class FakeVenueRepository implements VenueRepository {
           description:
               "This is a fantastic bar located in Location B. They sell weed in the back",
           image: venue2,
-          brandIds: [2],
-          productIds: [4, 5]),
+          brandIds: ['2'],
+          productIds: ['4', '5']),
     ];
   }
 
@@ -41,8 +41,8 @@ class FakeVenueRepository implements VenueRepository {
   }
 
   @override
-  Future<Venue> getVenueById(int id) async {
-    return _allVenues.firstWhere((venue) => venue.venueId == id);
+  Future<Venue> getVenueById(String venueId) async {
+    return _allVenues.firstWhere((venue) => venue.venueId == venueId);
   }
 
   @override
@@ -51,7 +51,7 @@ class FakeVenueRepository implements VenueRepository {
   }
 
   @override
-  Future<void> deleteVenue(int venueId) async {
+  Future<void> deleteVenue(String venueId) async {
     _allVenues.removeWhere((venue) => venue.venueId == venueId);
   }
 

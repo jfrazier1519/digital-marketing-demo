@@ -14,11 +14,11 @@ class ReviewsLoaded extends ReviewState {
 }
 
 class ReviewExpanded extends ReviewState {
-  final int reviewId;
+  final String reviewId;
   ReviewExpanded(this.reviewId);
 }
 
 class ReviewCollapsed extends ReviewState {
-  final int reviewId;
+  final String reviewId;
   ReviewCollapsed(this.reviewId);
 }

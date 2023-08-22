@@ -1,5 +1,5 @@
 import 'package:reefer_review_mobile/res/images.dart';
-import '../../data/models/brand.dart';
+import '../../data/models/brand/brand.dart';
 import '../../presentation/products_screen/products_category_enum.dart';
 import 'brand_repository.dart';
 
@@ -9,7 +9,7 @@ class FakeBrandRepository implements BrandRepository {
   FakeBrandRepository() {
     _allBrands = [
       Brand(
-          brandId: 1,
+          brandId: "1",
           name: "The Weed Company HQ",
           rating: 4.5,
           reviewCount: 10,
@@ -20,10 +20,10 @@ class FakeBrandRepository implements BrandRepository {
             ProductsCategoryEnum.Concentrates,
           ],
           venueIds: [
-            1
+            "1"
           ]),
       Brand(
-          brandId: 2,
+          brandId: "2",
           name: "Empire Weed",
           rating: 3.8,
           reviewCount: 25,
@@ -35,7 +35,7 @@ class FakeBrandRepository implements BrandRepository {
             ProductsCategoryEnum.Flower
           ],
           venueIds: [
-            2
+            "2"
           ]),
     ];
   }
@@ -46,8 +46,8 @@ class FakeBrandRepository implements BrandRepository {
   }
 
   @override
-  Future<Brand> getBrandById(int id) async {
-    return _allBrands.firstWhere((brand) => brand.brandId == id);
+  Future<Brand> getBrandById(String brandId) async {
+    return _allBrands.firstWhere((brand) => brand.brandId == brandId);
   }
 
   @override
@@ -56,7 +56,7 @@ class FakeBrandRepository implements BrandRepository {
   }
 
   @override
-  Future<void> deleteBrand(int brandId) async {
+  Future<void> deleteBrand(String brandId) async {
     _allBrands.removeWhere((brand) => brand.brandId == brandId);
   }
 

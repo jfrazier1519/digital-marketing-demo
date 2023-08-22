@@ -20,6 +20,6 @@ class SortBrands extends BrandEvent {
 }
 
 class FetchAssociatedVenues extends BrandEvent {
-  final int brandId;
+  final String brandId;
   FetchAssociatedVenues(this.brandId);
 }

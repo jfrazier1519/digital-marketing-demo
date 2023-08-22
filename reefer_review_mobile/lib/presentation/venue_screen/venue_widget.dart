@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/presentation/venue_screen/venue_details_screen/venue_details_screen.dart';
 import '../../data/models/route_arguments/venue_details_screen_arguments.dart';
-import '../../data/venue.dart';
+import '../../data/models/venue/venue.dart';
 
 class VenueWidget extends StatelessWidget {
   final Venue venue;

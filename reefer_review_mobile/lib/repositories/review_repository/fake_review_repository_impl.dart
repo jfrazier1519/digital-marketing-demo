@@ -1,5 +1,5 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
-import '../../data/models/user.dart';
+import '../../data/models/user/user.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
 import '../../data/models/review/venue_review.dart';
@@ -17,6 +17,8 @@ class FakeReviewRepository implements ReviewRepository {
       productExperiences: [],
       productPreferences: [],
       followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
     );
     User dummyReviewer2 = User(
       uid: '1',
@@ -26,45 +28,47 @@ class FakeReviewRepository implements ReviewRepository {
       productExperiences: [],
       productPreferences: [],
       followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
     );
 
     //TODO: add other review types here as they're needed
     _allReviews = [
       ProductReview(
-          reviewId: 1,
-          productId: 1,
+          reviewId: '1',
+          productId: '1',
           reviewer: dummyReviewer,
           content: 'Great product! Really enjoyed it.',
           date: DateTime.now(),
           rating: 4,
           title: 'Delicious Gummies'),
       ProductReview(
-          reviewId: 2,
-          productId: 1,
+          reviewId: '2',
+          productId: '1',
           reviewer: dummyReviewer2,
           content: 'It was alright, could be better.',
           date: DateTime.now(),
           rating: 2,
           title: 'The Worst'),
       ProductReview(
-          reviewId: 3,
-          productId: 3,
+          reviewId: '3',
+          productId: '3',
           reviewer: dummyReviewer,
           content: 'Fantastic! I recommend it to everyone.',
           date: DateTime.now(),
           rating: 5,
           title: '10/10 JUST DO IT'),
       VenueReview(
-          reviewId: 100,
-          venueId: 1,
+          reviewId: '100',
+          venueId: '1',
           reviewer: dummyReviewer,
           content: 'Great place, loved the atmosphere.',
           date: DateTime.now(),
           rating: 5,
           title: 'Perfect Spot'),
       VenueReview(
-          reviewId: 101,
-          venueId: 1,
+          reviewId: '101',
+          venueId: '1',
           reviewer: dummyReviewer2,
           content: 'The store was too crowded for my liking.',
           date: DateTime.now(),
@@ -74,7 +78,7 @@ class FakeReviewRepository implements ReviewRepository {
   }
 
   @override
-  Future<List<ProductReview>> getAllReviewsForProduct(int productId) async {
+  Future<List<ProductReview>> getAllReviewsForProduct(String productId) async {
     return _allReviews
         .where((review) =>
             review is ProductReview && review.productId == productId)
@@ -83,7 +87,7 @@ class FakeReviewRepository implements ReviewRepository {
   }
 
   @override
-  Future<List<VenueReview>> getAllReviewsForVenue(int venueId) async {
+  Future<List<VenueReview>> getAllReviewsForVenue(String venueId) async {
     return _allReviews
         .where((review) => review is VenueReview && review.venueId == venueId)
         .map((review) => review as VenueReview)
@@ -91,7 +95,7 @@ class FakeReviewRepository implements ReviewRepository {
   }
 
   @override
-  Future<Review> getReviewById(int reviewId) async {
+  Future<Review> getReviewById(String reviewId) async {
     return _allReviews.firstWhere((review) => review.reviewId == reviewId);
   }
 
@@ -101,7 +105,7 @@ class FakeReviewRepository implements ReviewRepository {
   }
 
   @override
-  Future<void> deleteReview(int reviewId) async {
+  Future<void> deleteReview(String reviewId) async {
     _allReviews.removeWhere((review) => review.reviewId == reviewId);
   }
 

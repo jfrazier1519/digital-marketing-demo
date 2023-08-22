@@ -1,4 +1,4 @@
-import '../../venue.dart';
+import '../venue/venue.dart';
 
 class VenueDetailsScreenArguments {
   final Venue venue;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/data/models/product_preference.dart';
+import 'package:reefer_review_mobile/data/models/product/product_preference.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
 
 import '../../../bloc/user_bloc/user_bloc.dart';

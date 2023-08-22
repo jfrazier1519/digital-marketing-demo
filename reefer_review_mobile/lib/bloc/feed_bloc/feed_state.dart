@@ -14,11 +14,11 @@ class FeedLoaded extends FeedState {
 }
 
 class PostExpanded extends FeedState {
-  final int postId;
+  final String postId;
   PostExpanded(this.postId);
 }
 
 class PostCollapsed extends FeedState {
-  final int postId;
+  final String postId;
   PostCollapsed(this.postId);
 }

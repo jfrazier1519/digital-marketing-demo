@@ -1,7 +1,7 @@
 import 'package:reefer_review_mobile/data/models/product/product_price.dart';
 
 class Product {
-  final int productId;
+  final String productId;
   final String name;
   final String category;
   final String brand;

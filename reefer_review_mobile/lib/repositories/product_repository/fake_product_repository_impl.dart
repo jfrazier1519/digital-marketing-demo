@@ -3,7 +3,7 @@ import 'package:reefer_review_mobile/res/images.dart';
 
 import '../../data/models/product/product.dart';
 import '../../data/models/product/product_price.dart';
-import '../../data/venue.dart';
+import '../../data/models/venue/venue.dart';
 import '../venue_repository/fake_venue_repository_impl.dart';
 
 class FakeProductRepository implements ProductRepository {
@@ -15,7 +15,7 @@ class FakeProductRepository implements ProductRepository {
   FakeProductRepository._internal() {
     _allProducts = [
       Product(
-        productId: 1,
+        productId: '1',
         name: "Wonderful Gummies",
         category: "Edibles",
         brand: "Empire Weed",
@@ -27,7 +27,7 @@ class FakeProductRepository implements ProductRepository {
         prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
-        productId: 2,
+        productId: '2',
         name: "Sample Product 2",
         category: "Edibles",
         brand: "The Weed Company HQ",
@@ -38,7 +38,7 @@ class FakeProductRepository implements ProductRepository {
         prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
-        productId: 3,
+        productId: '3',
         name: "Glass Bong",
         category: "Accessories",
         brand: "Empire Weed",
@@ -49,7 +49,7 @@ class FakeProductRepository implements ProductRepository {
         prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
-        productId: 4,
+        productId: '4',
         name: "Sample Product 4",
         category: "Concentrates",
         brand: "The Weed Company HQ",
@@ -60,7 +60,7 @@ class FakeProductRepository implements ProductRepository {
         prices: [Price("1g", 14), Price("1/2oz", 5), Price("1/8oz", 2)],
       ),
       Product(
-        productId: 5,
+        productId: '5',
         name: "Sample Product 5",
         category: "Oils",
         brand: "Empire Weed",
@@ -79,8 +79,8 @@ class FakeProductRepository implements ProductRepository {
   }
 
   @override
-  Future<Product> getProductById(int id) async {
-    return _allProducts.firstWhere((product) => product.productId == id);
+  Future<Product> getProductById(String productId) async {
+    return _allProducts.firstWhere((product) => product.productId == productId);
   }
 
   @override
@@ -89,7 +89,7 @@ class FakeProductRepository implements ProductRepository {
   }
 
   @override
-  Future<void> deleteProduct(int productId) async {
+  Future<void> deleteProduct(String productId) async {
     _allProducts.removeWhere((product) => product.productId == productId);
   }
 
@@ -146,12 +146,12 @@ class FakeProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> getProductsByBrand(String brandName) async {
-    return _allProducts.where((product) => product.brand == brandName).toList();
+  Future<List<Product>> getProductsByBrand(String brandId) async {
+    return _allProducts.where((product) => product.brand == brandId).toList();
   }
 
   @override
-  Future<List<Product>> getProductsByVenue(int venueId) async {
+  Future<List<Product>> getProductsByVenue(String venueId) async {
     Venue venue =
         await FakeVenueRepository.venueRepository.getVenueById(venueId);
 

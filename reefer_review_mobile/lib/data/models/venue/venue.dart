@@ -1,5 +1,5 @@
 class Venue {
-  final int venueId;
+  final String venueId;
   final String name;
   final String address;
   final String type;
@@ -7,8 +7,8 @@ class Venue {
   final int reviewCount;
   final String description;
   final String image;
-  final List<int> brandIds;
-  final List<int> productIds;
+  final List<String> brandIds;
+  final List<String> productIds;
 
   Venue({
     required this.venueId,

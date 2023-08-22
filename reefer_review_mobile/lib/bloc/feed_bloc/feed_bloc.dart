@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import '../../data/models/user/user.dart';
 import '../../data/post/post.dart';
 import '../../repositories/post_repository.dart/post_repository.dart';
 import '../../data/post/post_feed_type.dart';
@@ -12,7 +13,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedBloc(this.postRepository) : super(FeedInitial()) {
     on<FetchPostsUsecase>((event, emit) async {
       emit(FeedLoading());
-      var posts = await postRepository.getPosts(feedType: event.feedType);
+      var posts = await postRepository.getPosts(
+          feedType: event.feedType, user: event.user);
       emit(FeedLoaded(posts));
     });
 
@@ -26,7 +28,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchPostsByAuthor>((event, emit) async {
       emit(FeedLoading());
-      var posts = await postRepository.getPostsByAuthor(event.author);
+      var posts = await postRepository.getPostsByAuthorId(event.authorId);
       emit(FeedLoaded(posts));
     });
     on<AddPost>((event, emit) async {
