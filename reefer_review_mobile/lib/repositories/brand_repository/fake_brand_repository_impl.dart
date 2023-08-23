@@ -12,32 +12,64 @@ class FakeBrandRepository implements BrandRepository {
   final List<Brand> _allBrands = [
     Brand(
         uid: "1",
-        name: "The Weed Company HQ",
-        rating: 4.5,
-        reviewCount: 10,
-        description: "How very weedy it sounds.",
-        image: brand1,
+        name: "Makerz",
+        rating: 3.6,
+        reviewCount: 22,
+        description:
+            "The best concentrates, tinktures, and wax you can find. Homgrown with both care and hard won knowledge.",
+        image: brandID1,
         categories: [
-          ProductsCategoryEnum.Accessories,
-          ProductsCategoryEnum.Edibles,
+          ProductsCategoryEnum.Tincure,
+          ProductsCategoryEnum.Oils,
+          ProductsCategoryEnum.Wax,
+          ProductsCategoryEnum.Dab,
+          ProductsCategoryEnum.Concentrates
         ],
         venueIds: [
-          "1"
+          "3"
         ]),
     Brand(
         uid: "2",
-        name: "Empire Weed",
-        rating: 3.8,
-        reviewCount: 25,
-        description: "The empire strikes back.",
-        image: brand2,
+        name: "Munchies Munchables",
+        rating: 4.2,
+        reviewCount: 78,
+        description:
+            "Need to take the edge off? Not big into the idea of smoking? Why not try Munchies Munchables?! We provide all kinds of things from Cbd gummies to 100 or even 1000 mg chocolates. Come see what we Munchies has to offer today!",
+        image: brandID2,
         categories: [
-          ProductsCategoryEnum.CBD,
-          ProductsCategoryEnum.Merch,
-          ProductsCategoryEnum.Flower
+          ProductsCategoryEnum.Edibles,
         ],
         venueIds: [
           "2"
+        ]),
+    Brand(
+        uid: "3",
+        name: "GreenThumb",
+        rating: 5,
+        reviewCount: 1026,
+        description:
+            "We cultivate and produce top quality Flower, and we have the thumbs to prove it!",
+        image: brandID3,
+        categories: [
+          ProductsCategoryEnum.Flower,
+        ],
+        venueIds: [
+          "2",
+          "3"
+        ]),
+    Brand(
+        uid: "4",
+        name: "FlwrPwr",
+        rating: 4.7,
+        reviewCount: 617,
+        description:
+            "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
+        image: brandID4,
+        categories: [
+          ProductsCategoryEnum.Accessories,
+        ],
+        venueIds: [
+          "1"
         ]),
   ];
 

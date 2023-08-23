@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_details_screen/products_details_screen.dart';
 import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import '../../../data/models/product/product.dart';
 import '../../../data/models/route_arguments/product_details_screen_arguments.dart';
@@ -23,7 +24,7 @@ class ProductPriceWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          ProductsScreen.route,
+          ProductDetailsScreen.route,
           arguments: ProductDetailsScreenArguments(product: product),
         );
       },
@@ -103,7 +104,7 @@ class ProductPriceWidget extends StatelessWidget {
                             Transform.translate(
                               offset: const Offset(0, -2),
                               child: Text(
-                                '\$${price.value.toStringAsFixed(2)}',
+                                '\$${price.value.toStringAsFixed(0)}',
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
