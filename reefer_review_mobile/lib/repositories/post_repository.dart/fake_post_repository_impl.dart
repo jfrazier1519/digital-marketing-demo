@@ -37,7 +37,7 @@ class FakePostRepository extends PostRepository {
               date: DateTime.now(),
               content:
                   'Be the first to purchase our new honeycomb rig! It not only works as great as it looks but combines easily with any E-Nail. To make the deal even sweeter we even offer a 30 day money back gaurantee. Dont let this opportunity pass you by!',
-              image: productID13,
+              image: productID13_PostID1,
               productUrl: 'product_screen_route',
               productId: '13',
               profileType: ProfileType.BrandProfile),
@@ -47,7 +47,7 @@ class FakePostRepository extends PostRepository {
               date: DateTime.now(),
               content:
                   'We have great news for all of you CDB fans out there, our Fruit Bear CBD gumies are back in stock! they are a steal at only \$15 a pack. Come in on thursday and when you buy 2 packs you get the third for 1/2 price! Don\'t be a dummy, come get some gummies!',
-              image: productID9,
+              image: productID9_PostID2,
               productUrl: 'product_screen_route',
               productId: '9',
               profileType: ProfileType.VenueProfile),
@@ -57,7 +57,7 @@ class FakePostRepository extends PostRepository {
               date: DateTime.now(),
               content:
                   'Great news! We just landed some delicious Durban Poison Infused Pre-rolls and want to let you be the first to know. Come in and check out the delicious and relaxing feel of one of the best strains around.',
-              image: productID4,
+              image: productID4_PostID3,
               productUrl: 'product_screen_route',
               productId: '4',
               profileType: ProfileType.VenueProfile),

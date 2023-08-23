@@ -56,7 +56,7 @@ class FakeProductRepository implements ProductRepository {
         rating: 5.0,
         reviewCount: 16,
         description: "Indica Dominant Hybrid",
-        image: productID4,
+        image: productID4_PostID3,
         prices: [Price(".5g", 20), Price("1g", 40)],
       ),
       Product(
@@ -111,7 +111,7 @@ class FakeProductRepository implements ProductRepository {
         rating: 5,
         reviewCount: 8,
         description: "Gummy bearks 25mg CBD each",
-        image: productID9,
+        image: productID9_PostID2,
         prices: [Price("10 piece", 15)],
       ),
       Product(
@@ -155,13 +155,13 @@ class FakeProductRepository implements ProductRepository {
         rating: 5,
         reviewCount: 1,
         description: "Dab Rig",
-        image: productID13,
+        image: productID13_PostID1,
         prices: [Price("1", 220)],
       ),
       Product(
         productId: '14',
         name: "Atomizer Pen",
-        category: "Edibles",
+        category: "Accessories",
         brand: "FlwrPwr",
         rating: 2.6,
         reviewCount: 15,

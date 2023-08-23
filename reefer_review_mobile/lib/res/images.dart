@@ -17,16 +17,16 @@ const venueID3 = "assets/images/VenueID3.jpg";
 const productID1 = "assets/images/ProductID1.jpg";
 const productID2 = "assets/images/ProductID2.jpg";
 const productID3 = "assets/images/ProductID3.jpg";
-const productID4 = "assets/images/ProductID4.jpg";
+const productID4_PostID3 = "assets/images/ProductID4_PostID3.jpg";
 const productID5 = "assets/images/ProductID5.jpg";
 const productID6 = "assets/images/ProductID6.jpg";
 const productID7 = "assets/images/ProductID7.jpg";
 const productID8 = "assets/images/ProductID8.jpg";
-const productID9 = "assets/images/ProductID9.jpg";
+const productID9_PostID2 = "assets/images/ProductID9_PostID2.jpg";
 const productID10 = "assets/images/ProductID10.jpg";
 const productID11 = "assets/images/ProductID11.jpg";
 const productID12 = "assets/images/ProductID12.jpg";
-const productID13 = "assets/images/ProductID13.jpg";
+const productID13_PostID1 = "assets/images/ProductID13_PostID1.jpg";
 const productID14 = "assets/images/ProductID14.jpg";
 
 //Used for reviews

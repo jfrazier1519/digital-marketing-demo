@@ -237,7 +237,7 @@ class FakeUserRepository extends UserRepository {
           photoUrl: dummyProfileImage,
           followedBrands: [],
           followedUsers: [],
-          followedVenues: [],
+          followedVenues: ['1', '2', '3'],
         );
     }
   }

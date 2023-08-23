@@ -123,7 +123,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Text(price.size),
                             const Divider(thickness: 1, color: Colors.black),
-                            Text('\$${price.value.toStringAsFixed(2)}'),
+                            Text('\$${price.value.toStringAsFixed(0)}'),
                           ],
                         ),
                       ),

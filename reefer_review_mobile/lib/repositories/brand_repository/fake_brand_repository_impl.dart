@@ -26,7 +26,7 @@ class FakeBrandRepository implements BrandRepository {
           ProductsCategoryEnum.Concentrates
         ],
         venueIds: [
-          "1"
+          "3"
         ]),
     Brand(
         uid: "2",
@@ -54,7 +54,8 @@ class FakeBrandRepository implements BrandRepository {
           ProductsCategoryEnum.Flower,
         ],
         venueIds: [
-          "1"
+          "2",
+          "3"
         ]),
     Brand(
         uid: "4",
@@ -70,26 +71,6 @@ class FakeBrandRepository implements BrandRepository {
         venueIds: [
           "1"
         ]),
-    Brand(
-        uid: "5",
-        name: "Fire Spinners United",
-        rating: 4.2,
-        reviewCount: 340,
-        description:
-            "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
-        image: brandID4,
-        categories: [],
-        venueIds: ["1"]),
-    Brand(
-        uid: "6",
-        name: "Kickers Ball Music Festival",
-        rating: 3.9,
-        reviewCount: 1341,
-        description:
-            "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
-        image: brandID4,
-        categories: [],
-        venueIds: ["1"]),
   ];
 
   @override
