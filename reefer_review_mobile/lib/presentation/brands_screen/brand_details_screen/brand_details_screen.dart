@@ -75,12 +75,10 @@ class _BrandDetailsScreenState extends State<BrandDetailsScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    // Wrap your Text widget with an Expanded widget
                                     child: Text(
                                       widget.brand.profileName!,
                                       maxLines: 2,
-                                      overflow: TextOverflow
-                                          .ellipsis, // This will add ellipses if the text overflows
+                                      overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold),
