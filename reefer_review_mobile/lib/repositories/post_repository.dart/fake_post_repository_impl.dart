@@ -63,10 +63,10 @@ class FakePostRepository extends PostRepository {
               profileType: ProfileType.VenueProfile),
           EventPost(
             postId: '4',
-            authorId: '3',
+            authorId: '2',
             date: DateTime.now(),
             content:
-                'Come join us for a night of fire spinning and fun! There will be food, live music, and even a secret sponser! Learn to spin fire yourself by signing up for a class online! Check us out at firespinnersunited.org.',
+                'Come join us for a night of fire spinning and fun! There will be food, live music, and even a secret sponser! Learn to spin fire yourself by signing up for a class online! Check us out at firespinnersunited.org. Hosted by Munchies Munchables!',
             image: eventID1,
             eventUrl: 'event_screen_route',
             profileType: ProfileType.BrandProfile,
@@ -86,7 +86,7 @@ class FakePostRepository extends PostRepository {
             authorId: '1',
             date: DateTime.now(),
             content:
-                'Like music and the jazz cabbage? Well... so do we so come party with us at this years Kickers Ball! 3 day event with stages 6 stages, food trucks, homegrown shops, some of your favorite Cannabis Brands and more. Tickets, camping passes, and parking passes for sale online at KickersBallMF.org.',
+                'Like music and the jazz cabbage? Well... so do we so come party with us at this years Kickers Ball! 3 day event with stages 6 stages, food trucks, homegrown shops, some of your favorite Cannabis Brands and more. Tickets, camping passes, and parking passes for sale online at KickersBallMF.org. Hosted by Makerz!',
             image: eventID3,
             eventUrl: 'event_screen_route',
             profileType: ProfileType.BrandProfile,
