@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reefer_review_mobile/presentation/profile_setup_screen/profile_setup_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/product_experience_row.dart';
+import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/profile_setup_success_modal.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
 
 import '../../bloc/user_bloc/user_bloc.dart';
@@ -96,7 +96,7 @@ class _ProductExperiencesScreenState extends State<ProductExperiencesScreen> {
 
   _finishPressed(BuildContext context) {
     if (_globalKey.currentState!.validate()) {
-      Navigator.of(context).pushNamed(ProfileSetupScreen.route);
+      Navigator.of(context).pushNamed(ProfileSetupSuccessModal.route);
     }
   }
 }

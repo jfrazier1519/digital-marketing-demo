@@ -20,7 +20,7 @@ class FakeUserRepository extends UserRepository {
     ProductPreference('Distilate', false),
     ProductPreference('Dab', false),
     ProductPreference('Pre-rolls', false),
-    ProductPreference('Pre-roll', false),
+    ProductPreference('Pre-roll (Infused)', false),
     ProductPreference('CBD', false),
   ];
 
@@ -31,7 +31,7 @@ class FakeUserRepository extends UserRepository {
     ProductExperience('Distilate', 0),
     ProductExperience('Dab', 0),
     ProductExperience('Pre-rolls', 0),
-    ProductExperience('Pre-roll', 0),
+    ProductExperience('Pre-roll (Infused)', 0),
     ProductExperience('CBD', 0),
   ];
 
