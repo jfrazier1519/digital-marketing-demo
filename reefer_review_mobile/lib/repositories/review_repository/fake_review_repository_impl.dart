@@ -74,6 +74,46 @@ class FakeReviewRepository implements ReviewRepository {
           date: DateTime.now(),
           rating: 2,
           title: 'Too Packed'),
+      VenueReview(
+          reviewId: '101',
+          venueId: '1',
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
+      VenueReview(
+          reviewId: '101',
+          venueId: '1',
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
+      VenueReview(
+          reviewId: '101',
+          venueId: '1',
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
+      VenueReview(
+          reviewId: '101',
+          venueId: '1',
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
+      VenueReview(
+          reviewId: '101',
+          venueId: '1',
+          reviewer: dummyReviewer2,
+          content: 'The store was too crowded for my liking.',
+          date: DateTime.now(),
+          rating: 2,
+          title: 'Too Packed'),
     ];
   }
 

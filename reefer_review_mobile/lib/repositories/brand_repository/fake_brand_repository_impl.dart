@@ -17,7 +17,7 @@ class FakeBrandRepository implements BrandRepository {
         reviewCount: 22,
         description:
             "The best concentrates, tinktures, and wax you can find. Homgrown with both care and hard won knowledge.",
-        image: brand1,
+        image: brandID1,
         categories: [
           ProductsCategoryEnum.Tincure,
           ProductsCategoryEnum.Oils,
@@ -35,7 +35,7 @@ class FakeBrandRepository implements BrandRepository {
         reviewCount: 78,
         description:
             "Need to take the edge off? Not big into the idea of smoking? Why not try Munchies Munchables?! We provide all kinds of things from Cbd gummies to 100 or even 1000 mg chocolates. Come see what we Munchies has to offer today!",
-        image: brand2,
+        image: brandID2,
         categories: [
           ProductsCategoryEnum.Edibles,
         ],
@@ -44,12 +44,12 @@ class FakeBrandRepository implements BrandRepository {
         ]),
     Brand(
         uid: "3",
-        name: "The Weed Company HQ",
+        name: "GreenThumb",
         rating: 5,
         reviewCount: 1026,
         description:
             "We cultivate and produce top quality Flower, and we have the thumbs to prove it!",
-        image: brand1,
+        image: brandID3,
         categories: [
           ProductsCategoryEnum.Flower,
         ],
@@ -63,13 +63,33 @@ class FakeBrandRepository implements BrandRepository {
         reviewCount: 617,
         description:
             "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
-        image: brand1,
+        image: brandID4,
         categories: [
           ProductsCategoryEnum.Accessories,
         ],
         venueIds: [
           "1"
         ]),
+    Brand(
+        uid: "5",
+        name: "Fire Spinners United",
+        rating: 4.2,
+        reviewCount: 340,
+        description:
+            "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
+        image: brandID4,
+        categories: [],
+        venueIds: ["1"]),
+    Brand(
+        uid: "6",
+        name: "Kickers Ball Music Festival",
+        rating: 3.9,
+        reviewCount: 1341,
+        description:
+            "Our belief is that the quality of your tools affects the qulaity of your goods. Get the best from your Flower with FlwrPwr Glass and accessories. You wont find a better deal on E-nails, Rigs, and other Glass anywhere.",
+        image: brandID4,
+        categories: [],
+        venueIds: ["1"]),
   ];
 
   @override

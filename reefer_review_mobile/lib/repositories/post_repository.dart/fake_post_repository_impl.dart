@@ -31,15 +31,65 @@ class FakePostRepository extends PostRepository {
       : entityDispatcher = EntityDispatcher(
             userRepo: userRepo, brandRepo: brandRepo, venueRepo: venueRepo),
         _allPosts = [
+          ProductPost(
+              postId: '1',
+              authorId: '4',
+              date: DateTime.now(),
+              content:
+                  'Be the first to purchase our new honeycomb rig! It not only works as great as it looks but combines easily with any E-Nail. To make the deal even sweeter we even offer a 30 day money back gaurantee. Dont let this opportunity pass you by!',
+              image: productID13,
+              productUrl: 'product_screen_route',
+              productId: '13',
+              profileType: ProfileType.BrandProfile),
+          ProductPost(
+              postId: '2',
+              authorId: '3',
+              date: DateTime.now(),
+              content:
+                  'We have great news for all of you CDB fans out there, our Fruit Bear CBD gumies are back in stock! they are a steal at only \$15 a pack. Come in on thursday and when you buy 2 packs you get the third for 1/2 price! Don\'t be a dummy, come get some gummies!',
+              image: productID9,
+              productUrl: 'product_screen_route',
+              productId: '9',
+              profileType: ProfileType.VenueProfile),
+          ProductPost(
+              postId: '3',
+              authorId: '2',
+              date: DateTime.now(),
+              content:
+                  'Great news! We just landed some delicious Durban Poison Infused Pre-rolls and want to let you be the first to know. Come in and check out the delicious and relaxing feel of one of the best strains around.',
+              image: productID4,
+              productUrl: 'product_screen_route',
+              productId: '4',
+              profileType: ProfileType.VenueProfile),
           EventPost(
-            postId: '2',
+            postId: '4',
+            authorId: '3',
+            date: DateTime.now(),
+            content:
+                'Come join us for a night of fire spinning and fun! There will be food, live music, and even a secret sponser! Learn to spin fire yourself by signing up for a class online! Check us out at firespinnersunited.org.',
+            image: eventID1,
+            eventUrl: 'event_screen_route',
+            profileType: ProfileType.BrandProfile,
+          ),
+          EventPost(
+            postId: '5',
+            authorId: '3',
+            date: DateTime.now(),
+            content:
+                'Ever wonder where we grow our world famous crops? Well this is your chance to come take a look and maybe even learn something new. You can sign up for a tour at our webiste at Greenthumbs.org. We may even have a special suprise for the first 100 people that sign up for a tour.',
+            image: eventID2,
+            eventUrl: 'event_screen_route',
+            profileType: ProfileType.BrandProfile,
+          ),
+          EventPost(
+            postId: '6',
             authorId: '1',
             date: DateTime.now(),
             content:
-                'This is an event post. Im going to keep adding words here until I run out of things to say. Ill just keep going and going and going and going. alright. done now. hopefully. maybe? please be done',
-            image: dummyEventPostImage,
+                'Like music and the jazz cabbage? Well... so do we so come party with us at this years Kickers Ball! 3 day event with stages 6 stages, food trucks, homegrown shops, some of your favorite Cannabis Brands and more. Tickets, camping passes, and parking passes for sale online at KickersBallMF.org.',
+            image: eventID3,
             eventUrl: 'event_screen_route',
-            profileType: ProfileType.UserProfile,
+            profileType: ProfileType.BrandProfile,
           ),
           LoyaltyPost(
               postId: '3',
@@ -49,15 +99,6 @@ class FakePostRepository extends PostRepository {
               image: dummyLoyaltyPostImage,
               crystals: '5',
               profileType: ProfileType.UserProfile),
-          ProductPost(
-              postId: '4',
-              authorId: '2',
-              date: DateTime.now(),
-              content: 'This is a product post.',
-              image: product1,
-              productUrl: 'product_screen_route',
-              productId: '1',
-              profileType: ProfileType.BrandProfile),
           ReviewPost(
               postId: '5',
               authorId: '1',
@@ -66,15 +107,6 @@ class FakePostRepository extends PostRepository {
               image: dummyReviewPostImage,
               reviewStars: 4.5,
               profileType: ProfileType.UserProfile),
-          ProductPost(
-              postId: '6',
-              authorId: '1',
-              date: DateTime.now(),
-              content: 'This is a product post.',
-              image: product4,
-              productUrl: 'product_screen_route',
-              productId: '4',
-              profileType: ProfileType.BrandProfile),
         ];
 
   List<Post> get _followingPosts {

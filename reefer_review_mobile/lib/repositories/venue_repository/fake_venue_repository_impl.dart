@@ -19,7 +19,7 @@ class FakeVenueRepository implements VenueRepository {
         reviewCount: 32,
         description:
             "We are Glass Makers and sellers. We make all sortfs of accessories for both smoking and vaporizing cannabis. Some see us at our Northfolk Drive location!",
-        image: venue1,
+        image: venueID1,
         brandIds: ['4'],
         productIds: ['11', '12', '13', '14']),
     Venue(
@@ -31,7 +31,7 @@ class FakeVenueRepository implements VenueRepository {
         reviewCount: 12,
         description:
             "Growers of fine smokables as well as distributors of the best edibvles around.",
-        image: venue2,
+        image: venueID2,
         brandIds: ['1', '2', '3'],
         productIds: ['1', '2', '3', '4', '8', '9', '10']),
     Venue(
@@ -43,7 +43,7 @@ class FakeVenueRepository implements VenueRepository {
         reviewCount: 26,
         description:
             "Medical grade cannabis at a good price. Make an apointment to come see us today!",
-        image: venue2,
+        image: venueID3,
         brandIds: ['1', '2', '3'],
         productIds: ['1', '2', '3', '4', '5', '6', '7']),
   ];
