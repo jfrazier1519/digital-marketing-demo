@@ -19,16 +19,6 @@ class ProductPostWidget extends StatefulWidget {
 }
 
 class _ProductPostWidgetState extends State<ProductPostWidget> {
-  late UserBloc _userBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _userBloc = context.read<UserBloc>();
-    _userBloc.add(GetUserById(widget.productPost
-        .authorId)); // Assuming the ProductPost has an authorId property
-  }
-
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
