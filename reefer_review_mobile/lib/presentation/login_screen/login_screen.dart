@@ -38,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
-            vertical: 10,
           ),
           child: BlocListener<UserBloc, UserState>(
             listener: (context, state) {
@@ -51,49 +50,53 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
               }
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(reeferImage),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) => setState(() {}),
-                  controller: _emailController,
-                  decoration: const InputDecoration(labelText: "Email"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) => setState(() {}),
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: "Password"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: ElevatedButton(
-                    onPressed: _emailController.text.isEmpty ||
-                            _passwordController.text.isEmpty
-                        ? null
-                        : _loginButtonPressed,
-                    child: const Center(child: Text('Login')),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(reeferImage),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                TextButton(
-                  onPressed: _signUpPressed,
-                  child: const Text('Sign Up'),
-                ),
-                TextButton(
-                  onPressed: _forgotPasswordPressed,
-                  child: const Text('Forgot Password'),
-                ),
-              ],
+                  TextFormField(
+                    onChanged: (value) => setState(() {}),
+                    controller: _emailController,
+                    decoration: const InputDecoration(labelText: "Email"),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    onChanged: (value) => setState(() {}),
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(labelText: "Password"),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: ElevatedButton(
+                      onPressed: _emailController.text.isEmpty ||
+                              _passwordController.text.isEmpty
+                          ? null
+                          : _loginButtonPressed,
+                      child: const Center(child: Text('Login')),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: _signUpPressed,
+                    child: const Text('Sign Up'),
+                  ),
+                  TextButton(
+                    onPressed: _forgotPasswordPressed,
+                    child: const Text('Forgot Password'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

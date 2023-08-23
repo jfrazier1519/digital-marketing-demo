@@ -12,7 +12,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _photoTapped(context),
+      onTap: null,
       child: CircleAvatar(
         radius: radius,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reefer_review_mobile/bloc/user_bloc/user_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/update_profile_request.dart';
+import 'package:reefer_review_mobile/presentation/login_screen/login_screen.dart';
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/product_preferences_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/image_selector_round.dart';
 
@@ -35,6 +36,12 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
           child: SafeArea(
             child: Scaffold(
               appBar: AppBar(
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () => Navigator.of(context)
+                      .pushNamedAndRemoveUntil(
+                          LoginScreen.route, (route) => false),
+                ),
                 centerTitle: false,
                 title: const Text('Profile Details'),
               ),
