@@ -220,7 +220,7 @@ class FakeUserRepository extends UserRepository {
       case '1':
         return User(
           email: 'Test@mail.com',
-          uid: '1',
+          uid: '0',
           productPreferences: _preferences,
           productExperiences: _productExperiences,
           followedBrands: [],
@@ -229,14 +229,14 @@ class FakeUserRepository extends UserRepository {
         );
       default:
         return User(
-          uid: '2',
-          email: 'Test1@mail.com',
+          uid: '1',
+          email: 'JackedupJill@gmail.com',
           productPreferences: _preferences,
           productExperiences: _productExperiences,
-          displayName: 'Test',
-          photoUrl: dummyProfileImage,
-          followedBrands: [],
-          followedUsers: [],
+          displayName: 'Jack',
+          photoUrl: userID1,
+          followedBrands: ['1'],
+          followedUsers: ['3', '4', '12'],
           followedVenues: ['1', '2', '3'],
         );
     }
