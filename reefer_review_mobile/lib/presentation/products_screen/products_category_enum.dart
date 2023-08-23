@@ -6,7 +6,6 @@ enum ProductsCategoryEnum {
   Tincure,
   Distilate,
   Dab,
-  PreRolls,
   PreRoll,
   Edibles,
   CBD,
