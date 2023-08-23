@@ -56,6 +56,7 @@ class FakePostRepository extends PostRepository {
               content: 'This is a product post.',
               image: dummyProductPostImage,
               productUrl: 'product_screen_route',
+              productId: '1',
               profileType: ProfileType.UserProfile),
           ReviewPost(
               postId: '5',
@@ -70,8 +71,9 @@ class FakePostRepository extends PostRepository {
               authorId: '1',
               date: DateTime.now(),
               content: 'This is a product post.',
-              image: dummyProductPostImage,
+              image: product4,
               productUrl: 'product_screen_route',
+              productId: '4',
               profileType: ProfileType.BrandProfile),
         ];
 

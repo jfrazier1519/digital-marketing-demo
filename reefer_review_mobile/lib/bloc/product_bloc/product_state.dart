@@ -12,3 +12,9 @@ class ProductsLoaded extends ProductState {
 
   ProductsLoaded(this.products);
 }
+
+class ProductLoaded extends ProductState {
+  final Product product;
+
+  ProductLoaded(this.product);
+}

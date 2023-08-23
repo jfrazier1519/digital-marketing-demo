@@ -4,6 +4,7 @@ import '../models/profile/profile.dart';
 
 class ProductPost extends Post {
   final String productUrl;
+  final String productId;
 
   ProductPost({
     required String postId,
@@ -13,6 +14,7 @@ class ProductPost extends Post {
     required String content,
     required String image,
     required this.productUrl,
+    required this.productId,
   }) : super(
           profileType,
           postId: postId,

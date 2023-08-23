@@ -28,3 +28,8 @@ class FetchProductsByVenue extends ProductEvent {
   final String venueId;
   FetchProductsByVenue(this.venueId);
 }
+
+class FetchProductsById extends ProductEvent {
+  final String productId;
+  FetchProductsById(this.productId);
+}

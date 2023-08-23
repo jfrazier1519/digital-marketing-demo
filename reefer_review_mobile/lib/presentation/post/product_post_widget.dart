@@ -3,9 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:reefer_review_mobile/bloc/profile/profile_bloc.dart';
 import 'package:reefer_review_mobile/data/models/requests/get_profile_by_id_request.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_details_screen/products_details_screen.dart';
+import 'package:reefer_review_mobile/presentation/products_screen/products_screen.dart';
 import 'package:reefer_review_mobile/presentation/shared/custom_loading_indicator.dart';
+import 'package:reefer_review_mobile/repositories/product_repository/fake_product_repository_impl.dart';
 import 'package:reefer_review_mobile/repositories/profile_repository/fake_profile_repository_impl.dart';
+import '../../bloc/product_bloc/product_bloc.dart';
 import '../../bloc/user_bloc/user_bloc.dart';
+import '../../data/models/route_arguments/product_details_screen_arguments.dart';
 import '../../presentation/shared/rounded_container.dart';
 import '../../data/post/product_post.dart';
 
@@ -23,10 +28,19 @@ class _ProductPostWidgetState extends State<ProductPostWidget> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return BlocProvider(
-      create: (context) => ProfileBloc(FakeProfileRepositoryImpl.repository)
-        ..add(GetProfileByIdUsecase(GetProfileByIdRequest(
-            widget.productPost.authorId, widget.productPost.profileType))),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProfileBloc>(
+          create: (context) => ProfileBloc(FakeProfileRepositoryImpl.repository)
+            ..add(GetProfileByIdUsecase(GetProfileByIdRequest(
+                widget.productPost.authorId, widget.productPost.profileType))),
+        ),
+        BlocProvider<ProductBloc>(
+          create: (context) =>
+              ProductBloc(FakeProductRepository.productRepository)
+                ..add(FetchProductsById(widget.productPost.productId)),
+        ),
+      ],
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           if (state is ProfileLoaded) {
@@ -67,17 +81,37 @@ class _ProductPostWidgetState extends State<ProductPostWidget> {
                               const SizedBox(height: 10),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(widget.productPost.productUrl);
+                                  context.read<ProductBloc>().add(
+                                      FetchProductsById(
+                                          widget.productPost.productId));
                                 },
-                                child: Text(
-                                  'Go To Product Page',
-                                  style: TextStyle(
-                                    color: colorScheme.primary,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                                child: BlocBuilder<ProductBloc, ProductState>(
+                                  builder: (context, state) {
+                                    if (state is ProductLoaded) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                            ProductDetailsScreen.route,
+                                            arguments:
+                                                ProductDetailsScreenArguments(
+                                                    product: state.product),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Go To Product Page',
+                                          style: TextStyle(
+                                            color: colorScheme.primary,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    // Now, if the product isn't loaded yet, it won't display anything
+                                    return SizedBox.shrink();
+                                  },
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
