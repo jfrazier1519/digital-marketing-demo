@@ -16,7 +16,7 @@ class FakeBrandRepository implements BrandRepository {
           description: "How very weedy it sounds.",
           image: brand1,
           categories: [
-            ProductsCategoryEnum.Accesories,
+            ProductsCategoryEnum.Accessories,
             ProductsCategoryEnum.Edibles,
           ],
           venueIds: [

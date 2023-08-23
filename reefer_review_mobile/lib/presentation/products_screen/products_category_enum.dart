@@ -8,6 +8,6 @@ enum ProductsCategoryEnum {
   PreRoll,
   Edibles,
   CBD,
-  Accesories,
+  Accessories,
   Merch,
 }
