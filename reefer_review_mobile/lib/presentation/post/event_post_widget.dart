@@ -66,10 +66,10 @@ class _EventPostWidgetState extends State<EventPostWidget> {
                                 ),
                                 const SizedBox(height: 10),
                                 GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed(widget.eventPost.eventUrl);
-                                  },
+                                  // onTap: () {
+                                  //   Navigator.of(context)
+                                  //       .pushNamed(widget.eventPost.eventUrl);
+                                  // },
                                   child: Text(
                                     'Go To Event',
                                     style: TextStyle(
