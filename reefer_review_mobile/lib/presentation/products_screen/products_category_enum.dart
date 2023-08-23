@@ -1,6 +1,8 @@
 enum ProductsCategoryEnum {
   Flower,
   Wax,
+  Oils,
+  Concentrates,
   Tincure,
   Distilate,
   Dab,
