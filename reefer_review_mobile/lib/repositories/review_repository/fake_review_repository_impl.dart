@@ -1,43 +1,17 @@
 import 'package:reefer_review_mobile/repositories/review_repository/review_repository.dart';
-import '../../data/models/user/user.dart';
 import '../../data/models/review/review.dart';
 import '../../data/models/review/product_review.dart';
 import '../../data/models/review/venue_review.dart';
-import '../../res/images.dart';
 
 class FakeReviewRepository implements ReviewRepository {
   List<Review> _allReviews = [];
 
   FakeReviewRepository() {
-    User dummyReviewer = User(
-      uid: '2',
-      email: 'john.doe@example.com',
-      displayName: 'John Doe',
-      photoUrl: dummyProfileImage,
-      productExperiences: [],
-      productPreferences: [],
-      followedBrands: [],
-      followedUsers: [],
-      followedVenues: [],
-    );
-    User dummyReviewer2 = User(
-      uid: '1',
-      email: 'john.doe@example.com',
-      displayName: 'John Moe',
-      photoUrl: dummyProfileImage,
-      productExperiences: [],
-      productPreferences: [],
-      followedBrands: [],
-      followedUsers: [],
-      followedVenues: [],
-    );
-
-    //TODO: change reviewer to reviewerID
     _allReviews = [
       ProductReview(
           reviewId: '1',
           productId: '12',
-          reviewer: dummyReviewer,
+          reviewerId: '1',
           content:
               'I love this bronze pipe an how easy it is to diassemble and travel around with. The only down side, and why I am not giving this 4 stars, is that it gets too hot when I light the Flower. I have burned my lips many many times and have since stopped using it.',
           date: DateTime.now(),
@@ -46,7 +20,7 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '2',
           productId: '7',
-          reviewer: dummyReviewer2,
+          reviewerId: '2',
           content:
               'These Dab Carts never let me down and this strain is amazing for hiking. If you love the outdoors and love yourself I would recommend the 1g. Only down side is the price so go for the biggest value here. I promise you won\'t be dissapointed.',
           date: DateTime.now(),
@@ -55,7 +29,7 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '3',
           productId: '6',
-          reviewer: dummyReviewer,
+          reviewerId: '4',
           content:
               'This crumble is the bee\'s knees. Was a little expensive but worth every penny in my opinion. This one goes in the top 10 for me.',
           date: DateTime.now(),
@@ -64,7 +38,7 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '4',
           productId: '10',
-          reviewer: dummyReviewer,
+          reviewerId: '7',
           content:
               'I bought a brownie then visited my favorite Ice Cream joint and made it an Ice Cream Brownie sundae. Would eat again and reccomend.',
           date: DateTime.now(),
@@ -73,16 +47,16 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '5',
           productId: '9',
-          reviewer: dummyReviewer2,
+          reviewerId: '8',
           content:
               'I love these gummies and buy as many packs as I can whenever they are in stock. They are not only tasty but relieve my anxiety almost instantly and last hours. Thank you CBD!',
           date: DateTime.now(),
           rating: 5,
-          title: 'These Delta 9 gummies are the BEST!'),
+          title: 'These gummies are the BEST!'),
       ProductReview(
           reviewId: '6',
           productId: '1',
-          reviewer: dummyReviewer2,
+          reviewerId: '9',
           content:
               'Last time I was at the shop was told I should look out for the tangie and I did. This is the best decision I have made in a long time! Thanks for looking out @Drdankenstein ',
           date: DateTime.now(),
@@ -91,7 +65,7 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '7',
           productId: '3',
-          reviewer: dummyReviewer2,
+          reviewerId: '11',
           content:
               'I don\'t normally give bad reviews but I don\'t like the Sherb at all. Was well below my expectations and the high isn\'t worth it.',
           date: DateTime.now(),
@@ -100,7 +74,7 @@ class FakeReviewRepository implements ReviewRepository {
       ProductReview(
           reviewId: '8',
           productId: '14',
-          reviewer: dummyReviewer2,
+          reviewerId: '12',
           content:
               'I have used many atomizers but none as bad as this one. The battery life is terrible, it wastes my Flower about 50% of the time and its not intuitive to load at all. Don\'t buy this crap!',
           date: DateTime.now(),
@@ -109,7 +83,7 @@ class FakeReviewRepository implements ReviewRepository {
       VenueReview(
           reviewId: '9',
           venueId: '2',
-          reviewer: dummyReviewer2,
+          reviewerId: '6',
           content:
               'I was in the mood for something edible and found my way to Peace of Pie Dispensory / Cannabis Bakery. This place is AMAZING! Easy to see prices for any variety of edibles as well as complete break downs of effects and terpenes counts. I was floor with the helpful staff and knowedgeable bud tenders. You all rock! Keep making the Cannabis world proud!',
           date: DateTime.now(),
