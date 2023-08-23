@@ -5,8 +5,9 @@ abstract class FeedEvent {}
 
 class FetchPostsUsecase extends FeedEvent {
   final PostFeedType feedType;
+  final User user;
 
-  FetchPostsUsecase(this.feedType);
+  FetchPostsUsecase({required this.feedType, required this.user});
 }
 
 class AddPost extends FeedEvent {
@@ -15,17 +16,18 @@ class AddPost extends FeedEvent {
 }
 
 class ExpandPost extends FeedEvent {
-  final int postId;
+  final String postId;
   ExpandPost(this.postId);
 }
 
 class CollapsePost extends FeedEvent {
-  final int postId;
+  final String postId;
   CollapsePost(this.postId);
 }
 
 class FetchPostsByAuthor extends FeedEvent {
-  final String author;
+  final String authorId;
+  final ProfileType profileType;
 
-  FetchPostsByAuthor({required this.author});
+  FetchPostsByAuthor({required this.authorId, required this.profileType});
 }

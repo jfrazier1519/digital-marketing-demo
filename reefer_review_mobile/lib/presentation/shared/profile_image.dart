@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reefer_review_mobile/presentation/profile_screen/profile_screen.dart';
 
-import '../../data/models/profile.dart';
+import '../../data/models/profile/profile.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key, required this.profile, this.radius = 50});

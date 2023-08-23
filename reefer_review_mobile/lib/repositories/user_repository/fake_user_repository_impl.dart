@@ -1,6 +1,6 @@
-import 'package:reefer_review_mobile/data/models/user.dart';
-import 'package:reefer_review_mobile/data/models/product_experience.dart';
-import 'package:reefer_review_mobile/data/models/product_preference.dart';
+import 'package:reefer_review_mobile/data/models/user/user.dart';
+import 'package:reefer_review_mobile/data/models/product/product_experience.dart';
+import 'package:reefer_review_mobile/data/models/product/product_preference.dart';
 import 'package:reefer_review_mobile/data/models/requests/login_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/register_user_request.dart';
 import 'package:reefer_review_mobile/data/models/requests/send_email_verification_link_request.dart';
@@ -8,10 +8,39 @@ import 'package:reefer_review_mobile/data/models/requests/update_profile_request
 import 'package:reefer_review_mobile/repositories/user_repository/user_repository.dart';
 import 'package:reefer_review_mobile/res/images.dart';
 
+import '../utilities/custom_entity_exception.dart';
+
 class FakeUserRepository extends UserRepository {
-  static UserRepository repository = FakeUserRepository();
+  static UserRepository repository = FakeUserRepository._internal();
+
+  FakeUserRepository._internal();
 
   User? _account;
+
+  final List<User> _users = [
+    User(
+      uid: '1',
+      email: 'john.doe@example.com',
+      displayName: 'John Doe',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
+      followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
+    ),
+    User(
+      uid: '2',
+      email: 'john.doe2@example.com',
+      displayName: 'John Doe 2',
+      photoUrl: dummyProfileImage,
+      productExperiences: [],
+      productPreferences: [],
+      followedBrands: [],
+      followedUsers: [],
+      followedVenues: [],
+    ),
+  ];
 
   final _preferences = [
     ProductPreference('Flower', false),
@@ -76,14 +105,17 @@ class FakeUserRepository extends UserRepository {
   }
 
   User _generateAccount({bool firstTime = false}) {
-    final userId = firstTime ? '1' : '0';
-    switch (userId) {
+    final uid = firstTime ? '1' : '0';
+    switch (uid) {
       case '1':
         return User(
           email: 'Test@mail.com',
           uid: '1',
           productPreferences: _preferences,
           productExperiences: _productExperiences,
+          followedBrands: [],
+          followedUsers: [],
+          followedVenues: [],
         );
       default:
         return User(
@@ -93,6 +125,9 @@ class FakeUserRepository extends UserRepository {
           productExperiences: _productExperiences,
           displayName: 'Test',
           photoUrl: dummyProfileImage,
+          followedBrands: [],
+          followedUsers: [],
+          followedVenues: [],
         );
     }
   }
@@ -109,5 +144,43 @@ class FakeUserRepository extends UserRepository {
     } else {
       _account = _generateAccount();
     }
+  }
+
+  @override
+  Future<User> getUserById(String uid) async {
+    try {
+      return _users.firstWhere((user) => user.uid == uid);
+    } catch (_) {
+      throw EntityNotFoundException('User with id $uid not found');
+    }
+  }
+
+  @override
+  Future<void> updateUser(User updatedUser) async {
+    int index = _users.indexWhere((user) => user.uid == updatedUser.uid);
+    if (index != -1) {
+      _users[index] = updatedUser;
+    } else {
+      _users.add(updatedUser);
+    }
+  }
+
+  @override
+  Future<void> followBrand(User user, String brandId) async {
+    if (!user.followedBrands.contains(brandId)) {
+      user.followedBrands.add(brandId);
+      await updateUser(user);
+    }
+  }
+
+  @override
+  Future<void> unfollowBrand(User user, String brandId) async {
+    user.followedBrands.remove(brandId);
+    await updateUser(user);
+  }
+
+  @override
+  Future<List<User>> getAllUsers() async {
+    return _users;
   }
 }

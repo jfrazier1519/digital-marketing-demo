@@ -4,7 +4,7 @@ import 'package:reefer_review_mobile/data/models/requests/update_profile_request
 import 'package:reefer_review_mobile/presentation/profile_setup_screen/widgets/star_row.dart';
 
 import '../../../bloc/user_bloc/user_bloc.dart';
-import '../../../data/models/product_experience.dart';
+import '../../../data/models/product/product_experience.dart';
 
 class ProductExperienceRow extends StatelessWidget {
   const ProductExperienceRow({super.key, required this.experience});

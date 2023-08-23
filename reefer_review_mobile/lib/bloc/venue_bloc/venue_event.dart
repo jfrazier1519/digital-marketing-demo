@@ -12,6 +12,6 @@ class SortVenues extends VenueEvent {
 }
 
 class FetchAssociatedBrands extends VenueEvent {
-  final int venueId;
+  final String venueId;
   FetchAssociatedBrands(this.venueId);
 }

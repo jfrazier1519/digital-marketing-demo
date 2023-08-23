@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:reefer_review_mobile/repositories/venue_repository/venue_repository.dart';
-import '../../data/models/brand.dart';
-import '../../data/venue.dart';
+import '../../data/models/brand/brand.dart';
+import '../../data/models/venue/venue.dart';
 import '../../presentation/brands_screen/brands_sort_enum.dart';
 import '../../presentation/products_screen/products_category_enum.dart';
 import '../../repositories/brand_repository/brand_repository.dart';

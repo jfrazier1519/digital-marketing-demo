@@ -1,11 +1,11 @@
-import 'package:reefer_review_mobile/data/models/profile.dart';
+import 'package:reefer_review_mobile/data/models/profile/profile.dart';
 import 'package:reefer_review_mobile/data/models/review/review.dart';
 
 class VenueReview extends Review {
-  final int venueId;
+  final String venueId;
 
   VenueReview({
-    required int reviewId,
+    required String reviewId,
     required this.venueId,
     required Profile reviewer,
     required String content,

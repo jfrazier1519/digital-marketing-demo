@@ -7,12 +7,17 @@ class UserInitial extends UserState {}
 
 class UserLoading extends UserState {}
 
+class UserUpdated extends UserState {
+  final User user;
+  UserUpdated(this.user);
+}
+
 class UserRequestSuccessful extends UserState {
   UserRequestSuccessful();
 }
 
 class UserLoaded extends UserState {
-  final User account;
+  final User user;
 
-  UserLoaded(this.account);
+  UserLoaded(this.user);
 }

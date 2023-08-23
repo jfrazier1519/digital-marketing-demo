@@ -1,44 +1,45 @@
 import 'package:reefer_review_mobile/res/images.dart';
-import '../../data/models/brand.dart';
+import '../../data/models/brand/brand.dart';
 import '../../presentation/products_screen/products_category_enum.dart';
+import '../utilities/custom_entity_exception.dart';
 import 'brand_repository.dart';
 
 class FakeBrandRepository implements BrandRepository {
-  List<Brand> _allBrands = [];
+  static BrandRepository repository = FakeBrandRepository._internal();
 
-  FakeBrandRepository() {
-    _allBrands = [
-      Brand(
-          brandId: 1,
-          name: "The Weed Company HQ",
-          rating: 4.5,
-          reviewCount: 10,
-          description: "How very weedy it sounds.",
-          image: brand1,
-          categories: [
-            ProductsCategoryEnum.Accessories,
-            ProductsCategoryEnum.Edibles,
-          ],
-          venueIds: [
-            1
-          ]),
-      Brand(
-          brandId: 2,
-          name: "Empire Weed",
-          rating: 3.8,
-          reviewCount: 25,
-          description: "The empire strikes back.",
-          image: brand2,
-          categories: [
-            ProductsCategoryEnum.CBD,
-            ProductsCategoryEnum.Merch,
-            ProductsCategoryEnum.Flower
-          ],
-          venueIds: [
-            2
-          ]),
-    ];
-  }
+  FakeBrandRepository._internal();
+
+  final List<Brand> _allBrands = [
+    Brand(
+        uid: "1",
+        name: "The Weed Company HQ",
+        rating: 4.5,
+        reviewCount: 10,
+        description: "How very weedy it sounds.",
+        image: brand1,
+        categories: [
+          ProductsCategoryEnum.Accessories,
+          ProductsCategoryEnum.Edibles,
+        ],
+        venueIds: [
+          "1"
+        ]),
+    Brand(
+        uid: "2",
+        name: "Empire Weed",
+        rating: 3.8,
+        reviewCount: 25,
+        description: "The empire strikes back.",
+        image: brand2,
+        categories: [
+          ProductsCategoryEnum.CBD,
+          ProductsCategoryEnum.Merch,
+          ProductsCategoryEnum.Flower
+        ],
+        venueIds: [
+          "2"
+        ]),
+  ];
 
   @override
   Future<List<Brand>> getAllBrands() async {
@@ -46,8 +47,13 @@ class FakeBrandRepository implements BrandRepository {
   }
 
   @override
-  Future<Brand> getBrandById(int id) async {
-    return _allBrands.firstWhere((brand) => brand.brandId == id);
+  Future<Brand> getBrandById(String brandId) async {
+    print('All brands: $_allBrands');
+    try {
+      return _allBrands.firstWhere((brand) => brand.uid == brandId);
+    } catch (_) {
+      throw EntityNotFoundException('Brand with id $brandId not found');
+    }
   }
 
   @override
@@ -56,14 +62,13 @@ class FakeBrandRepository implements BrandRepository {
   }
 
   @override
-  Future<void> deleteBrand(int brandId) async {
-    _allBrands.removeWhere((brand) => brand.brandId == brandId);
+  Future<void> deleteBrand(String brandId) async {
+    _allBrands.removeWhere((brand) => brand.uid == brandId);
   }
 
   @override
   Future<void> updateBrand(Brand updatedBrand) async {
-    int index =
-        _allBrands.indexWhere((brand) => brand.brandId == updatedBrand.brandId);
+    int index = _allBrands.indexWhere((brand) => brand.uid == updatedBrand.uid);
     if (index != -1) {
       _allBrands[index] = updatedBrand;
     }
@@ -94,7 +99,7 @@ class FakeBrandRepository implements BrandRepository {
 
     switch (sortOption) {
       case 'Brand':
-        comparator = (a, b) => a.name.compareTo(b.name);
+        comparator = (a, b) => a.profileName!.compareTo(b.profileName!);
         break;
       case 'Rating':
         comparator = (a, b) => a.rating.compareTo(b.rating);
@@ -103,7 +108,7 @@ class FakeBrandRepository implements BrandRepository {
         comparator = (a, b) => a.reviewCount.compareTo(b.reviewCount);
         break;
       default:
-        comparator = (a, b) => a.name.compareTo(b.name);
+        comparator = (a, b) => a.profileName!.compareTo(b.profileName!);
         break;
     }
 

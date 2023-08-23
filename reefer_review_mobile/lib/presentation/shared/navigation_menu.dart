@@ -30,12 +30,12 @@ class NavigationMenu extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                ProfileImage(profile: state.account),
+                                ProfileImage(profile: state.user),
                                 const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
-                                  state.account.displayName ?? '',
+                                  state.user.displayName ?? '',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,

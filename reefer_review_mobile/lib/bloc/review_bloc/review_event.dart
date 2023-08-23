@@ -4,23 +4,23 @@ part of 'review_bloc.dart';
 abstract class ReviewEvent {}
 
 class FetchReviewsForProduct extends ReviewEvent {
-  final int productId;
+  final String productId;
 
   FetchReviewsForProduct(this.productId);
 }
 
 class FetchReviewsForVenue extends ReviewEvent {
-  final int venueId;
+  final String venueId;
 
   FetchReviewsForVenue(this.venueId);
 }
 
 class ExpandReview extends ReviewEvent {
-  final int reviewId;
+  final String reviewId;
   ExpandReview(this.reviewId);
 }
 
 class CollapseReview extends ReviewEvent {
-  final int reviewId;
+  final String reviewId;
   CollapseReview(this.reviewId);
 }

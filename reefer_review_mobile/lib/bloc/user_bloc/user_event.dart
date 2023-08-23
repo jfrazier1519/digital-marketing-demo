@@ -28,3 +28,15 @@ class LoginUserUsecase extends UserEvent {
 
   LoginUserUsecase(this.request);
 }
+
+class ToggleFollowBrand extends UserEvent {
+  final User user;
+  final String brandId;
+
+  ToggleFollowBrand(this.user, this.brandId);
+}
+
+class GetUserById extends UserEvent {
+  final String uid;
+  GetUserById(this.uid);
+}

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../data/venue.dart';
-import '../../data/models/brand.dart';
+import '../../data/models/venue/venue.dart';
+import '../../data/models/brand/brand.dart';
 import '../../presentation/venue_screen/venues_sort_enum.dart';
 import '../../repositories/venue_repository/venue_repository.dart';
 import '../../repositories/brand_repository/brand_repository.dart';

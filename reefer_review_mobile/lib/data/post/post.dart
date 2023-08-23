@@ -1,15 +1,17 @@
-import 'package:reefer_review_mobile/data/models/profile.dart';
+import '../models/profile/profile.dart';
 
 abstract class Post {
-  final int postId;
-  final Profile author;
+  final String postId;
+  final String authorId;
+  final ProfileType profileType;
   final DateTime date;
   final String content;
   final String image;
 
-  Post({
+  Post(
+    this.profileType, {
     required this.postId,
-    required this.author,
+    required this.authorId,
     required this.date,
     required this.content,
     required this.image,

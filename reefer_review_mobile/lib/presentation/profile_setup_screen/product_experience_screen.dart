@@ -64,11 +64,10 @@ class _ProductExperiencesScreenState extends State<ProductExperiencesScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) => ProductExperienceRow(
-                              experience:
-                                  state.account.productExperiences[index]),
+                              experience: state.user.productExperiences[index]),
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: 20),
-                          itemCount: state.account.productExperiences.length,
+                          itemCount: state.user.productExperiences.length,
                         ),
                       ),
                       const SizedBox(
