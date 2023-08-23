@@ -12,27 +12,40 @@ class FakeVenueRepository implements VenueRepository {
   final List<Venue> _allVenues = [
     Venue(
         uid: "1",
-        name: "Sample Venue 1",
-        address: "1245 Strawberry Ln, Luxerburg CO, 88897",
-        venueType: 'Distillery',
-        rating: 4.5,
-        reviewCount: 10,
-        description: "Very professional establishment.",
+        name: "Grangers Glass",
+        address: "2446 west Northfolk Drive, Huntsville AL, 11463",
+        venueType: 'Distributor',
+        rating: 4.3,
+        reviewCount: 32,
+        description:
+            "We are Glass Makers and sellers. We make all sortfs of accessories for both smoking and vaporizing cannabis. Some see us at our Northfolk Drive location!",
         image: venue1,
-        brandIds: ['1'],
-        productIds: ['1', '2', '3']),
+        brandIds: ['4'],
+        productIds: ['11', '12', '13', '14']),
     Venue(
         uid: "2",
-        name: "Sample Venue 2",
-        address: "Location B",
-        venueType: 'Bar',
-        rating: 3.8,
-        reviewCount: 25,
+        name: "Peace of Pie",
+        address: "766 South East Street, Kent WA, 98106",
+        venueType: 'Grower, Distributor',
+        rating: 4.1,
+        reviewCount: 12,
         description:
-            "This is a fantastic bar located in Location B. They sell weed in the back",
+            "Growers of fine smokables as well as distributors of the best edibvles around.",
         image: venue2,
-        brandIds: ['2'],
-        productIds: ['4', '5']),
+        brandIds: ['1', '2', '3'],
+        productIds: ['1', '2', '3', '4', '8', '9', '10']),
+    Venue(
+        uid: "3",
+        name: "Big Al's",
+        address: "84667 54th Circle, Portland OR, 45824",
+        venueType: 'Distributor, Pharmacy',
+        rating: 4.7,
+        reviewCount: 26,
+        description:
+            "Medical grade cannabis at a good price. Make an apointment to come see us today!",
+        image: venue2,
+        brandIds: ['1', '2', '3'],
+        productIds: ['1', '2', '3', '4', '5', '6', '7']),
   ];
 
   @override
