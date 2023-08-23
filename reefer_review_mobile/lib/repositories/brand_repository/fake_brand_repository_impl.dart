@@ -17,7 +17,7 @@ class FakeBrandRepository implements BrandRepository {
           image: brand1,
           categories: [
             ProductsCategoryEnum.Accessories,
-            ProductsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.Edibles,
           ],
           venueIds: [
             1
@@ -30,7 +30,7 @@ class FakeBrandRepository implements BrandRepository {
           description: "The empire strikes back.",
           image: brand2,
           categories: [
-            ProductsCategoryEnum.Concentrates,
+            ProductsCategoryEnum.CBD,
             ProductsCategoryEnum.Merch,
             ProductsCategoryEnum.Flower
           ],

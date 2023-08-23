@@ -26,6 +26,7 @@ class MainApp extends StatelessWidget {
           child: CustomLoadingIndicator(),
         ),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           onGenerateRoute: router.generateRoute,
           theme: lightTheme,
         ),
