@@ -51,13 +51,13 @@ class FakePostRepository extends PostRepository {
               profileType: ProfileType.UserProfile),
           ProductPost(
               postId: '4',
-              authorId: '1',
+              authorId: '2',
               date: DateTime.now(),
               content: 'This is a product post.',
-              image: dummyProductPostImage,
+              image: product1,
               productUrl: 'product_screen_route',
               productId: '1',
-              profileType: ProfileType.UserProfile),
+              profileType: ProfileType.BrandProfile),
           ReviewPost(
               postId: '5',
               authorId: '1',
