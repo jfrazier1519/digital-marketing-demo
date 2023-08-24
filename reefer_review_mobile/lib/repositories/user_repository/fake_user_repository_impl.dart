@@ -155,8 +155,8 @@ class FakeUserRepository extends UserRepository {
   final _preferences = [
     ProductPreference('Flower', false),
     ProductPreference('Wax', false),
-    ProductPreference('Tincure', false),
-    ProductPreference('Distilate', false),
+    ProductPreference('Tincture', false),
+    ProductPreference('Distillate', false),
     ProductPreference('Dab', false),
     ProductPreference('Pre-rolls', false),
     ProductPreference('Pre-roll (Infused)', false),
@@ -166,8 +166,8 @@ class FakeUserRepository extends UserRepository {
   final _productExperiences = [
     ProductExperience('Flower', 0),
     ProductExperience('Wax', 0),
-    ProductExperience('Tincure', 0),
-    ProductExperience('Distilate', 0),
+    ProductExperience('Tincture', 0),
+    ProductExperience('Distillate', 0),
     ProductExperience('Dab', 0),
     ProductExperience('Pre-rolls', 0),
     ProductExperience('Pre-roll (Infused)', 0),

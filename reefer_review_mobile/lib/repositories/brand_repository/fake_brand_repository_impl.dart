@@ -19,7 +19,7 @@ class FakeBrandRepository implements BrandRepository {
             "The best concentrates, tinktures, and wax you can find. Homgrown with both care and hard won knowledge.",
         image: brandID1,
         categories: [
-          ProductsCategoryEnum.Tincure,
+          ProductsCategoryEnum.Tincture,
           ProductsCategoryEnum.Oils,
           ProductsCategoryEnum.Wax,
           ProductsCategoryEnum.Dab,

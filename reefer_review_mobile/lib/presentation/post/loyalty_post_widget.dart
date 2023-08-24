@@ -91,7 +91,7 @@ class _LoyaltyPostWidgetState extends State<LoyaltyPostWidget> {
                             width: double.infinity,
                             child: Image.asset(
                               widget.loyaltyPost.image,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           )
                         : Container(),

@@ -90,7 +90,7 @@ class _EventPostWidgetState extends State<EventPostWidget> {
                             width: double.infinity,
                             child: Image.asset(
                               widget.eventPost.image,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           )
                         : Container(),
