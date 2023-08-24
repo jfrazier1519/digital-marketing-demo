@@ -14,106 +14,109 @@ class BrandWidget extends StatelessWidget {
     var colorScheme = Theme.of(context).colorScheme;
 
     return GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            BrandDetailsScreen.route,
-            arguments: BrandDetailsScreenArguments(brand: brand),
-          );
-        },
-        child: Container(
-            margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
-            decoration: BoxDecoration(
-              color: colorScheme.tertiary,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                bottomLeft: Radius.circular(8.0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.onBackground.withOpacity(0.1),
-                  offset: const Offset(0, 2),
-                  blurRadius: 4.0,
-                )
-              ],
-            ),
-            child: Row(children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: brand.profileImage!.isNotEmpty
-                    ? ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(8.0),
-                        ),
-                        child: Image.asset(
-                          brand.profileImage!,
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        ),
-                      )
-                    : const SizedBox(width: 100, height: 100),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Name
-                    Text(
-                      brand.profileName!,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          BrandDetailsScreen.route,
+          arguments: BrandDetailsScreenArguments(brand: brand),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 8.0),
+        decoration: BoxDecoration(
+          color: colorScheme.tertiary,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(8.0),
+            bottomLeft: Radius.circular(8.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.onBackground.withOpacity(0.1),
+              offset: const Offset(0, 2),
+              blurRadius: 4.0,
+            )
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            brand.profileImage!.isNotEmpty
+                ? ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
                     ),
+                    child: Image.asset(
+                      brand.profileImage!,
+                      width: 100,
+                      height: 125,
+                      fit: BoxFit.fill,
+                    ),
+                  )
+                : const SizedBox(width: 100, height: 100),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Name
+                  Text(
+                    brand.profileName!,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
 
-                    const SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(Icons.star_border,
-                                color: colorScheme.primary, size: 18),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              brand.rating.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: colorScheme.primary),
-                            ),
-                            Text(" Stars",
-                                style: TextStyle(
-                                    color: colorScheme.primary,
-                                    fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Text(
-                            '(${brand.reviewCount} reviews)',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.star_border,
+                              color: colorScheme.primary, size: 18),
+                          const SizedBox(
+                            width: 5,
                           ),
+                          Text(
+                            brand.rating.toString(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: colorScheme.primary),
+                          ),
+                          Text(" Stars",
+                              style: TextStyle(
+                                  color: colorScheme.primary,
+                                  fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: Text(
+                          '(${brand.reviewCount} reviews)',
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
-                    const SizedBox(height: 10),
-                    Wrap(
-                      spacing: 8.0,
-                      runSpacing: 8.0,
-                      children: brand.categories
-                          .map((category) => CategoryBubble(
-                              text: category.toString().split('.').last,
-                              colorScheme: colorScheme))
-                          .toList(),
-                    )
-                  ],
-                ),
-              )
-            ])));
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: brand.categories
+                        .map((category) => CategoryBubble(
+                            text: category.toString().split('.').last,
+                            colorScheme: colorScheme))
+                        .toList(),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
