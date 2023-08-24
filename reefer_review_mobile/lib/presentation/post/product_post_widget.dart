@@ -124,7 +124,7 @@ class _ProductPostWidgetState extends State<ProductPostWidget> {
                           width: double.infinity,
                           child: Image.asset(
                             widget.productPost.image,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                         )
                       : Container(),

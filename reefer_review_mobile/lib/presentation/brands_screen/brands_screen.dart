@@ -155,7 +155,10 @@ class _BrandsScreenContentState extends State<_BrandsScreenContent> {
                 if (state is BrandLoading) {
                   return const CircularProgressIndicator();
                 } else if (state is BrandsLoaded) {
-                  return ListView.builder(
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 20,
+                    ),
                     itemCount: state.brands.length,
                     itemBuilder: (context, index) =>
                         BrandWidget(brand: state.brands[index]),

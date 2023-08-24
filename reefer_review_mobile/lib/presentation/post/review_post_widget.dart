@@ -89,7 +89,7 @@ class _ReviewPostWidgetState extends State<ReviewPostWidget> {
                             width: double.infinity,
                             child: Image.asset(
                               widget.reviewPost.image,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           )
                         : Container(),

@@ -50,7 +50,7 @@ class VenueWidget extends StatelessWidget {
                           venue.profileImage!,
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       )
                     : const SizedBox(width: 100, height: 100),
